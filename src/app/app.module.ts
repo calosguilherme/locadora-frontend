@@ -8,10 +8,13 @@ import { HomeComponent } from './viewer/home/home.component';
 import { LoginComponent } from './viewer/login/login.component';
 import { CadastroPessoaComponent } from './viewer/cadastroPessoa/cadastroPessoa.component';
 import { CommonModule } from '@angular/common';
-import { FormsModule } from '@angular/forms';
+import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { SelectButtonModule } from 'primeng/selectbutton';
 import { AutoCompleteModule } from 'primeng/autocomplete';
 import { PasswordModule } from 'primeng/password';
+import { PessoaService } from './services/pessoaService';
+import { HttpClientModule } from '@angular/common/http';
+import { EnderecoService } from './services/enderecoService';
 
 @NgModule({
   declarations: [
@@ -30,10 +33,12 @@ import { PasswordModule } from 'primeng/password';
     CalendarModule,
     SelectButtonModule,
     AutoCompleteModule,
-    PasswordModule
+    PasswordModule,
+    ReactiveFormsModule,
+    HttpClientModule,
 
   ],
-  providers: [],
+  providers: [PessoaService, EnderecoService],
   bootstrap: [AppComponent]
 })
 export class AppModule { }
