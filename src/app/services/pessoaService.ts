@@ -12,13 +12,19 @@ export class PessoaService {
     })
   };
 
+  private options
 
-  constructor(public http: HttpClient) { }
+  constructor(private http: HttpClient) {
+    this.options = { headers: this.getHeaders() };
+  }
 
+  private getHeaders(): HttpHeaders {
+    const headers = new HttpHeaders({ 'Content-Type': 'application/json; charset=utf-8' });
+    return headers;
+  }
 
-
-  getAllPessoa() {
-    return this.http.get<Pessoa[]>(`http://careers.picpay.com/tests/mobdev/users`);
+  postPessoa(pessoa: Pessoa) {
+    return this.http.post<Pessoa>('https://locadora-pessoal.herokuapp.com/pessoa', pessoa, this.options)
   }
 
 }
