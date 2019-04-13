@@ -24,6 +24,7 @@ export class PessoaService {
   }
 
   postPessoa(pessoa: Pessoa) {
+    console.log(JSON.stringify(pessoa))
     return this.http.post<Pessoa>('https://locadora-pessoal.herokuapp.com/pessoa', pessoa, this.options)
   }
 

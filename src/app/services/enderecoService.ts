@@ -1,7 +1,8 @@
 import { Injectable } from '@angular/core';
 import { HttpClient, HttpHeaders } from '@angular/common/http';
-
-import { Pessoa } from '../model/pessoa.model';
+import { Municipio } from '../model/municipio.model';
+import { Estado } from '../model/estado.model';
+import { Bairro } from '../model/bairro.model';
 
 @Injectable()
 export class EnderecoService {
@@ -28,6 +29,20 @@ export class EnderecoService {
     console.log(this.apenasNumeros(cep))
     return this.http.get<number>('https://viacep.com.br/ws/' +cep+ '/json/')
   }
+
+  getAllMunicipio() {
+    return this.http.get<Municipio[]>('https://locadora-pessoal.herokuapp.com/municipio/')
+  }
+
+  getAllEstado() {
+    return this.http.get<Estado[]>('https://locadora-pessoal.herokuapp.com/estado/')
+  }
+
+  getAllBairro() {
+    return this.http.get<Bairro[]>('https://locadora-pessoal.herokuapp.com/bairro/')
+  }
+
+
 
   apenasNumeros(campo) {
     campo = campo.replace(/[^0-9]/g, '');
