@@ -34,15 +34,14 @@ export class CadastroPessoaComponent implements OnInit {
       'cep': ['', Validators.required],
       'nome': ['', [Validators.required, Validators.minLength(2)]],
       'nomeusuario': ['', [Validators.required, Validators.minLength(4)]],
-      'datanascimento': [''],
+      'datanascimento': ['', Validators.required],
       'estado': [null, Validators.required],
       'municipio': [null, Validators.required],
       'bairro': [null, Validators.required],
-      'sexo': null,
+      'sexo': [null, Validators.required],
       'cpf': [null, Validators.required],
+      'email': [null, Validators.required],
       'senha': [null, [Validators.required, Validators.minLength(6)]],
-      'status': 0,
-      'pontuacao':0
     });
     this.enderecoService.getAllBairro().subscribe(bairros => this.bairros = bairros)
     this.enderecoService.getAllEstado().subscribe(estados => this.estados = estados)
@@ -78,8 +77,6 @@ export class CadastroPessoaComponent implements OnInit {
 
   envia() {
     this.pessoaForm.get('sexo').setValue(this.pessoaForm.value.sexo.value)
-    this.pessoaForm.removeControl('senha')
-    console.log(this.pessoaForm.value)
     this.pessoaService.postPessoa(this.pessoaForm.value).subscribe(suc => {
       console.log(suc);
     },

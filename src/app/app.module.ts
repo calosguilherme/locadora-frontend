@@ -15,6 +15,7 @@ import { PasswordModule } from 'primeng/password';
 import { PessoaService } from './services/pessoaService';
 import { HttpClientModule } from '@angular/common/http';
 import { EnderecoService } from './services/enderecoService';
+import { CatalogoJogosComponent } from './viewer/catalogoJogos/catalogoJogos.component';
 
 @NgModule({
   declarations: [
@@ -22,6 +23,7 @@ import { EnderecoService } from './services/enderecoService';
     HomeComponent,
     LoginComponent,
     CadastroPessoaComponent,
+    CatalogoJogosComponent,
   ],
   imports: [
     CommonModule,
