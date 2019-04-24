@@ -6,7 +6,7 @@ import { Genero } from '../model/genero.model';
 import { Jogo } from '../model/jogo.model';
 
 @Injectable()
-export class PessoaService {
+export class JogosService {
   httpOptions = {
     headers: new HttpHeaders({
       'Content-Type': 'application/json',
@@ -34,7 +34,9 @@ export class PessoaService {
   }
 
   getJogosNome(nome?: string) {
-    return this.http.get<Jogo[]>('https://locadora-pessoal.herokuapp.com/jogo/' + nome)
+    if (nome == '') return this.http.get<Jogo[]>('https://locadora-pessoal.herokuapp.com/jogo/'+ nome)
+    else return this.http.get<Jogo[]>('https://locadora-pessoal.herokuapp.com/jogo/'+nome+'/0')
+
   }
 
 }

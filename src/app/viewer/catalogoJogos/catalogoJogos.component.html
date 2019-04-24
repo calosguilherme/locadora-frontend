@@ -1,140 +1,255 @@
-<div class="container" style="margin-top: 60px; background-color:#f1f1f1">
-  <form [formGroup]="pessoaForm">
-    <div class=" form-group">
-      <label class="control-label">Nome de Usuário</label>
-      <div class="input-group mb-3">
-        <div class="input-group-prepend">
-          <span class="input-group-text" id="basic-addon1"><i class="fas fa-user"></i></span>
-        </div>
-        <input type="text" class="form-control" placeholder="Username" aria-label="Username" aria-describedby="basic-addon1" formControlName="nomeusuario">
+ <!-- ================ start banner area ================= -->
+<section class="blog-banner-area" id="category">
+  <div class="container h-100">
+    <div class="blog-banner">
+      <div class="text-center">
+        <h1>Catálogo de Jogos</h1>
+        <nav aria-label="breadcrumb" class="banner-breadcrumb">
+          <ol class="breadcrumb">
+            <li class="breadcrumb-item"><a href="#">Home</a></li>
+            <li class="breadcrumb-item active" aria-current="page">Cátalogo de Jogos</li>
+          </ol>
+        </nav>
       </div>
     </div>
-
-    <div class=" form-group">
-      <label class="control-label">Senha</label>
-      <div class="input-group mb-3">
-        <div class="input-group-prepend">
-          <span class="input-group-text" id="basic-addon1"><i class="fas fa-key"></i></span>
-        </div>
-        <input type="password" pPassword class="form-control" placeholder="Senha" aria-label="Senha" aria-describedby="basic-addon1" formControlName="senha">
-      </div>
-    </div>
-
-    <div class="form-group">
-      <label class="control-label">Nome Completo</label>
-      <div class="input-group mb-3">
-        <div class="input-group-prepend">
-          <span class="input-group-text" id="basic-addon1"><i class="fas fa-user-tie"></i></span>
-        </div>
-        <input type="text" class="form-control" placeholder="Nome Completo" aria-label="nome" aria-describedby="basic-addon1" formControlName="nome">
-      </div>
-    </div>
-
-    <div class="form-group">
-      <label class="control-label">Email</label>
-      <div class="input-group mb-3">
-        <div class="input-group-prepend">
-          <span class="input-group-text" id="basic-addon1"><i class="fas fa-at"></i></span>
-        </div>
-        <input type="email" class="form-control" placeholder="Email" aria-label="email" aria-describedby="basic-addon1" formControlName="email">
-      </div>
-    </div>
-
-    <div class="form-group">
-      <label class="control-label">CPF</label>
-      <div class="input-group mb-3">
-        <div class="input-group-prepend">
-          <span class="input-group-text" id="basic-addon1"><i class="fas fa-id-badge"></i></span>
-        </div>
-        <input type="text" class="form-control" placeholder="CPF" aria-label="cpf" aria-describedby="basic-addon1" formControlName="cpf">
-      </div>
-    </div>
-
+  </div>
+</section>
+<!-- ================ end banner area ================= -->
+<!-- ================ category section start ================= -->
+<section class="section-margin--small mb-5">
+  <div class="container">
     <div class="row">
-      <div class="col">
-        <label class="control-label">Data de Nascimento</label>
-        <div class="input-group mb-3">
-          <div class="input-group-prepend">
-            <span class="input-group-text" id="basic-addon1"><i class="fas fa-calendar-alt"></i></span>
+      <div class="col-xl-3 col-lg-4 col-md-5">
+        <div class="sidebar-categories">
+          <div class="head">Plataforma</div>
+          <ul class="main-categories">
+            <li class="common-filter">
+              <form action="#">
+                <ul *ngFor="let plataforma of plataformas">
+                  <li class="filter-list"><input class="pixel-checkbox" type="checkbox">{{plataforma.nome}}</li>
+                </ul>
+              </form>
+            </li>
+          </ul>
+        </div>
+        <div class="sidebar-filter">
+          <div class="top-filter-head">Filtro de Jogos</div>
+          <div class="common-filter">
+            <div class="head">Genero</div>
+            <form action="#">
+              <ul *ngFor="let genero of generos">
+                <li class="filter-list"><input class="pixel-checkbox" type="checkbox" >{{genero.nome}}</li>
+              </ul>
+            </form>
           </div>
-          <p-calendar formControlName="datanascimento" dateFormat="dd/mm/yy"></p-calendar>
-        </div>
-      </div>
-
-
-      <div class="col">
-        <label class="control-label">Sexo</label>
-        <div class="input-group mb-3">
-          <p-selectButton [options]="[
-                              {name:'Masculino', icon: 'fas fa-mars', value: 0},
-                              {name:'Feminino', icon: 'fas fa-venus', value: 1}
-                              ]" formControlName="sexo" optionLabel="name">
-            <ng-template let-item>
-              <button class="btn btn-outline-dark">
-                <span style="font-size: 1rem;">
-                  <i class="{{item.value.icon}}"></i>
-                </span>
-
-                <span> {{item.value.name}}</span>
-              </button>
-            </ng-template>
-          </p-selectButton>
-        </div>
-      </div>
-    </div>
-
-    <div class="row">
-      <div class="col">
-        <div class="form-group">
-          <label class="control-label">CEP</label>
-          <div class="input-group mb-3">
-            <div class="input-group-prepend">
-              <span class="input-group-text" id="basic-addon1"><i class="fas fa-map-marked-alt"></i></span>
+          <div class="common-filter">
+            <div class="head">Color</div>
+            <form action="#">
+              <ul>
+                <li class="filter-list"><input class="pixel-radio" type="radio" id="black" name="color"><label for="black">Black<span>(29)</span></label></li>
+                <li class="filter-list">
+                  <input class="pixel-radio" type="radio" id="balckleather" name="color"><label for="balckleather">
+                    Black
+                    Leather<span>(29)</span>
+                  </label>
+                </li>
+                <li class="filter-list">
+                  <input class="pixel-radio" type="radio" id="blackred" name="color"><label for="blackred">
+                    Black
+                    with red<span>(19)</span>
+                  </label>
+                </li>
+                <li class="filter-list"><input class="pixel-radio" type="che" id="gold" name="color"><label for="gold">Gold<span>(19)</span></label></li>
+                <li class="filter-list"><input class="pixel-radio" type="radio" id="spacegrey" name="color"><label for="spacegrey">Spacegrey<span>(19)</span></label></li>
+              </ul>
+            </form>
+          </div>
+          <div class="common-filter">
+            <div class="head">Price</div>
+            <div class="price-range-area">
+              <div id="price-range"></div>
+              <div class="value-wrapper d-flex">
+                <div class="price">Price:</div>
+                <span>$</span>
+                <div id="lower-value"></div>
+                <div class="to">to</div>
+                <span>$</span>
+                <div id="upper-value"></div>
+              </div>
             </div>
-            <input type="text" class="form-control" (focusout)="pegaCep()" placeholder="CEP" aria-label="CEP" aria-describedby="basic-addon1" formControlName="cep">
+          </div>
+        </div>
+      </div>
+      <div class="col-xl-9 col-lg-8 col-md-7">
+        <!-- Start Filter Bar -->
+        <div class="filter-bar d-flex flex-wrap align-items-center">
+          <div class="sorting">
+            <select>
+              <option value="1">Ordenação Padrão</option>
+              <option value="1">Ordenação Ordem Alfabetica</option>
+              <option value="1">Ordenação Lançamento</option>
+            </select>
+          </div>
+          <div class="sorting mr-auto">
+            <select>
+              <option value="10">Exibir 10</option>
+              <option value="20">Exibir 20</option>
+              <option value="30">Exibir 30</option>
+            </select>
+          </div>
+          <div>
+            <div class="input-group filter-bar-search">
+              <input type="text" placeholder="Pesquisar" [(ngModel)]="pesquisarNome">
+              <div class="input-group-append">
+                <button type="button" (click)="pegaJogos(pesquisarNome)"><i class="fas fa-search"></i></button>
+              </div>
+            </div>
+          </div>
+        </div>
+        <!-- End Filter Bar -->
+        <!-- Start Best Seller -->
+        <section class="lattest-product-area pb-40 category-list">
+          <div class="row">
+            <ng-container *ngFor="let jogo of jogos">
+              <div class="col-md-6 col-lg-4">
+                <div class="card text-center card-product">
+                  <div class="card-product__img">
+                    <img class="card-img" src="{{jogo.urlimagem}}" alt="">
+                    <ul class="card-product__imgOverlay">
+                      <li><button><i class="ti-search"></i></button></li>
+                      <li><button><i class="ti-shopping-cart"></i></button></li>
+                      <li><button><i class="ti-heart"></i></button></li>
+                    </ul>
+                  </div>
+                  <div class="card-body">
+                    <!--<p>Accessories</p>-->
+                    <h4 class="card-product__title"><a href="#">{{jogo.nome}}</a></h4>
+                    <!--<p class="card-product__price">$150.00</p>-->
+                  </div>
+                </div>
+              </div>
+            </ng-container>
+
+          </div>
+        </section>
+        <!-- End Best Seller -->
+      </div>
+    </div>
+  </div>
+</section>
+<!-- ================ category section end ================= -->
+<!-- ================ top product area start ================= -->
+<section class="related-product-area">
+  <div class="container">
+    <div class="section-intro pb-60px">
+      <p>Popular Item in the market</p>
+      <h2>Top <span class="section-intro__style">Product</span></h2>
+    </div>
+    <div class="row mt-30">
+      <div class="col-sm-6 col-xl-3 mb-4 mb-xl-0">
+        <div class="single-search-product-wrapper">
+          <div class="single-search-product d-flex">
+            <a href="#"><img src="img/product/product-sm-1.png" alt=""></a>
+            <div class="desc">
+              <a href="#" class="title">Gray Coffee Cup</a>
+              <div class="price">$170.00</div>
+            </div>
+          </div>
+          <div class="single-search-product d-flex">
+            <a href="#"><img src="img/product/product-sm-2.png" alt=""></a>
+            <div class="desc">
+              <a href="#" class="title">Gray Coffee Cup</a>
+              <div class="price">$170.00</div>
+            </div>
+          </div>
+          <div class="single-search-product d-flex">
+            <a href="#"><img src="img/product/product-sm-3.png" alt=""></a>
+            <div class="desc">
+              <a href="#" class="title">Gray Coffee Cup</a>
+              <div class="price">$170.00</div>
+            </div>
           </div>
         </div>
       </div>
 
-
-      <div class="col">
-        <label class="control-label">Estado</label>
-        <div class="input-group mb-3">
-          <div class="input-group-prepend">
-            <span class="input-group-text" id="basic-addon1"><i class="fab fa-usps"></i></span>
+      <div class="col-sm-6 col-xl-3 mb-4 mb-xl-0">
+        <div class="single-search-product-wrapper">
+          <div class="single-search-product d-flex">
+            <a href="#"><img src="img/product/product-sm-4.png" alt=""></a>
+            <div class="desc">
+              <a href="#" class="title">Gray Coffee Cup</a>
+              <div class="price">$170.00</div>
+            </div>
           </div>
-          <p-autoComplete [readonly]="true" formControlName="estado" [suggestions]="results" (completeMethod)="search($event)"
-                          [dropdown]="true"></p-autoComplete>
+          <div class="single-search-product d-flex">
+            <a href="#"><img src="img/product/product-sm-5.png" alt=""></a>
+            <div class="desc">
+              <a href="#" class="title">Gray Coffee Cup</a>
+              <div class="price">$170.00</div>
+            </div>
+          </div>
+          <div class="single-search-product d-flex">
+            <a href="#"><img src="img/product/product-sm-6.png" alt=""></a>
+            <div class="desc">
+              <a href="#" class="title">Gray Coffee Cup</a>
+              <div class="price">$170.00</div>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <div class="col-sm-6 col-xl-3 mb-4 mb-xl-0">
+        <div class="single-search-product-wrapper">
+          <div class="single-search-product d-flex">
+            <a href="#"><img src="img/product/product-sm-7.png" alt=""></a>
+            <div class="desc">
+              <a href="#" class="title">Gray Coffee Cup</a>
+              <div class="price">$170.00</div>
+            </div>
+          </div>
+          <div class="single-search-product d-flex">
+            <a href="#"><img src="img/product/product-sm-8.png" alt=""></a>
+            <div class="desc">
+              <a href="#" class="title">Gray Coffee Cup</a>
+              <div class="price">$170.00</div>
+            </div>
+          </div>
+          <div class="single-search-product d-flex">
+            <a href="#"><img src="img/product/product-sm-9.png" alt=""></a>
+            <div class="desc">
+              <a href="#" class="title">Gray Coffee Cup</a>
+              <div class="price">$170.00</div>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <div class="col-sm-6 col-xl-3 mb-4 mb-xl-0">
+        <div class="single-search-product-wrapper">
+          <div class="single-search-product d-flex">
+            <a href="#"><img src="img/product/product-sm-1.png" alt=""></a>
+            <div class="desc">
+              <a href="#" class="title">Gray Coffee Cup</a>
+              <div class="price">$170.00</div>
+            </div>
+          </div>
+          <div class="single-search-product d-flex">
+            <a href="#"><img src="img/product/product-sm-2.png" alt=""></a>
+            <div class="desc">
+              <a href="#" class="title">Gray Coffee Cup</a>
+              <div class="price">$170.00</div>
+            </div>
+          </div>
+          <div class="single-search-product d-flex">
+            <a href="#"><img src="img/product/product-sm-3.png" alt=""></a>
+            <div class="desc">
+              <a href="#" class="title">Gray Coffee Cup</a>
+              <div class="price">$170.00</div>
+            </div>
+          </div>
         </div>
       </div>
     </div>
-
-    <div class="row">
-      <div class="col">
-        <label class="control-label">Cidade</label>
-        <div class="input-group mb-3">
-          <div class="input-group-prepend">
-            <span class="input-group-text" id="basic-addon1"><i class="fas fa-city"></i></span>
-          </div>
-          <p-autoComplete [readonly]="true" formControlName="municipio" [suggestions]="results" (completeMethod)="search($event)"
-                          [dropdown]="true"></p-autoComplete>
-        </div>
-      </div>
-
-
-
-      <div class="col">
-        <label class="control-label">Bairro</label>
-        <div class="input-group mb-3">
-          <div class="input-group-prepend">
-            <span class="input-group-text" id="basic-addon1"><i class="fas fa-home"></i></span>
-          </div>
-          <p-autoComplete formControlName="bairro" [suggestions]="results" (completeMethod)="search($event)"
-                          [dropdown]="true"></p-autoComplete>
-        </div>
-      </div>
-    </div>
-    <button (click)="envia()" type="button" class="btn btn-primary btn-lg btn-block" [disabled]="!pessoaForm.valid">Cadastrar</button>
-    <button [routerLink]="['/']" type="button" class="btn btn-danger btn-lg btn-block">Cancelar</button>
-  </form>
-</div>
+  </div>
+</section>
+<!-- ================ top product area end ================= -->

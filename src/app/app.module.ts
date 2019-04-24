@@ -16,6 +16,7 @@ import { PessoaService } from './services/pessoaService';
 import { HttpClientModule } from '@angular/common/http';
 import { EnderecoService } from './services/enderecoService';
 import { CatalogoJogosComponent } from './viewer/catalogoJogos/catalogoJogos.component';
+import { JogosService } from './services/jogosService';
 
 @NgModule({
   declarations: [
@@ -40,7 +41,7 @@ import { CatalogoJogosComponent } from './viewer/catalogoJogos/catalogoJogos.com
     HttpClientModule,
 
   ],
-  providers: [PessoaService, EnderecoService],
+  providers: [PessoaService, EnderecoService, JogosService],
   bootstrap: [AppComponent]
 })
 export class AppModule { }
