@@ -24,11 +24,9 @@
           <div class="head">Plataforma</div>
           <ul class="main-categories">
             <li class="common-filter">
-              <form action="#">
-                <ul *ngFor="let plataforma of plataformas">
-                  <li class="filter-list"><input class="pixel-checkbox" type="checkbox">{{plataforma.nome}}</li>
+                <ul *ngFor="let plataforma of plataformas; let i= index">
+                  <li class="filter-list"><input class="pixel-checkbox" type="checkbox" [(ngModel)]="camposPlata[i]" (change)="getPlataforma(plataforma.nome)" >{{plataforma.nome}}</li>
                 </ul>
-              </form>
             </li>
           </ul>
         </div>
@@ -36,13 +34,11 @@
           <div class="top-filter-head">Filtro de Jogos</div>
           <div class="common-filter">
             <div class="head">Genero</div>
-            <form action="#">
               <ul *ngFor="let genero of generos">
-                <li class="filter-list"><input class="pixel-checkbox" type="checkbox" >{{genero.nome}}</li>
+                <li class="filter-list"><input class="pixel-checkbox" type="checkbox"  [(ngModel)]="camposGen[i]" (change)="getGenero(genero.nome)"  >{{genero.nome}}</li>
               </ul>
-            </form>
           </div>
-          <div class="common-filter">
+          <!--<div class="common-filter">
             <div class="head">Color</div>
             <form action="#">
               <ul>
@@ -77,17 +73,19 @@
                 <div id="upper-value"></div>
               </div>
             </div>
-          </div>
+          </div>-->
         </div>
       </div>
       <div class="col-xl-9 col-lg-8 col-md-7">
         <!-- Start Filter Bar -->
         <div class="filter-bar d-flex flex-wrap align-items-center">
+
           <div class="sorting">
-            <select>
-              <option value="1">Ordenação Padrão</option>
-              <option value="1">Ordenação Ordem Alfabetica</option>
-              <option value="1">Ordenação Lançamento</option>
+            <select (change)="ordenaJogos($event.target.value)">
+              <option value="0">Ordenação Padrão</option>
+              <option value="1">Ordem Alfabetica</option>
+              <option value="2">Mais Recente</option>
+              <!--<option value="1">Ordenação Lançamento</option>-->
             </select>
           </div>
           <div class="sorting mr-auto">
@@ -97,49 +95,53 @@
               <option value="30">Exibir 30</option>
             </select>
           </div>
+          <div class="sorting mr-auto">
+            <button class="btn btn-danger" (click)="limpar()">Limpar Filtros <i class="fas fa-trash-alt"></i></button>
+          </div>
           <div>
             <div class="input-group filter-bar-search">
-              <input type="text" placeholder="Pesquisar" [(ngModel)]="pesquisarNome">
+              <input type="text" placeholder="Pesquisar" (keyup.enter)="pegaJogos(filtros)" [(ngModel)]="filtros.jogo">
               <div class="input-group-append">
-                <button type="button" (click)="pegaJogos(pesquisarNome)"><i class="fas fa-search"></i></button>
+                <button type="button" (click)="pegaJogos(filtros)"><i class="fas fa-search"></i></button>
               </div>
             </div>
           </div>
+
         </div>
-        <!-- End Filter Bar -->
-        <!-- Start Best Seller -->
-        <section class="lattest-product-area pb-40 category-list">
-          <div class="row">
-            <ng-container *ngFor="let jogo of jogos">
-              <div class="col-md-6 col-lg-4">
-                <div class="card text-center card-product">
-                  <div class="card-product__img">
-                    <img class="card-img" src="{{jogo.urlimagem}}" alt="" height="293" width="255">
-                    <ul class="card-product__imgOverlay">
-                      <li><button><i class="ti-search"></i></button></li>
-                      <li><button><i class="ti-shopping-cart"></i></button></li>
-                      <li><button><i class="ti-heart"></i></button></li>
-                    </ul>
-                  </div>
-                  <div class="card-body">
-                    <!--<p>Accessories</p>-->
-                    <h4 class="card-product__title"><a href="#">{{jogo.nome}}</a></h4>
-                    <!--<p class="card-product__price">$150.00</p>-->
+          <!-- End Filter Bar -->
+          <!-- Start Best Seller -->
+          <section class="lattest-product-area pb-40 category-list">
+            <div class="row">
+              <ng-container *ngFor="let jogo of jogos">
+                <div class="col-md-6 col-lg-4">
+                  <div class="card text-center card-product">
+                    <div class="card-product__img">
+                      <img class="card-img" src="{{jogo.urlimagem}}" alt="" height="293" width="255">
+                      <ul class="card-product__imgOverlay">
+                        <li><button><i class="ti-search"></i></button></li>
+                        <li><button><i class="ti-shopping-cart"></i></button></li>
+                        <li><button><i class="ti-heart"></i></button></li>
+                      </ul>
+                    </div>
+                    <div class="card-body">
+                      <!--<p>Accessories</p>-->
+                      <h4 class="card-product__title"><a href="#">{{jogo.nome}}</a></h4>
+                      <!--<p class="card-product__price">$150.00</p>-->
+                    </div>
                   </div>
                 </div>
-              </div>
-            </ng-container>
+              </ng-container>
 
-          </div>
-        </section>
-        <!-- End Best Seller -->
-      </div>
+            </div>
+          </section>
+          <!-- End Best Seller -->
+        </div>
     </div>
   </div>
 </section>
 <!-- ================ category section end ================= -->
 <!-- ================ top product area start ================= -->
-<section class="related-product-area">
+<!--<section class="related-product-area">
   <div class="container">
     <div class="section-intro pb-60px">
       <p>Popular Item in the market</p>
@@ -251,5 +253,5 @@
       </div>
     </div>
   </div>
-</section>
+</section>-->
 <!-- ================ top product area end ================= -->

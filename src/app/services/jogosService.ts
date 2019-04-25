@@ -33,9 +33,8 @@ export class JogosService {
     return this.http.get<Plataforma[]>('https://locadora-pessoal.herokuapp.com/plataforma')
   }
 
-  getJogosNome(nome?: string) {
-    if (nome == '') return this.http.get<Jogo[]>('https://locadora-pessoal.herokuapp.com/jogo/'+ nome)
-    else return this.http.get<Jogo[]>('https://locadora-pessoal.herokuapp.com/jogo/'+nome+'/0')
+  getJogosNome(filtros?) {
+    return this.http.get<Jogo[]>('https://locadora-pessoal.herokuapp.com/jogo', { params: filtros})
 
   }
 
