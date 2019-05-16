@@ -3,7 +3,10 @@
     <img src="https://www.maxpixel.net/static/photo/1x/Controller-Gamepad-Icon-Computer-Game-Video-Games-1784573.png" width="30" height="30" class="d-inline-block align-top" alt="">
     Locadora Pessoal
   </a>
-  <a [routerLink] = "['/catalogo']" style="color:white">Catalogo</a>
+  <div>
+    <a [routerLink]="['/relatorios']"style="color:white;padding-right: 10px;padding-left: 10px;">Relatorios</a>
+    <a [routerLink]="['/catalogo']" style="color:white;padding-right: 10px;padding-left: 10px;">Catalogo</a>
+  </div>
 </nav>
 <div style="margin-top: 60px">
   <router-outlet></router-outlet>

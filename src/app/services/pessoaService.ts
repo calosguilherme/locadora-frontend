@@ -28,4 +28,9 @@ export class PessoaService {
     return this.http.post<Pessoa>('https://locadora-pessoal.herokuapp.com/pessoa', pessoa, this.options)
   }
 
+  getPessoas() {
+    return this.http.get<Pessoa[]>('https://locadora-pessoal.herokuapp.com/pessoa')
+  }
+
+
 }

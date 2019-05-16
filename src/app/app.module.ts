@@ -17,6 +17,8 @@ import { HttpClientModule } from '@angular/common/http';
 import { EnderecoService } from './services/enderecoService';
 import { CatalogoJogosComponent } from './viewer/catalogoJogos/catalogoJogos.component';
 import { JogosService } from './services/jogosService';
+import { RelatoriosComponent } from './viewer/relatorios/relatorios.component';
+import { VitrineService } from './services/vitrineService';
 
 @NgModule({
   declarations: [
@@ -25,6 +27,7 @@ import { JogosService } from './services/jogosService';
     LoginComponent,
     CadastroPessoaComponent,
     CatalogoJogosComponent,
+    RelatoriosComponent,
   ],
   imports: [
     CommonModule,
@@ -41,7 +44,7 @@ import { JogosService } from './services/jogosService';
     HttpClientModule,
 
   ],
-  providers: [PessoaService, EnderecoService, JogosService],
+  providers: [PessoaService, EnderecoService, JogosService, VitrineService],
   bootstrap: [AppComponent]
 })
 export class AppModule { }
