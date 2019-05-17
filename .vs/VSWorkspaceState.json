@@ -3,14 +3,14 @@
     "",
     "\\src",
     "\\src\\app",
+    "\\src\\app\\model",
+    "\\src\\app\\services",
     "\\src\\app\\viewer",
     "\\src\\app\\viewer\\cadastroPessoa",
     "\\src\\app\\viewer\\home",
     "\\src\\app\\viewer\\login",
-    "\\src\\app\\viewer\\relatorios",
-    "\\src\\assets",
-    "\\src\\assets\\img"
+    "\\src\\app\\viewer\\relatorios"
   ],
-  "SelectedNode": "\\src\\assets\\img\\chamado.png",
+  "SelectedNode": "\\src\\app\\model\\vitrineJogo.model.ts",
   "PreviewInSolutionExplorer": false
 }

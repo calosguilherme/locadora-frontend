@@ -21,51 +21,66 @@
     <h1>Relatorios</h1>
   </div>
 </div>
-  <section class="blog_categorie_area">
-    <div class="container">
-      <div class="row">
-        <div class="col-sm-6 col-lg-4 mb-4 mb-lg-0">
-          <div class="categories_post">
-            <img class="card-img rounded-0" src="assets/img/images.png" alt="post">
-            <div class="categories_details">
-              <div class="categories_text">
-                <a href="single-blog.html">
-                  <h5>Total de Jogos na Vitrine</h5>
-                </a>
-                <div class="border_line"></div>
-                <h5>{{vitrineJogo.length}}</h5>
-              </div>
+<section class="blog_categorie_area">
+  <div class="container">
+    <div class="row">
+      <div class="col-sm-6 col-lg-4 mb-4 mb-lg-0">
+        <div class="categories_post">
+          <img class="card-img rounded-0" src="assets/img/images.png" alt="post">
+          <div class="categories_details" (click)="tipoGrafico='jogos'">
+            <div class="categories_text">
+                <h5>Total de Jogos na Vitrine</h5>
+              <div class="border_line"></div>
+              <h5>{{vitrineJogo?.length}}</h5>
             </div>
           </div>
         </div>
-        <div class="col-sm-6 col-lg-4 mb-4 mb-lg-0">
-          <div class="categories_post">
-            <img class="card-img rounded-0" src="assets/img/user.png" alt="post">
-            <div class="categories_details">
-              <div class="categories_text">
-                <a href="single-blog.html">
-                  <h5>Total de Usuários</h5>
-                </a>
-                <div class="border_line"></div>
-                <h5>{{pessoas.length}}</h5>
-              </div>
+      </div>
+      <div class="col-sm-6 col-lg-4 mb-4 mb-lg-0">
+        <div class="categories_post">
+          <img class="card-img rounded-0" src="assets/img/user.png" alt="post">
+          <div class="categories_details" (click)="tipoGrafico='pessoas'">
+            <div class="categories_text">
+                <h5>Total de Usuários</h5>
+              <div class="border_line"></div>
+              <h5>{{pessoas?.length}}</h5>
             </div>
           </div>
         </div>
-        <div class="col-sm-6 col-lg-4 mb-4 mb-lg-0">
-          <div class="categories_post">
-            <img class="card-img rounded-0" src="assets/img/chamado.png" alt="post">
-            <div class="categories_details">
-              <div class="categories_text">
-                <a href="single-blog.html">
-                  <h5>Total de Chamados</h5>
-                </a>
-                <div class="border_line"></div>
-                <h5>0</h5>
-              </div>
+      </div>
+      <div class="col-sm-6 col-lg-4 mb-4 mb-lg-0">
+        <div class="categories_post">
+          <img class="card-img rounded-0" src="assets/img/chamado.png" alt="post">
+          <div class="categories_details"(click)="tipoGrafico='chamados'">
+            <div class="categories_text">
+                <h5>Total de Chamados</h5>
+              <div class="border_line"></div>
+              <h5>0</h5>
             </div>
           </div>
         </div>
       </div>
     </div>
-  </section>
+  </div>
+</section>
+<div *ngIf="tipoGrafico == 'jogos'">
+  <div style="padding-bottom: 20px;">
+    <h3 style="text-align: center;">Jogos por Genero</h3>
+    <p-chart type="polarArea" [data]="graficoJogoGenero"></p-chart>
+  </div>
+  <div style="padding-bottom: 20px;">
+    <h3 style="text-align: center;">Jogos por Plataforma</h3>
+    <p-chart type="polarArea" [data]="graficoJogoPlataforma"></p-chart>
+  </div>
+  <div style="padding-bottom: 20px;">
+    <h3 style="text-align: center;">Generos de Jogos por Cidade</h3>
+    <p-chart type="bar" [data]="graficoJogoGeneroCidade"></p-chart>
+  </div>
+</div>
+<div *ngIf="tipoGrafico == 'pessoas'">
+  <h3 style="text-align: center;">Pessoas por Nivel ⭐ </h3>
+  <p-chart type="bar" [data]="graficoPessoaPontuacao"></p-chart>
+</div>
+<div *ngIf="tipoGrafico == 'chamados'">
+
+</div>

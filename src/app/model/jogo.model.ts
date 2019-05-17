@@ -7,7 +7,7 @@ export class Jogo {
   anolancamento: Date
   urlimagem: string
   pontuacao: number
-  generos: Genero[]
-  plataformas: Plataforma[]
+  genero: Genero[]
+  plataforma: Plataforma[]
   constructor() { }
 }

@@ -21,6 +21,8 @@
     "@angular/platform-browser-dynamic": "~7.0.0",
     "@angular/router": "~7.0.0",
     "bootstrap": "^4.3.1",
+    "chart.js": "^2.8.0",
+    "chat.js": "^1.0.2",
     "core-js": "^2.5.4",
     "primeicons": "^1.0.0",
     "primeng": "^7.1.0",

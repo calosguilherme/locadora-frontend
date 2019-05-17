@@ -19,6 +19,7 @@ import { CatalogoJogosComponent } from './viewer/catalogoJogos/catalogoJogos.com
 import { JogosService } from './services/jogosService';
 import { RelatoriosComponent } from './viewer/relatorios/relatorios.component';
 import { VitrineService } from './services/vitrineService';
+import { ChartModule } from 'primeng/chart';
 
 @NgModule({
   declarations: [
@@ -42,6 +43,7 @@ import { VitrineService } from './services/vitrineService';
     PasswordModule,
     ReactiveFormsModule,
     HttpClientModule,
+    ChartModule,
 
   ],
   providers: [PessoaService, EnderecoService, JogosService, VitrineService],
