@@ -15,7 +15,7 @@ import { Plataforma } from 'src/app/model/plataforma.model';
   styleUrls: ['./relatorios.component.css']
 })
 export class RelatoriosComponent implements OnInit {
-  vitrineJogo: VitrineJogo[]
+  vitrineJogo: any[]
   pessoas: Pessoa[]
   generos: Genero[]
   plataformas: Plataforma[]

@@ -15,6 +15,7 @@ export class CatalogoJogosComponent implements OnInit {
   public jogos: Jogo[]
   public generos: Genero[]
   public pesquisarNome: string
+  public modalJogo: Jogo
   public filtros = {
      jogo: '', 
      genero: [],
@@ -111,6 +112,11 @@ export class CatalogoJogosComponent implements OnInit {
       this.filtros.genero.push(nome)
     }
     this.pegaJogos(this.filtros)
+  }
+
+  selecionaJogo(jogo) {
+    console.log(jogo)
+    this.modalJogo = jogo
   }
 
   limpar() {
