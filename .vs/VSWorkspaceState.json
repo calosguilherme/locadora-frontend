@@ -7,10 +7,10 @@
     "\\src\\app\\services",
     "\\src\\app\\viewer",
     "\\src\\app\\viewer\\cadastroPessoa",
+    "\\src\\app\\viewer\\catalogoJogos",
     "\\src\\app\\viewer\\home",
-    "\\src\\app\\viewer\\login",
-    "\\src\\app\\viewer\\relatorios"
+    "\\src\\app\\viewer\\login"
   ],
-  "SelectedNode": "\\src\\app\\model\\vitrineJogo.model.ts",
+  "SelectedNode": "\\src\\app\\viewer\\cadastroPessoa\\cadastroPessoa.component.ts",
   "PreviewInSolutionExplorer": false
 }

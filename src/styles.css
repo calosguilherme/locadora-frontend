@@ -1632,16 +1632,17 @@ a {
 
   .categories_post .categories_details {
     position: absolute;
-    top: 20px;
-    left: 20px;
-    right: 20px;
-    bottom: 20px;
+    top: 0px;
+    left: 0px;
+    right: 0px;
+    bottom: 0px;
     background: rgba(34,34,34,0.75);
     color: #fff;
     transition: all 0.3s linear;
     display: flex;
     align-items: center;
-    justify-content: center
+    justify-content: center;
+    border-radius: 50%;
   }
 
     .categories_post .categories_details h5 {
