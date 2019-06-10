@@ -1,12 +1,9 @@
 import { Injectable } from '@angular/core';
 import { HttpClient, HttpHeaders } from '@angular/common/http';
 
-import { Plataforma } from '../model/plataforma.model';
-import { Genero } from '../model/genero.model';
-import { Jogo } from '../model/jogo.model';
 
 @Injectable()
-export class JogosService {
+export class AuthService {
   httpOptions = {
     headers: new HttpHeaders({
       'Content-Type': 'application/json',
@@ -25,17 +22,18 @@ export class JogosService {
     return headers;
   }
 
-  getGeneros() {
-    return this.http.get<Genero[]>('https://locadora-pessoal.herokuapp.com/genero')
+
+  login(auth) {
+    //let auth = {
+    //  cpf = cpfL,
+    //  senha = senhaL
+    //}
+    return this.http.post<any>('https://locadora-pessoal.herokuapp.com/auth', auth, this.options)
   }
 
-  getPlataformas() {
-    return this.http.get<Plataforma[]>('https://locadora-pessoal.herokuapp.com/plataforma')
+  teste() {
+    return this.http.get<any>('http://172.17.105.161:3000/auth/google')
   }
 
-  getJogos(filtros?) {
-    return this.http.get<Jogo[]>('https://locadora-pessoal.herokuapp.com/jogo', { params: filtros})
-
-  }
 
 }

@@ -16,6 +16,7 @@ export class CatalogoJogosComponent implements OnInit {
   public generos: Genero[]
   public pesquisarNome: string
   public modalJogo: Jogo
+  public sucRequi: boolean = false
   public filtros = {
      jogo: '', 
      genero: [],
@@ -36,7 +37,10 @@ export class CatalogoJogosComponent implements OnInit {
   }
   pegaJogos(filtro?) {
     console.log(filtro)
-    this.jogosService.getJogosNome(filtro).subscribe(jogos => this.jogos = jogos)
+    this.jogosService.getJogos(filtro).subscribe(jogos => {
+      this.jogos = jogos
+      this.sucRequi = true
+    })
   }
 
 

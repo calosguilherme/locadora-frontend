@@ -1,16 +1,7 @@
 {
   "ExpandedNodes": [
-    "",
-    "\\src",
-    "\\src\\app",
-    "\\src\\app\\model",
-    "\\src\\app\\services",
-    "\\src\\app\\viewer",
-    "\\src\\app\\viewer\\cadastroPessoa",
-    "\\src\\app\\viewer\\catalogoJogos",
-    "\\src\\app\\viewer\\home",
-    "\\src\\app\\viewer\\login"
+    ""
   ],
-  "SelectedNode": "\\src\\app\\viewer\\cadastroPessoa\\cadastroPessoa.component.ts",
+  "SelectedNode": "\\e2e",
   "PreviewInSolutionExplorer": false
 }

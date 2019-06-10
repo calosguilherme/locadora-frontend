@@ -4,6 +4,7 @@ import { LoginComponent } from './viewer/login/login.component';
 import { CadastroPessoaComponent } from './viewer/cadastroPessoa/cadastroPessoa.component';
 import { CatalogoJogosComponent } from './viewer/catalogoJogos/catalogoJogos.component';
 import { RelatoriosComponent } from './viewer/relatorios/relatorios.component';
+import { AdministrativoComponent } from './viewer/administrativo/administrativo.component';
 
 const routes: Routes = [
   {
@@ -21,6 +22,10 @@ const routes: Routes = [
   {
     path: "relatorios",
     component: RelatoriosComponent
+  },
+  {
+    path: "administrativo",
+    component: AdministrativoComponent
   }
 ];
 

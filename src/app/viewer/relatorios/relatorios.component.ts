@@ -10,7 +10,7 @@ import { Plataforma } from 'src/app/model/plataforma.model';
 
 
 @Component({
-  selector: 'app-home',
+  selector: 'relatorios',
   templateUrl: './relatorios.component.html',
   styleUrls: ['./relatorios.component.css']
 })

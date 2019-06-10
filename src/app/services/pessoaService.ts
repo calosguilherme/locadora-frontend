@@ -32,5 +32,12 @@ export class PessoaService {
     return this.http.get<Pessoa[]>('https://locadora-pessoal.herokuapp.com/pessoa')
   }
 
+  removePessoa(id: number) {
+    let idP = { idpessoa: id }
+    console.log(idP)
+    return this.http.post<Pessoa>('https://locadora-pessoal.herokuapp.com/pessoa/remove', idP, this.options)
+  }
+
+
 
 }

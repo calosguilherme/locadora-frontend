@@ -1,0 +1,37 @@
+<nav role='navigation'>
+  <ul class="main">
+    <li><a (click)="menuSelect=0"><i class="fas fa-tachometer-alt"></i> Dashboard</a></li>
+    <li><a (click)="menuSelect=1"><i class="fas fa-clipboard"></i> Relatorios</a></li>
+    <li><a (click)="menuSelect=2"><i class="fas fa-gamepad"></i> Gerenciar Jogos</a></li>
+    <li><a (click)="menuSelect=3"><i class="fas fa-user-cog"></i> Gerenciar Usuários</a></li>
+  </ul>
+</nav>
+
+<main role="main">
+
+  <section *ngIf="menuSelec==0" class="panel important">
+
+    <h2>Write Some News</h2>
+    <ul>
+      <li>Information Panel</li>
+    </ul>
+  </section>
+
+  <section *ngIf="menuSelec==2" class="panel important">
+    <h2>Write a post</h2>
+    <form action="<?php echo $_SERVER['PHP_SELF']; ?>" method="post">
+      <div class="twothirds">
+        Blog title:<br />
+        <input type="text" name="title" size="40" /><br /><br />
+        Content:<br />
+        <textarea name="newstext" rows="15" cols="67"></textarea><br />
+      </div>
+      <div>
+        <input type="submit" name="submit" value="Save" />
+      </div>
+    </form>
+  </section>
+  <relatorios *ngIf="menuSelect==1"></relatorios>
+  <gerenciarJogos *ngIf="menuSelect==2"></gerenciarJogos>
+  <gerenciarPessoas *ngIf="menuSelect==3"></gerenciarPessoas>
+</main>
