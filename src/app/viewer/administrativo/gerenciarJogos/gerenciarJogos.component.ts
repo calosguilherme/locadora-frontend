@@ -82,11 +82,11 @@ export class GerenciarJogosComponent implements OnInit {
   }
 
   onRowSelect(event) {
-    this.jogo = this.clonePessoa(event.data);
+    this.jogo = this.cloneJogo(event.data);
     this.displayDialog = true;
   }
 
-  clonePessoa(j: Jogo): Jogo {
+  cloneJogo(j: Jogo): Jogo {
     let jogo = { ...j };
     return jogo;
   }

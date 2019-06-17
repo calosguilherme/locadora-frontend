@@ -15,6 +15,7 @@ import { RelatoriosComponent } from './viewer/relatorios/relatorios.component';
 import { AdministrativoComponent } from './viewer/administrativo/administrativo.component';
 import { GerenciarJogosComponent } from './viewer/administrativo/gerenciarJogos/gerenciarJogos.component';
 import { GerenciarPessoasComponent } from './viewer/administrativo/gerenciarPessoas/gerenciarPessoas.component';
+import { CadastroJogocomponent } from './viewer/administrativo/gerenciarJogos/cadastroJogo/cadastroJogo.component';
 //Viewer Component
 //Services
 import { AuthService } from './services/authService';
@@ -32,6 +33,7 @@ import { ChartModule } from 'primeng/chart';
 import { TableModule } from 'primeng/table';
 import { DialogModule } from 'primeng/dialog';
 import { ProgressSpinnerModule } from 'primeng/progressspinner';
+import { MultiSelectModule } from 'primeng/multiselect';
 //PrimeNG
 
 @NgModule({
@@ -40,6 +42,7 @@ import { ProgressSpinnerModule } from 'primeng/progressspinner';
     HomeComponent,
     LoginComponent,
     CadastroPessoaComponent,
+    CadastroJogocomponent,
     CatalogoJogosComponent,
     RelatoriosComponent,
     AdministrativoComponent,
@@ -63,6 +66,7 @@ import { ProgressSpinnerModule } from 'primeng/progressspinner';
     TableModule,
     DialogModule,
     ProgressSpinnerModule,
+    MultiSelectModule,
   ],
   providers: [PessoaService, EnderecoService, JogosService, VitrineService, AuthService],
   bootstrap: [AppComponent]

@@ -1,0 +1,85 @@
+<div class="container" style="background-color:#f1f1f1">
+    <div class=" form-group">
+      <label class="control-label">Nome</label>
+      <div class="input-group mb-3">
+        <input type="text" class="form-control" placeholder="Nome" aria-describedby="basic-addon1" [(ngModel)]="jogo.nome">
+      </div>
+    </div>
+
+    <div class=" form-group">
+      <label class="control-label">Descrição</label>
+      <div class="input-group mb-3">
+        <textarea class="form-control" placeholder="Descrição" aria-label="Senha" aria-describedby="basic-addon1" [(ngModel)]="jogo.descricao"></textarea>
+      </div>
+    </div>
+
+    <div class="form-group">
+      <label class="control-label">Classificação</label>
+      <div class="input-group mb-3">
+        <input type="text" class="form-control" placeholder="Classificação" aria-describedby="basic-addon1" [(ngModel)]="jogo.classificacao">
+      </div>
+    </div>
+
+    <div class="form-group">
+      <label class="control-label">Produtora</label>
+      <div class="input-group mb-3">
+        <input type="text" class="form-control" placeholder="Produtora" aria-describedby="basic-addon1" [(ngModel)]="jogo.produtora">
+      </div>
+    </div>
+
+    <div class="row">
+      <div class="col">
+        <label class="control-label">Data de Lançamento</label>
+        <div class="input-group mb-3">
+          <p-calendar [(ngModel)]="jogo.datalancamento"dateFormat="dd/mm/yy"></p-calendar>
+        </div>
+      </div>
+
+
+      <div class="col">
+        <label class="control-label">Multiplayer</label>
+        <div class="input-group mb-3">
+          <p-selectButton [options]="[
+                              {name:'Não', icon: 'fas fa-thumbs-down', value: 0},
+                              {name:'Sim', icon: 'fas fa-thumbs-up', value: 1}
+                              ]" [(ngModel)]="jogo.multiplayer" optionLabel="name">
+            <ng-template let-item>
+              <button class="btn btn-outline-dark">
+                <span style="font-size: 1rem;">
+                  <i class="{{item.value.icon}}"></i>
+                </span>
+
+                <span> {{item.value.name}}</span>
+              </button>
+            </ng-template>
+          </p-selectButton>
+        </div>
+      </div>
+    </div>
+
+    <div class="form-group">
+      <label class="control-label">Plataforma</label>
+      <div class="input-group mb-3">
+        <p-multiSelect [options]="plataformas" [(ngModel)]="jogo.plataforma" [ngModelOptions]="{standalone: true}" [panelStyle]="{minWidth:'12em'}">
+          <ng-template let-value pTemplate="selectedItems">
+            <div *ngFor="let val of value" class="ui-multiselected-item-token ui-corner-all">
+              <!--<img [src]="val.urlimagem" style="width:20px;vertical-align:middle;margin-right:.5em" />-->
+              <span>{{val.nome}}</span>
+            </div>
+            <span *ngIf="!value || value.length === 0" class="ui-multiselected-empty-token ui-corner-all">Plataformas</span>
+          </ng-template>
+          <ng-template let-plataforma pTemplate="item">
+            <!--<img [src]="plataforma.value.urlimagem" style="width:24px;display:inline-block;vertical-align:middle" />-->
+            <div style="font-size:14px;float:right;margin-top:4px">{{plataforma.value.nome}}</div>
+          </ng-template>
+        </p-multiSelect>
+      </div>
+    </div>
+
+    <div class="form-group">
+      <label class="control-label">Genero</label>
+      <div class="input-group mb-3">
+        <p-multiSelect [options]="generos" [(ngModel)]="jogo.genero" optionLabel="nome" [ngModelOptions]="{standalone: true}"></p-multiSelect>
+      </div>
+    </div>
+</div>
