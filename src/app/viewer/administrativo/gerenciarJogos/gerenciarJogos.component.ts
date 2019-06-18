@@ -34,7 +34,6 @@ export class GerenciarJogosComponent implements OnInit {
       suc => {
         console.log(suc)
       }
-      console.log(jogos)
       this.jogos = jogos
       this.sucRequi = true
     })
@@ -57,14 +56,19 @@ export class GerenciarJogosComponent implements OnInit {
 
   save() {
     let jogos = [...this.jogos];
-    if (this.newJogo)
-      jogos.push(this.jogo);
+    if (this.newJogo) {
+      this.jogosService.postJogo(this.jogo).subscribe(
+        suc => {
+          console.log(this.jogo)
+          jogos.push(this.jogo);
+        })
+    }
     else {
-      //this.jogosService.(this.jogo).subscribe(
-      //  suc => {
-      //    console.log(this.jogo)
-      //    jogos[this.jogos.indexOf(this.selected)] = this.jogo;
-      //  })
+      this.jogosService.postJogo(this.jogo).subscribe(
+        suc => {
+          console.log(this.jogo)
+          jogos[this.jogos.indexOf(this.selected)] = this.jogo;
+        })
     }
     this.jogos = jogos;
     this.jogo = null;
@@ -73,21 +77,26 @@ export class GerenciarJogosComponent implements OnInit {
 
   delete() {
     let index = this.jogos.indexOf(this.selected);
-    //this.jogosService.(this.jogos[index].idjogo).subscribe(
-    //  suc => {
-    //    this.jogos = this.jogos.filter((val, i) => i != index);
-    //    this.jogo = null;
-    //    this.displayDialog = false;
-    //  })
+    this.jogosService.removeJogo(this.jogos[index].idjogo).subscribe(
+      suc => {
+        this.jogos = this.jogos.filter((val, i) => i != index);
+        this.jogo = null;
+        this.displayDialog = false;
+      })
   }
 
   onRowSelect(event) {
     this.jogo = this.cloneJogo(event.data);
+    this.jogo.anolancamento = new Date(this.jogo.anolancamento)
     this.displayDialog = true;
   }
 
   cloneJogo(j: Jogo): Jogo {
     let jogo = { ...j };
     return jogo;
+  }
+
+  reciverFeedback(respostaFilho) {
+    this.jogo = respostaFilho;
   }
 }

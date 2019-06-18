@@ -16,6 +16,7 @@ import { AdministrativoComponent } from './viewer/administrativo/administrativo.
 import { GerenciarJogosComponent } from './viewer/administrativo/gerenciarJogos/gerenciarJogos.component';
 import { GerenciarPessoasComponent } from './viewer/administrativo/gerenciarPessoas/gerenciarPessoas.component';
 import { CadastroJogocomponent } from './viewer/administrativo/gerenciarJogos/cadastroJogo/cadastroJogo.component';
+import { GerenciarPlataformas } from './viewer/administrativo/gerenciaPlataformas/gerenciarPlataformas.component';
 //Viewer Component
 //Services
 import { AuthService } from './services/authService';
@@ -34,6 +35,7 @@ import { TableModule } from 'primeng/table';
 import { DialogModule } from 'primeng/dialog';
 import { ProgressSpinnerModule } from 'primeng/progressspinner';
 import { MultiSelectModule } from 'primeng/multiselect';
+import { InputSwitchModule } from 'primeng/inputswitch';
 //PrimeNG
 
 @NgModule({
@@ -48,6 +50,7 @@ import { MultiSelectModule } from 'primeng/multiselect';
     AdministrativoComponent,
     GerenciarJogosComponent,
     GerenciarPessoasComponent,
+    GerenciarPlataformas,
   ],
   imports: [
     CommonModule,
@@ -67,6 +70,7 @@ import { MultiSelectModule } from 'primeng/multiselect';
     DialogModule,
     ProgressSpinnerModule,
     MultiSelectModule,
+    InputSwitchModule
   ],
   providers: [PessoaService, EnderecoService, JogosService, VitrineService, AuthService],
   bootstrap: [AppComponent]

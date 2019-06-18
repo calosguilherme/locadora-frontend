@@ -25,66 +25,8 @@
     </ng-template>
   </p-table>
 
-  <p-dialog header="Detalhes do Jogo" [(visible)]="displayDialog" [responsive]="true" showEffect="fade" [modal]="true">
-    <cadastroJogo [jogo]="jogo"></cadastroJogo>
-    <!--<div class="ui-g ui-fluid" *ngIf="jogo">
-    <div class="ui-g-12">
-      <div class="ui-g-4">
-        <label>ID</label>
-      </div>
-      <div class="ui-g-8">
-        <input pInputText [value]="jogo.idjogo" disabled />
-      </div>
-    </div>
-    <div class="ui-g-12">
-      <div class="ui-g-4">
-        <label>Nome</label>
-      </div>
-      <div class="ui-g-8">
-        <input pInputText [(ngModel)]="jogo.nome" />
-      </div>
-    </div>
-    <div class="ui-g-12">
-      <div class="ui-g-4">
-        <label>Produtora</label>
-      </div>
-      <div class="ui-g-8">
-        <input pInputText [(ngModel)]="jogo.produtora" />
-      </div>
-    </div>
-    <div class="ui-g-12">
-      <div class="ui-g-4">
-        <label>Classificação</label>
-      </div>
-      <div class="ui-g-8">
-        <input pInputText [(ngModel)]="jogo.classificacao" />
-      </div>
-    </div>
-    <div class="ui-g-12">
-      <div class="ui-g-4">
-        <label>Multiplayer</label>
-      </div>
-      <div class="ui-g-8">
-        <input pInputText [(ngModel)]="jogo.multiplayer" />
-      </div>
-    </div>
-    <div class="ui-g-12">
-      <div class="ui-g-4">
-        <label>URL Imagem</label>
-      </div>
-      <div class="ui-g-8">
-        <input pInputText [(ngModel)]="jogo.urlimagem" />
-      </div>
-    </div>
-    <div class="ui-g-12">
-      <div class="ui-g-4">
-        <label>Data Lançamento</label>
-      </div>
-      <div class="ui-g-8">
-        <input type="date" [(ngModel)]="jogo.anolancamento" />
-      </div>
-    </div>
-  </div>-->
+  <p-dialog header="Detalhes do Jogo" [(visible)]="displayDialog" [responsive]="true" showEffect="fade" [modal]="true" [contentStyle]="{'max-height':'600px','max-width':'600px'}" [style]="{'width':'600px'}">
+    <cadastroJogo [jogo]="jogo" (retornoJogo)="reciverFeedback($event)"></cadastroJogo>
     <p-footer>
       <div class="ui-dialog-buttonpane ui-helper-clearfix">
         <button type="button" pButton icon="fa fa-close" (click)="delete()" label="Delete"></button>

@@ -33,9 +33,30 @@ export class JogosService {
     return this.http.get<Plataforma[]>('https://locadora-pessoal.herokuapp.com/plataforma')
   }
 
+  postPlataforma(plataforma: Plataforma) {
+    console.log(plataforma)
+    return this.http.post<Plataforma>('https://locadora-pessoal.herokuapp.com/plataforma', plataforma, this.options)
+  }
+
+
+  removePlataforma(id: number) {
+    let idP = { idplataforma: id }
+    return this.http.post<Jogo>('https://locadora-pessoal.herokuapp.com/plataforma/remove', idP, this.options)
+  }
+
   getJogos(filtros?) {
     return this.http.get<Jogo[]>('https://locadora-pessoal.herokuapp.com/jogo', { params: filtros})
 
+  }
+
+
+  removeJogo(id: number) {
+    let idJ = { idjogo: id }
+    return this.http.post<Jogo>('https://locadora-pessoal.herokuapp.com/jogo/remove', idJ, this.options)
+  }
+
+  postJogo(jogo: Jogo) {
+    return this.http.post<Jogo>('https://locadora-pessoal.herokuapp.com/jogo', jogo, this.options)
   }
 
 }
