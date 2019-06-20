@@ -8,6 +8,7 @@ import { Component, OnInit } from '@angular/core';
 })
 export class AdministrativoComponent implements OnInit {
   menuSelect: number = 0
+  active: boolean = false
 
   constructor(
   ) {  }

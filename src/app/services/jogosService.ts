@@ -41,7 +41,16 @@ export class JogosService {
 
   removePlataforma(id: number) {
     let idP = { idplataforma: id }
-    return this.http.post<Jogo>('https://locadora-pessoal.herokuapp.com/plataforma/remove', idP, this.options)
+    return this.http.post<Plataforma>('https://locadora-pessoal.herokuapp.com/plataforma/remove', idP, this.options)
+  }
+
+  postGenero(genero: Genero) {
+    return this.http.post<Genero>('https://locadora-pessoal.herokuapp.com/genero', genero, this.options)
+  }
+
+
+  removeGenero(id: number) {
+    return this.http.post<Genero>('https://locadora-pessoal.herokuapp.com/genero/remove', id, this.options)
   }
 
   getJogos(filtros?) {

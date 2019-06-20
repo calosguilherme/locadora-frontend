@@ -17,6 +17,7 @@ import { GerenciarJogosComponent } from './viewer/administrativo/gerenciarJogos/
 import { GerenciarPessoasComponent } from './viewer/administrativo/gerenciarPessoas/gerenciarPessoas.component';
 import { CadastroJogocomponent } from './viewer/administrativo/gerenciarJogos/cadastroJogo/cadastroJogo.component';
 import { GerenciarPlataformas } from './viewer/administrativo/gerenciaPlataformas/gerenciarPlataformas.component';
+import { GerenciarGeneros } from './viewer/administrativo/gerenciarGeneros/gerenciarGeneros.component';
 //Viewer Component
 //Services
 import { AuthService } from './services/authService';
@@ -51,6 +52,7 @@ import { InputSwitchModule } from 'primeng/inputswitch';
     GerenciarJogosComponent,
     GerenciarPessoasComponent,
     GerenciarPlataformas,
+    GerenciarGeneros
   ],
   imports: [
     CommonModule,
