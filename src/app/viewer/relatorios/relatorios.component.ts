@@ -6,6 +6,8 @@ import { PessoaService } from 'src/app/services/pessoaService';
 import { JogosService } from 'src/app/services/jogosService';
 import { Genero } from 'src/app/model/genero.model';
 import { Plataforma } from 'src/app/model/plataforma.model';
+import { PlataformaService } from 'src/app/services/plataformaService';
+import { GeneroService } from 'src/app/services/generoService';
 
 
 
@@ -28,24 +30,26 @@ export class RelatoriosComponent implements OnInit {
   constructor(
     private vitrineService: VitrineService,
     private pessoaService: PessoaService,
-    private jogosService: JogosService
+    private jogosService: JogosService,
+    private plataformaService: PlataformaService,
+    private generoService: GeneroService
   ) {
   }
 
   ngOnInit() {
     this.vitrineService.getJogosVitrine().subscribe(vitrineJogo => {
       this.vitrineJogo = vitrineJogo
-      this.jogosService.getGeneros().subscribe(generos => {
+      this.generoService.getComFiltros({status:0}).subscribe(generos => {
         this.generos = generos
         this.graficoJogoGenero = this.montaGraficoJogoGenero()
         this.graficoJogoGeneroCidade = this.montaGraficoJogoGeneroCidade()
       })
-      this.jogosService.getPlataformas().subscribe(plataformas => {
+      this.plataformaService.getComFiltros({status: 0}).subscribe(plataformas => {
         this.plataformas = plataformas
         this.graficoJogoPlataforma = this.montaGraficoJogoPlataforma()
       })
     })
-    this.pessoaService.getPessoas().subscribe(pessoas => {
+    this.pessoaService.getComFiltros({status:0}).subscribe(pessoas => {
       this.pessoas = pessoas
       this.montaGraficoPessoaPontuacao()
     })
@@ -57,6 +61,7 @@ export class RelatoriosComponent implements OnInit {
     let data = []
     for (let genero of this.generos) {
       label.push(genero.nome)
+      console.log(this.vitrineJogo)
       data.push(this.vitrineJogo.filter(x => x.jogo.genero.find(y => y.nome == genero.nome)).length)
     }
     return({

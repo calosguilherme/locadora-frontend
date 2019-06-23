@@ -1,6 +1,8 @@
 import { Component, OnInit } from '@angular/core';
 import { JogosService } from 'src/app/services/jogosService';
 import { Plataforma } from 'src/app/model/plataforma.model';
+import { PlataformaService } from 'src/app/services/plataformaService';
+import { MessageService } from 'primeng/components/common/messageservice';
 
 
 
@@ -21,11 +23,12 @@ export class GerenciarPlataformas implements OnInit {
 
 
   constructor(
-    private jogoService: JogosService,
+    private messageService: MessageService,
+    private plataformaService: PlataformaService,
   ) { }
 
   ngOnInit() {
-    this.jogoService.getPlataformas().subscribe(plataformas => {
+    this.plataformaService.getComFiltros({status: 0}).subscribe(plataformas => {
       suc => {
         console.log(suc)
       }
@@ -50,19 +53,26 @@ export class GerenciarPlataformas implements OnInit {
   save() {
     let plataformas = [...this.plataformas];
     if (this.newPlataforma) {
-      this.jogoService.postPlataforma(this.plataforma).subscribe(
-        suc => {
-          console.log(this.plataforma)
+      this.plataformaService.create(this.plataforma).subscribe(
+        success => {
           plataformas.push(this.plataforma);
-        })
+          this.messageService.add({ severity: 'success', summary: 'Sucesso', detail: success.message() });
+        },
+        error => {
+          this.messageService.add({ severity: 'error', summary: 'Erro', detail: error.error.text });
+        }
+      )
     }
 
     else {
-      this.jogoService.postPlataforma(this.plataforma).subscribe(
-        suc => {
-        console.log(this.plataforma)
-         plataformas[this.plataformas.indexOf(this.selected)] = this.plataforma;
-      })
+      this.plataformaService.update(this.plataforma).subscribe(
+        success => {
+          plataformas[this.plataformas.indexOf(this.selected)] = this.plataforma;
+          this.messageService.add({ severity: 'success', summary: 'Sucesso', detail: success.message() });
+        },
+        error => {
+          this.messageService.add({ severity: 'error', summary: 'Erro', detail: error.error.text });
+        })
     }
     this.plataformas = plataformas;
     this.plataforma = null;
@@ -71,13 +81,16 @@ export class GerenciarPlataformas implements OnInit {
 
   delete() {
     let index = this.plataformas.indexOf(this.selected);
-    console.log(this.plataformas[index].idplataforma)
-    this.jogoService.removePlataforma(this.plataformas[index].idplataforma).subscribe(
-    suc => {
+    this.plataformaService.remove(this.plataformas[index].idplataforma).subscribe(
+    success => {
           this.plataformas = this.plataformas.filter((val, i) => i != index);
           this.plataforma = null;
           this.displayDialog = false;
-        },)
+          this.messageService.add({ severity: 'success', summary: 'Sucesso', detail: success.message() });
+      },
+      error => {
+        this.messageService.add({ severity: 'error', summary: 'Erro', detail: error.error.text });
+      })
   }
 
   onRowSelect(event) {

@@ -1,6 +1,8 @@
 import { Component, OnInit } from '@angular/core';
 import { JogosService } from 'src/app/services/jogosService';
 import { Genero } from 'src/app/model/genero.model';
+import { GeneroService } from 'src/app/services/generoService';
+import { MessageService } from 'primeng/components/common/messageservice';
 
 
 
@@ -21,23 +23,28 @@ export class GerenciarGeneros implements OnInit {
 
 
   constructor(
-    private jogoService: JogosService,
+    private messageService: MessageService,
+    private generoService: GeneroService,
   ) { }
 
   ngOnInit() {
-    this.jogoService.getGeneros().subscribe(generos => {
-      suc => {
-        console.log(suc)
-      }
-      this.generos = generos
-      this.sucRequi = true
-    })
+    this.getDados()
 
 
     this.cols = [
       { field: 'idgenero', header: 'ID' },
       { field: 'nome', header: 'Nome' },
     ];
+  }
+
+  getDados() {
+    return (this.generoService.getComFiltros({status: 0}).subscribe(generos => {
+      success => {
+        console.log(success)
+      }
+      this.generos = generos
+      this.sucRequi = true
+    }))
   }
 
   showDialogToAdd() {
@@ -49,19 +56,27 @@ export class GerenciarGeneros implements OnInit {
   save() {
     let generos = [...this.generos];
     if (this.newGenero) {
-      this.jogoService.postGenero(this.genero).subscribe(
-        suc => {
-          console.log(this.genero)
+      this.generoService.create(this.genero).subscribe(
+        success => {
           generos.push(this.genero);
-        })
+          this.messageService.add({ severity: 'success', summary: 'Sucesso', detail: success.message() });
+        },
+        error => {
+          this.messageService.add({ severity: 'error', summary: 'Erro', detail: error.error.text });
+        }
+      )
     }
 
     else {
-      this.jogoService.postGenero(this.genero).subscribe(
-        suc => {
-        console.log(this.genero)
-         generos[this.generos.indexOf(this.selected)] = this.genero;
-      })
+      this.generoService.update(this.genero).subscribe(
+        success => {
+          generos[this.generos.indexOf(this.selected)] = this.genero;
+          this.messageService.add({ severity: 'success', summary: 'Sucesso', detail: success.message() });
+        },
+        error => {
+          this.messageService.add({ severity: 'error', summary: 'Erro', detail: error.error.text });
+        }
+      )
     }
     this.generos = generos;
     this.genero = null;
@@ -71,12 +86,20 @@ export class GerenciarGeneros implements OnInit {
   delete() {
     let index = this.generos.indexOf(this.selected);
     console.log(this.generos[index].idgenero)
-    this.jogoService.removeGenero(this.generos[index].idgenero).subscribe(
-    suc => {
+    this.generoService.remove(this.generos[index].idgenero).subscribe(
+      success => {
           this.generos = this.generos.filter((val, i) => i != index);
           this.genero = null;
           this.displayDialog = false;
-        },)
+          console.log(success)
+          this.messageService.add({ severity: 'success', summary: 'Sucesso', detail: success.message });
+      },
+      error => {
+        console.log(error)
+        this.messageService.add({ severity: 'error', summary: 'Erro', detail: error.error.text });
+      }
+
+    )
   }
 
   onRowSelect(event) {

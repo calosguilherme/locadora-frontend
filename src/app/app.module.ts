@@ -25,6 +25,8 @@ import { JogosService } from './services/jogosService';
 import { EnderecoService } from './services/enderecoService';
 import { VitrineService } from './services/vitrineService';
 import { PessoaService } from './services/pessoaService';
+import { GeneroService } from './services/generoService';
+import { PlataformaService } from './services/plataformaService';
 //Services
 //PrimeNG
 import { CalendarModule } from 'primeng/calendar';
@@ -37,6 +39,9 @@ import { DialogModule } from 'primeng/dialog';
 import { ProgressSpinnerModule } from 'primeng/progressspinner';
 import { MultiSelectModule } from 'primeng/multiselect';
 import { InputSwitchModule } from 'primeng/inputswitch';
+import { ToastModule } from 'primeng/toast';
+import { MessageService } from 'primeng/components/common/messageservice';
+import { KeyFilterModule } from 'primeng/keyfilter';
 //PrimeNG
 
 @NgModule({
@@ -72,9 +77,11 @@ import { InputSwitchModule } from 'primeng/inputswitch';
     DialogModule,
     ProgressSpinnerModule,
     MultiSelectModule,
-    InputSwitchModule
+    InputSwitchModule,
+    ToastModule,
+    KeyFilterModule
   ],
-  providers: [PessoaService, EnderecoService, JogosService, VitrineService, AuthService],
+  providers: [PessoaService, EnderecoService, JogosService, VitrineService, AuthService, GeneroService, MessageService, PlataformaService],
   bootstrap: [AppComponent]
 })
 export class AppModule { }

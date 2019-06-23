@@ -4,6 +4,8 @@ import { Genero } from 'src/app/model/genero.model';
 import { JogosService } from 'src/app/services/jogosService';
 import { Jogo } from 'src/app/model/jogo.model';
 import { SelectItem } from 'primeng/components/common/selectitem';
+import { PlataformaService } from 'src/app/services/plataformaService';
+import { GeneroService } from 'src/app/services/generoService';
 
 
 
@@ -19,14 +21,15 @@ export class CadastroJogocomponent implements OnInit {
   @Output() retornoJogo = new EventEmitter()
 
   constructor(
-    private jogosService: JogosService
+    private plataformaService: PlataformaService,
+    private generoService: GeneroService
   ) {}
 
   ngOnInit() {
-    this.jogosService.getPlataformas().subscribe(plataformas => {
+    this.plataformaService.getComFiltros({status: 0}).subscribe(plataformas => {
       this.plataformas = this.criaSelectPlataforma(plataformas)
     });
-    this.jogosService.getGeneros().subscribe(generos => this.generos = generos);
+    this.generoService.getComFiltros({ status: 0 }).subscribe(generos => this.generos = generos);
 
   }
 

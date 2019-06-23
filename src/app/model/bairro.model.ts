@@ -1,5 +1,10 @@
+import { Municipio } from './municipio.model';
+
 export class Bairro {
   idbairro: number;
   nome: string;
-  constructor() { }
+  municipio: Municipio
+  constructor() {
+    this.municipio = new Municipio()
+  }
 }

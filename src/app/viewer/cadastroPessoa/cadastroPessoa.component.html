@@ -46,7 +46,7 @@
         <div class="input-group-prepend">
           <span class="input-group-text" id="basic-addon1"><i class="fas fa-id-badge"></i></span>
         </div>
-        <input type="text" class="form-control" placeholder="CPF" aria-label="cpf" aria-describedby="basic-addon1" formControlName="cpf">
+        <input type="text" class="form-control" placeholder="CPF" aria-label="cpf" aria-describedby="basic-addon1" formControlName="cpf" [pKeyFilter]="num">
       </div>
     </div>
 
@@ -103,7 +103,7 @@
           <div class="input-group-prepend">
             <span class="input-group-text" id="basic-addon1"><i class="fab fa-usps"></i></span>
           </div>
-          <p-autoComplete [readonly]="true" formControlName="estado" [suggestions]="results" (completeMethod)="search($event)"
+          <p-autoComplete [readonly]="true" formControlName="estado" [suggestions]="listestado" (completeMethod)="searchEstado($event)"
                           [dropdown]="true"></p-autoComplete>
         </div>
       </div>
@@ -116,7 +116,7 @@
           <div class="input-group-prepend">
             <span class="input-group-text" id="basic-addon1"><i class="fas fa-city"></i></span>
           </div>
-          <p-autoComplete [readonly]="true" formControlName="municipio" [suggestions]="results" (completeMethod)="search($event)"
+          <p-autoComplete [readonly]="true" formControlName="municipio" [suggestions]="listmunicipio" (completeMethod)="searchMuni($event)"
                           [dropdown]="true"></p-autoComplete>
         </div>
       </div>
@@ -129,7 +129,7 @@
           <div class="input-group-prepend">
             <span class="input-group-text" id="basic-addon1"><i class="fas fa-home"></i></span>
           </div>
-          <p-autoComplete formControlName="bairro" [suggestions]="results" (completeMethod)="search($event)"
+          <p-autoComplete formControlName="bairro" [suggestions]="listbairro" (completeMethod)="searchBairro($event)"
                           [dropdown]="true"></p-autoComplete>
         </div>
       </div>

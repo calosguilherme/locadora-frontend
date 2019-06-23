@@ -54,7 +54,7 @@
     </div>
     <p-footer>
       <div class="ui-dialog-buttonpane ui-helper-clearfix">
-        <button type="button" pButton icon="fa fa-close" (click)="delete()" label="Delete"></button>
+        <button *ngIf="!newPlataforma" type="button" pButton icon="fa fa-close" (click)="delete()" label="Delete"></button>
         <button type="button" pButton icon="fa fa-check" (click)="save()" label="Save"></button>
       </div>
     </p-footer>

@@ -30,7 +30,7 @@ export class GerenciarJogosComponent implements OnInit {
   ) { }
 
   ngOnInit() {
-    this.jogosService.getJogos().subscribe(jogos => {
+    this.jogosService.getComFiltros({status: 0}).subscribe(jogos => {
       suc => {
         console.log(suc)
       }
@@ -57,14 +57,14 @@ export class GerenciarJogosComponent implements OnInit {
   save() {
     let jogos = [...this.jogos];
     if (this.newJogo) {
-      this.jogosService.postJogo(this.jogo).subscribe(
+      this.jogosService.create(this.jogo).subscribe(
         suc => {
           console.log(this.jogo)
           jogos.push(this.jogo);
         })
     }
     else {
-      this.jogosService.postJogo(this.jogo).subscribe(
+      this.jogosService.update(this.jogo).subscribe(
         suc => {
           console.log(this.jogo)
           jogos[this.jogos.indexOf(this.selected)] = this.jogo;
@@ -77,7 +77,7 @@ export class GerenciarJogosComponent implements OnInit {
 
   delete() {
     let index = this.jogos.indexOf(this.selected);
-    this.jogosService.removeJogo(this.jogos[index].idjogo).subscribe(
+    this.jogosService.remove(this.jogos[index].idjogo).subscribe(
       suc => {
         this.jogos = this.jogos.filter((val, i) => i != index);
         this.jogo = null;
@@ -86,6 +86,7 @@ export class GerenciarJogosComponent implements OnInit {
   }
 
   onRowSelect(event) {
+    this.newJogo = false
     this.jogo = this.cloneJogo(event.data);
     this.jogo.anolancamento = new Date(this.jogo.anolancamento)
     this.displayDialog = true;

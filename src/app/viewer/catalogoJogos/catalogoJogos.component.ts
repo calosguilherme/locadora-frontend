@@ -3,6 +3,8 @@ import { JogosService } from 'src/app/services/jogosService';
 import { Plataforma } from 'src/app/model/plataforma.model';
 import { Jogo } from 'src/app/model/jogo.model';
 import { Genero } from 'src/app/model/genero.model';
+import { GeneroService } from 'src/app/services/generoService';
+import { PlataformaService } from 'src/app/services/plataformaService';
 
 
 @Component({
@@ -27,17 +29,18 @@ export class CatalogoJogosComponent implements OnInit {
 
   constructor(
     private jogosService: JogosService,
+    private generoService: GeneroService,
+    private plataformaService: PlataformaService,
 
   ) {  }
 
   ngOnInit() {
-    this.jogosService.getPlataformas().subscribe(plataformas => this.plataformas = plataformas)
+    this.plataformaService.getComFiltros({ status: 0 }).subscribe(plataformas => this.plataformas = plataformas)
     this.pegaJogos()
-    this.jogosService.getGeneros().subscribe(generos => this.generos = generos)
+    this.generoService.getComFiltros({status: 0}).subscribe(generos => this.generos = generos)
   }
   pegaJogos(filtro?) {
-    console.log(filtro)
-    this.jogosService.getJogos(filtro).subscribe(jogos => {
+    this.jogosService.getComFiltros(filtro).subscribe(jogos => {
       this.jogos = jogos
       this.sucRequi = true
     })
@@ -99,16 +102,17 @@ export class CatalogoJogosComponent implements OnInit {
   }
 
   getPlataforma(nome) {
+    this.sucRequi = false
     if (this.filtros.plataforma.find(x => x == nome)) {
       this.filtros.plataforma = this.filtros.plataforma.filter(x => x != nome)
     }
     else {
       this.filtros.plataforma.push(nome)
     }
-    console.log(this.jogos)
     this.pegaJogos(this.filtros)
   }
   getGenero(nome) {
+    this.sucRequi = false
     if (this.filtros.genero.find(x => x == nome)) {
       this.filtros.genero = this.filtros.genero.filter(x => x != nome)
     }
@@ -119,11 +123,11 @@ export class CatalogoJogosComponent implements OnInit {
   }
 
   selecionaJogo(jogo) {
-    console.log(jogo)
     this.modalJogo = jogo
   }
 
   limpar() {
+    this.sucRequi = false
     this.camposPlata = []
     this.camposGen = []
     this.filtros = {

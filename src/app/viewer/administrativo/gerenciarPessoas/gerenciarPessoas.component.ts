@@ -1,6 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { Pessoa } from 'src/app/model/pessoa.model';
 import { PessoaService } from 'src/app/services/pessoaService';
+import { MessageService } from 'primeng/components/common/messageservice';
 
 
 
@@ -22,10 +23,11 @@ export class GerenciarPessoasComponent implements OnInit {
 
   constructor(
     private pessoaService: PessoaService,
+    private messageService: MessageService,
   ) { }
 
   ngOnInit() {
-    this.pessoaService.getPessoas().subscribe(pessoa => {
+    this.pessoaService.getComFiltros({ status: 0}).subscribe(pessoa => {
       suc => {
         console.log(suc)
       }
@@ -53,14 +55,14 @@ export class GerenciarPessoasComponent implements OnInit {
 
   save() {
     let pessoas = [...this.pessoas];
-    if (this.newPessoa)
-      pessoas.push(this.pessoa);
-    else {
-      this.pessoaService.postPessoa(this.pessoa).subscribe(
-        suc => {
-        console.log(this.pessoa)
-         pessoas[this.pessoas.indexOf(this.selected)] = this.pessoa;
-      })
+    if (!this.newPessoa){
+      this.pessoaService.update(this.pessoa).subscribe(
+        success => {
+          this.messageService.add({ severity: 'success', summary: 'Sucesso', detail: success.message() });
+        },
+        error => {
+          this.messageService.add({ severity: 'error', summary: 'Erro', detail: error.error.text });
+        })
     }
     this.pessoas = pessoas;
     this.pessoa = null;
@@ -70,12 +72,16 @@ export class GerenciarPessoasComponent implements OnInit {
   delete() {
     let index = this.pessoas.indexOf(this.selected);
     console.log(this.pessoas[index].idpessoa)
-    this.pessoaService.removePessoa(this.pessoas[index].idpessoa).subscribe(
-    suc => {
+    this.pessoaService.remove(this.pessoas[index].idpessoa).subscribe(
+    success => {
           this.pessoas = this.pessoas.filter((val, i) => i != index);
           this.pessoa = null;
           this.displayDialog = false;
-        },)
+         this.messageService.add({ severity: 'success', summary: 'Sucesso', detail: success.message() });
+      },
+      error => {
+        this.messageService.add({ severity: 'error', summary: 'Erro', detail: error.error.text });
+      })
   }
 
   onRowSelect(event) {

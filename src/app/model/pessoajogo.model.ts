@@ -1,12 +1,7 @@
 import { Plataforma } from "./plataforma.model";
 import { Genero } from "./genero.model";
 
-enum Status {
-  ativo = 0,
-  inativo = 1,
-}
-
-export class Jogo {
+export class PessoaJogo {
   idjogo: number
   nome: string
   descricao: string
@@ -18,6 +13,5 @@ export class Jogo {
   pontuacao: number
   genero: Genero[]
   plataforma: Plataforma[]
-  status: Status
   constructor() { }
 }

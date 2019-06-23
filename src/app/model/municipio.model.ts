@@ -1,5 +1,10 @@
+import { Estado } from './estado.model';
+
 export class Municipio {
   idmunicipio: number;
   nome: string;
-  constructor() { }
+  estado: Estado;
+  constructor() {
+    this.estado = new Estado()
+  }
 }

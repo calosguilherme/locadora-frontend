@@ -1,71 +1,13 @@
 import { Injectable } from '@angular/core';
-import { HttpClient, HttpHeaders } from '@angular/common/http';
-
-import { Plataforma } from '../model/plataforma.model';
-import { Genero } from '../model/genero.model';
+import { HttpClient} from '@angular/common/http';
 import { Jogo } from '../model/jogo.model';
+import { CrudService } from '../model/crudService.model';
+import { environment } from 'src/environments/environment';
 
 @Injectable()
-export class JogosService {
-  httpOptions = {
-    headers: new HttpHeaders({
-      'Content-Type': 'application/json',
-      'Authorization': 'my-auth-token'
-    })
-  };
-
-  private options
-
-  constructor(private http: HttpClient) {
-    this.options = { headers: this.getHeaders() };
-  }
-
-  private getHeaders(): HttpHeaders {
-    const headers = new HttpHeaders({ 'Content-Type': 'application/json; charset=utf-8' });
-    return headers;
-  }
-
-  getGeneros() {
-    return this.http.get<Genero[]>('https://locadora-pessoal.herokuapp.com/genero')
-  }
-
-  getPlataformas() {
-    return this.http.get<Plataforma[]>('https://locadora-pessoal.herokuapp.com/plataforma')
-  }
-
-  postPlataforma(plataforma: Plataforma) {
-    console.log(plataforma)
-    return this.http.post<Plataforma>('https://locadora-pessoal.herokuapp.com/plataforma', plataforma, this.options)
-  }
-
-
-  removePlataforma(id: number) {
-    let idP = { idplataforma: id }
-    return this.http.post<Plataforma>('https://locadora-pessoal.herokuapp.com/plataforma/remove', idP, this.options)
-  }
-
-  postGenero(genero: Genero) {
-    return this.http.post<Genero>('https://locadora-pessoal.herokuapp.com/genero', genero, this.options)
-  }
-
-
-  removeGenero(id: number) {
-    return this.http.post<Genero>('https://locadora-pessoal.herokuapp.com/genero/remove', id, this.options)
-  }
-
-  getJogos(filtros?) {
-    return this.http.get<Jogo[]>('https://locadora-pessoal.herokuapp.com/jogo', { params: filtros})
-
-  }
-
-
-  removeJogo(id: number) {
-    let idJ = { idjogo: id }
-    return this.http.post<Jogo>('https://locadora-pessoal.herokuapp.com/jogo/remove', idJ, this.options)
-  }
-
-  postJogo(jogo: Jogo) {
-    return this.http.post<Jogo>('https://locadora-pessoal.herokuapp.com/jogo', jogo, this.options)
+export class JogosService extends CrudService<Jogo> {
+  constructor(protected http: HttpClient) {
+    super(http, `${environment.API}jogo`);
   }
 
 }

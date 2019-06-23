@@ -1,3 +1,5 @@
+import { Cep } from './cep.model';
+
 enum Sexo {
   Masculino = 0,
   Feminino = 1,
@@ -13,15 +15,14 @@ export class Pessoa {
   nome: string;
   nomeusuario: string;
   datanascimento: Date;
-  cpf: string
-  sexo: Sexo
-  pontuacao: number
-  status: Status
-  bairro: string
-  municipio: string
-  estado: string
-  cep: string
-  senha: string
+  cpf: string;
+  sexo: Sexo;
+  pontuacao: number;
+  status: Status;
+  cep: Cep;
+  senha: string;
+  email: string;
+  urlimagem: string;
 
   constructor() { }
 }

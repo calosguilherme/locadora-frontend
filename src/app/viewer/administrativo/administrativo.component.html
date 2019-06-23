@@ -1,3 +1,4 @@
+<p-toast position="bottom-right"></p-toast>
 <main role="main">
 
   <section *ngIf="menuSelec==0" class="panel important">
@@ -25,7 +26,7 @@
 
 </main>
 <!-- Ensure window size is always 100vh -->
-<div class="container-fluid dashboard-wrapper"  [class.active]="active" >
+<div class="container-fluid dashboard-wrapper" [class.active]="active">
   <!-- side bar wrapper  -->
   <div id="sidebar-wrapper">
     <a id="toggle-menu" [routerLink]="" (click)="active=!active">
@@ -35,30 +36,30 @@
     <!--   side-menu   -->
     <ul id="side-menu">
       <li>
-        <a [routerLink]=""  (click)="menuSelect=0">
+        <a [routerLink]="" (click)="menuSelect=0">
           Dashboard
           <span class="sub-icon"><i class="fas fa-tachometer-alt"></i></span>
         </a>
       <li>
-        <a [routerLink]=""  (click)="menuSelect=1">
+        <a [routerLink]="" (click)="menuSelect=1">
           Relatorios
           <span class="sub-icon"><i class="fas fa-clipboard"></i></span>
         </a>
       </li>
       <li>
-        <a [routerLink]=""  (click)="menuSelect=2">
+        <a [routerLink]="" (click)="menuSelect=2">
           Jogos
           <span class="sub-icon"><i class="fas fa-gamepad"></i></span>
         </a>
       </li>
       <li>
-        <a [routerLink]=""  (click)="menuSelect=3">
+        <a [routerLink]="" (click)="menuSelect=3">
           Usuários
           <span class="sub-icon"><i class="fa fa-user-cog"></i></span>
         </a>
       </li>
       <li>
-        <a  [routerLink]="" (click)="menuSelect=4">
+        <a [routerLink]="" (click)="menuSelect=4">
           Plataformas
           <span class="sub-icon"><i class="fa fab fa-playstation"></i></span>
         </a>

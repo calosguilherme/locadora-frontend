@@ -2,40 +2,15 @@ import { Injectable } from '@angular/core';
 import { HttpClient, HttpHeaders } from '@angular/common/http';
 
 import { Pessoa } from '../model/pessoa.model';
+import { CrudService } from '../model/crudService.model';
+import { environment } from 'src/environments/environment';
 
 @Injectable()
-export class PessoaService {
-  httpOptions = {
-    headers: new HttpHeaders({
-      'Content-Type': 'application/json',
-      'Authorization': 'my-auth-token'
-    })
-  };
+export class PessoaService extends CrudService<Pessoa>{
 
-  private options
 
-  constructor(private http: HttpClient) {
-    this.options = { headers: this.getHeaders() };
-  }
-
-  private getHeaders(): HttpHeaders {
-    const headers = new HttpHeaders({ 'Content-Type': 'application/json; charset=utf-8' });
-    return headers;
-  }
-
-  postPessoa(pessoa: Pessoa) {
-    console.log(JSON.stringify(pessoa))
-    return this.http.post<Pessoa>('https://locadora-pessoal.herokuapp.com/pessoa', pessoa, this.options)
-  }
-
-  getPessoas() {
-    return this.http.get<Pessoa[]>('https://locadora-pessoal.herokuapp.com/pessoa')
-  }
-
-  removePessoa(id: number) {
-    let idP = { idpessoa: id }
-    console.log(idP)
-    return this.http.post<Pessoa>('https://locadora-pessoal.herokuapp.com/pessoa/remove', idP, this.options)
+  constructor(protected http: HttpClient) {
+    super(http, `${environment.API}pessoa`);
   }
 
 
