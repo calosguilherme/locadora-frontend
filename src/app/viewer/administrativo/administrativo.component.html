@@ -42,30 +42,24 @@
         </a>
       <li>
         <a [routerLink]="" (click)="menuSelect=1">
-          Relatorios
-          <span class="sub-icon"><i class="fas fa-clipboard"></i></span>
-        </a>
-      </li>
-      <li>
-        <a [routerLink]="" (click)="menuSelect=2">
           Jogos
           <span class="sub-icon"><i class="fas fa-gamepad"></i></span>
         </a>
       </li>
       <li>
-        <a [routerLink]="" (click)="menuSelect=3">
+        <a [routerLink]="" (click)="menuSelect=2">
           Usuários
           <span class="sub-icon"><i class="fa fa-user-cog"></i></span>
         </a>
       </li>
       <li>
-        <a [routerLink]="" (click)="menuSelect=4">
+        <a [routerLink]="" (click)="menuSelect=3">
           Plataformas
           <span class="sub-icon"><i class="fa fab fa-playstation"></i></span>
         </a>
       </li>
       <li>
-        <a [routerLink]="" (click)="menuSelect=5">
+        <a [routerLink]="" (click)="menuSelect=4">
           Generos
           <span class="sub-icon"><i class="fa fa-th"></i></span>
         </a>
@@ -78,77 +72,14 @@
   <!-- Page-content-wrapper   -->
   <div class="page-content-wrapper">
     <div class="container-fluid main-content">
-      <relatorios *ngIf="menuSelect==1"></relatorios>
-      <gerenciarJogos *ngIf="menuSelect==2"></gerenciarJogos>
-      <gerenciarPessoas *ngIf="menuSelect==3"></gerenciarPessoas>
-      <gerenciarPlataformas *ngIf="menuSelect==4"></gerenciarPlataformas>
-      <gerenciarGeneros *ngIf="menuSelect==5"></gerenciarGeneros>
+      <relatorios *ngIf="menuSelect==0"></relatorios>
+      <gerenciarJogos *ngIf="menuSelect==1"></gerenciarJogos>
+      <gerenciarPessoas *ngIf="menuSelect==2"></gerenciarPessoas>
+      <gerenciarPlataformas *ngIf="menuSelect==3"></gerenciarPlataformas>
+      <gerenciarGeneros *ngIf="menuSelect==4"></gerenciarGeneros>
     </div>
     <!-- top fixed navigation -->
-    <div *ngIf="menuSelect==0">
-      <nav class="navbar navbar-fixed-top navbar-custom">
 
-        <a href="javascript:void(0)" class="brand">SproutTech</a>
-      </nav>
-      <!-- /.top fixed navigation -->
-      <section>
-        <div class="container-fluid main-content">
-          <div class="row">
-            <div class="col-md-4 offset-md-8">
-              <div class="searchbox">
-                <form action="">
-                  <div class="input-group">
-
-                    <input type="text" class="form-control" placeholder="search" aria-describedby="basic-addon1"><span class="input-group-addon" id="basic-addon1"><i class="fa fa-search"></i></span>
-                  </div>
-                </form>
-              </div>
-            </div>
-          </div>
-
-          <!--      cards    -->
-          <div class="row">
-            <div class="col-md-3 card-wrapper">
-              <div class="card dashboard-card sales-card">
-                <h4 class="card-title">Sales</h4>
-                <div class="card-block"><i class="fa fa-bar-chart"></i></div>
-              </div>
-            </div>
-            <div class="col-md-3 card-wrapper">
-              <div class="card dashboard-card query-card">
-                <h4 class="card-title">Orders</h4>
-                <div class="card-block"><i class="fa fa-edit"></i></div>
-              </div>
-            </div>
-            <div class="col-md-3 card-wrapper">
-              <div class="card dashboard-card order-card">
-                <h4 class="card-title">Query</h4>
-                <div class="card-block"><i class="fa fa-comments"></i></div>
-              </div>
-            </div>
-            <div class="col-md-3 card-wrapper">
-              <div class="card dashboard-card payment-card">
-                <h4 class="card-title">Delivery</h4>
-                <div class="card-block"><i class="fa fa-rocket"></i></div>
-              </div>
-            </div>
-          </div>
-
-          <div class="row">
-            <div class="col-md-12">
-              <div class="card-message">
-                <h4 class="card-title">Message</h4>
-                <div class="card-block">
-                  <div class="alert alert-danger">Urgent! process staff payroll.</div>
-                  <div class="alert alert-success">Wooh! we completed project 3 days ahead.</div>
-                  <div class="alert alert-info">Attn: Manger is on the way.</div>
-                  <div class="alert alert-warning">We may loose some uncommited work in GitHub.</div>
-                </div>
-              </div>
-            </div>
-          </div>
-        </div>
-      </section>
-    </div>
   </div>
-  <!-- End dashboard-wrapper -->
+</div>
+<!-- End dashboard-wrapper -->

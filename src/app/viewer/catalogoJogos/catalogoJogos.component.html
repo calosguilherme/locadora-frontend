@@ -110,6 +110,7 @@
           </div>
           <!-- End Filter Bar -->
           <!-- Start Best Seller -->
+          <p-progressSpinner *ngIf="!sucRequi" class="d-flex justify-content-center" [style]="{width: '250px', height: '250px'}"></p-progressSpinner>
           <div *ngIf="sucRequi">
             <section class="lattest-product-area pb-40 category-list">
               <div class="row">
@@ -137,12 +138,12 @@
             </section>
             <!-- End Best Seller -->
           </div>
-          </div>
+        </div>
         </div>
     </div>
   </section>
 
-<p-progressSpinner *ngIf="!sucRequi" class="d-flex justify-content-center" [style]="{width: '250px', height: '250px'}"></p-progressSpinner>
+
 
 
 

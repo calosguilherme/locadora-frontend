@@ -11,13 +11,13 @@ import { HomeComponent } from './viewer/home/home.component';
 import { LoginComponent } from './viewer/login/login.component';
 import { CadastroPessoaComponent } from './viewer/cadastroPessoa/cadastroPessoa.component';
 import { CatalogoJogosComponent } from './viewer/catalogoJogos/catalogoJogos.component';
-import { RelatoriosComponent } from './viewer/relatorios/relatorios.component';
 import { AdministrativoComponent } from './viewer/administrativo/administrativo.component';
 import { GerenciarJogosComponent } from './viewer/administrativo/gerenciarJogos/gerenciarJogos.component';
 import { GerenciarPessoasComponent } from './viewer/administrativo/gerenciarPessoas/gerenciarPessoas.component';
 import { CadastroJogocomponent } from './viewer/administrativo/gerenciarJogos/cadastroJogo/cadastroJogo.component';
 import { GerenciarPlataformas } from './viewer/administrativo/gerenciaPlataformas/gerenciarPlataformas.component';
 import { GerenciarGeneros } from './viewer/administrativo/gerenciarGeneros/gerenciarGeneros.component';
+import { RelatoriosComponent } from './viewer/administrativo/relatorios/relatorios.component';
 //Viewer Component
 //Services
 import { AuthService } from './services/authService';
