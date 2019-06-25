@@ -27,6 +27,7 @@ import { VitrineService } from './services/vitrineService';
 import { PessoaService } from './services/pessoaService';
 import { GeneroService } from './services/generoService';
 import { PlataformaService } from './services/plataformaService';
+import { CookieService } from 'ngx-cookie-service';
 //Services
 //PrimeNG
 import { CalendarModule } from 'primeng/calendar';
@@ -42,6 +43,7 @@ import { InputSwitchModule } from 'primeng/inputswitch';
 import { ToastModule } from 'primeng/toast';
 import { MessageService } from 'primeng/components/common/messageservice';
 import { KeyFilterModule } from 'primeng/keyfilter';
+import { PessoaJogoService } from './services/pessoaJogoService';
 //PrimeNG
 
 @NgModule({
@@ -79,9 +81,9 @@ import { KeyFilterModule } from 'primeng/keyfilter';
     MultiSelectModule,
     InputSwitchModule,
     ToastModule,
-    KeyFilterModule
+    KeyFilterModule,
   ],
-  providers: [PessoaService, EnderecoService, JogosService, VitrineService, AuthService, GeneroService, MessageService, PlataformaService],
+  providers: [PessoaService, EnderecoService, JogosService, VitrineService, AuthService, GeneroService, MessageService, PlataformaService, PessoaJogoService, CookieService],
   bootstrap: [AppComponent]
 })
 export class AppModule { }

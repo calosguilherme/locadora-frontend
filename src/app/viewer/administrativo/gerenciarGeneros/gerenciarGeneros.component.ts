@@ -59,7 +59,7 @@ export class GerenciarGeneros implements OnInit {
       this.generoService.create(this.genero).subscribe(
         success => {
           generos.push(this.genero);
-          this.messageService.add({ severity: 'success', summary: 'Sucesso', detail: success.message() });
+          this.messageService.add({ severity: 'success', summary: 'Sucesso', detail: success.message });
         },
         error => {
           this.messageService.add({ severity: 'error', summary: 'Erro', detail: error.error.text });
@@ -71,7 +71,7 @@ export class GerenciarGeneros implements OnInit {
       this.generoService.update(this.genero).subscribe(
         success => {
           generos[this.generos.indexOf(this.selected)] = this.genero;
-          this.messageService.add({ severity: 'success', summary: 'Sucesso', detail: success.message() });
+          this.messageService.add({ severity: 'success', summary: 'Sucesso', detail: success.message });
         },
         error => {
           this.messageService.add({ severity: 'error', summary: 'Erro', detail: error.error.text });

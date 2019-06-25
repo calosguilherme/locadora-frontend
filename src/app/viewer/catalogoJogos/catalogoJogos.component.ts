@@ -5,6 +5,10 @@ import { Jogo } from 'src/app/model/jogo.model';
 import { Genero } from 'src/app/model/genero.model';
 import { GeneroService } from 'src/app/services/generoService';
 import { PlataformaService } from 'src/app/services/plataformaService';
+import { PessoaJogo } from 'src/app/model/pessoajogo.model';
+import { CookieService } from 'ngx-cookie-service';
+import { PessoaJogoService } from 'src/app/services/pessoaJogoService';
+import { MessageService } from 'primeng/components/common/messageservice';
 
 
 @Component({
@@ -18,7 +22,10 @@ export class CatalogoJogosComponent implements OnInit {
   public generos: Genero[]
   public pesquisarNome: string
   public modalJogo: Jogo
+  public cadPessoaJogo: boolean = false
   public sucRequi: boolean = false
+  public preco: number
+  cookieExists: boolean = this.cookieService.check('idpessoa');
   public filtros = {
      jogo: '', 
      genero: [],
@@ -31,7 +38,9 @@ export class CatalogoJogosComponent implements OnInit {
     private jogosService: JogosService,
     private generoService: GeneroService,
     private plataformaService: PlataformaService,
-
+    private cookieService: CookieService,
+    private pessoaJogoService: PessoaJogoService,
+    private messageService: MessageService,
   ) {  }
 
   ngOnInit() {
@@ -126,6 +135,8 @@ export class CatalogoJogosComponent implements OnInit {
     this.modalJogo = jogo
   }
 
+
+
   limpar() {
     this.sucRequi = false
     this.camposPlata = []
@@ -136,6 +147,23 @@ export class CatalogoJogosComponent implements OnInit {
       plataforma: [],
     }
     this.pegaJogos()
+  }
+
+  criaPessoaJogo() {
+    let pessoaJogo = new PessoaJogo()
+    pessoaJogo.idjogo = this.modalJogo.idjogo
+    pessoaJogo.idpessoa = Number(this.cookieService.get('idpessoa'))
+    pessoaJogo.preco = this.preco
+    this.pessoaJogoService.create(pessoaJogo).subscribe(
+      success => {
+        this.cadPessoaJogo = false;
+        console.log(success)
+        this.messageService.add({ severity: 'success', summary: 'Sucesso', detail: success.message });
+      },
+      error => {
+        console.log(error)
+        this.messageService.add({ severity: 'error', summary: 'Erro', detail: error.error.text });
+      })
   }
 
 }

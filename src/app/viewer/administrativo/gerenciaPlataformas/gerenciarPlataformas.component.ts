@@ -56,7 +56,7 @@ export class GerenciarPlataformas implements OnInit {
       this.plataformaService.create(this.plataforma).subscribe(
         success => {
           plataformas.push(this.plataforma);
-          this.messageService.add({ severity: 'success', summary: 'Sucesso', detail: success.message() });
+          this.messageService.add({ severity: 'success', summary: 'Sucesso', detail: success.message });
         },
         error => {
           this.messageService.add({ severity: 'error', summary: 'Erro', detail: error.error.text });
@@ -68,7 +68,7 @@ export class GerenciarPlataformas implements OnInit {
       this.plataformaService.update(this.plataforma).subscribe(
         success => {
           plataformas[this.plataformas.indexOf(this.selected)] = this.plataforma;
-          this.messageService.add({ severity: 'success', summary: 'Sucesso', detail: success.message() });
+          this.messageService.add({ severity: 'success', summary: 'Sucesso', detail: success.message });
         },
         error => {
           this.messageService.add({ severity: 'error', summary: 'Erro', detail: error.error.text });
@@ -86,7 +86,7 @@ export class GerenciarPlataformas implements OnInit {
           this.plataformas = this.plataformas.filter((val, i) => i != index);
           this.plataforma = null;
           this.displayDialog = false;
-          this.messageService.add({ severity: 'success', summary: 'Sucesso', detail: success.message() });
+          this.messageService.add({ severity: 'success', summary: 'Sucesso', detail: success.message });
       },
       error => {
         this.messageService.add({ severity: 'error', summary: 'Erro', detail: error.error.text });

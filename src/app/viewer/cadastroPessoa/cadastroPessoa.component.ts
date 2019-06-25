@@ -8,6 +8,7 @@ import { Estado } from 'src/app/model/estado.model';
 import { Bairro } from 'src/app/model/bairro.model';
 import { MessageService } from 'primeng/components/common/messageservice';
 import { Cep } from 'src/app/model/cep.model';
+import { Router } from '@angular/router';
 
 
 
@@ -32,6 +33,7 @@ export class CadastroPessoaComponent implements OnInit {
     private pessoaService: PessoaService,
     private enderecoService: EnderecoService,
     private messageService: MessageService,
+    private router: Router,
   ) {  }
 
   ngOnInit() {
@@ -130,18 +132,20 @@ export class CadastroPessoaComponent implements OnInit {
     pessoa.nomeusuario = this.pessoaForm.value.nomeusuario
     pessoa.datanascimento = this.pessoaForm.value.datanascimento
     pessoa.sexo = this.pessoaForm.value.sexo.value
-    pessoa.nome = this.pessoaForm.value.nometa
+    pessoa.nome = this.pessoaForm.value.nome
     if (pessoa.sexo == 0) pessoa.urlimagem = 'https://fiverr-res.cloudinary.com/images/q_auto,f_auto/gigs/123155116/original/ada692539ed9ea12a2d20bf054ab5316d211254b/create-illustrative-instagram-twitch-and-youtube-profile-pictures.jpg'
     else pessoa.urlimagem = "https://d12swbtw719y4s.cloudfront.net/images/jjeUS6nn/2I5SMJe9DNNUHdqLO0Xk/FaceQ1468032328760.jpeg?w=463"
     pessoa.cep = cep
     pessoa.status = 0
+    console.log(JSON.stringify(pessoa))
     return(pessoa)
   }
 
   envia() {
     this.pessoaService.create(this.montaObjetoPessoa()).subscribe(
       success => {
-        this.messageService.add({ severity: 'success', summary: 'Sucesso', detail: success.message() });
+        this.router.navigate(['home']);
+        this.messageService.add({ severity: 'success', summary: 'Sucesso', detail: success.message });
       },
       error => {
         this.messageService.add({ severity: 'error', summary: 'Erro', detail: error.error.text });

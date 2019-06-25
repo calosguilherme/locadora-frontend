@@ -1,6 +1,6 @@
 import { Injectable } from '@angular/core';
 import { HttpClient, HttpHeaders } from '@angular/common/http';
-
+import { CookieService } from 'ngx-cookie-service';
 
 @Injectable()
 export class AuthService {
@@ -13,7 +13,10 @@ export class AuthService {
 
   private options
 
-  constructor(private http: HttpClient) {
+  constructor(
+    private http: HttpClient,
+    private cookieService: CookieService,
+  ) {
     this.options = { headers: this.getHeaders() };
   }
 
@@ -24,16 +27,27 @@ export class AuthService {
 
 
   login(auth) {
-    //let auth = {
-    //  cpf = cpfL,
-    //  senha = senhaL
-    //}
     return this.http.post<any>('https://locadora-pessoal.herokuapp.com/auth', auth, this.options)
+  }
+
+  logout() {
+    this.cookieService.deleteAll()
   }
 
   teste() {
     return this.http.get<any>('http://172.17.105.161:3000/auth/google')
   }
 
+  salvacookie(pessoa: any) {
+    var dt = new Date();
+    dt.setHours(dt.getHours() + 2);
+    this.cookieService.set('idpessoa', pessoa.idpessoa.toString(), dt)
+    this.cookieService.set('nome', pessoa.nome.toString(), dt)
+    this.cookieService.set('urlimagem', pessoa.urlimagem.toString(), dt)
+    this.cookieService.set('cpf', pessoa.cpf.toString(), dt)
+    if (pessoa.numeroregistro) {
+      this.cookieService.set('numeroregistro', pessoa.numeroregistro.toString(), dt)
+    }
+  }
 
 }

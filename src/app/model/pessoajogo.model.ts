@@ -1,17 +1,12 @@
 import { Plataforma } from "./plataforma.model";
 import { Genero } from "./genero.model";
+import { Pessoa } from './pessoa.model';
 
 export class PessoaJogo {
+  idpessoa: number
   idjogo: number
-  nome: string
-  descricao: string
-  anolancamento: Date
-  urlimagem: string
-  classificacao: string
-  multiplayer: boolean
-  produtora: string
-  pontuacao: number
-  genero: Genero[]
-  plataforma: Plataforma[]
+  preco: number
+  vitrine: boolean
+  pessoa: Pessoa
   constructor() { }
 }

@@ -40,9 +40,9 @@ export class GerenciarPessoasComponent implements OnInit {
       { field: 'idpessoa', header: 'ID' },
       { field: 'nome', header: 'Nome' },
       { field: 'nomeusuario', header: 'User Name' },
-      { field: 'cpf', header: 'CPF' },
       { field: 'pontuacao', header: '⭐Pontuação⭐' },
       { field: 'email', header: 'Email' },
+      { field: 'cpf', header: 'CPF' },
       { field: 'datanascimento', header: 'Data Nascimento' },
     ];
   }
@@ -58,7 +58,7 @@ export class GerenciarPessoasComponent implements OnInit {
     if (!this.newPessoa){
       this.pessoaService.update(this.pessoa).subscribe(
         success => {
-          this.messageService.add({ severity: 'success', summary: 'Sucesso', detail: success.message() });
+          this.messageService.add({ severity: 'success', summary: 'Sucesso', detail: success.message });
         },
         error => {
           this.messageService.add({ severity: 'error', summary: 'Erro', detail: error.error.text });
@@ -77,7 +77,7 @@ export class GerenciarPessoasComponent implements OnInit {
           this.pessoas = this.pessoas.filter((val, i) => i != index);
           this.pessoa = null;
           this.displayDialog = false;
-         this.messageService.add({ severity: 'success', summary: 'Sucesso', detail: success.message() });
+         this.messageService.add({ severity: 'success', summary: 'Sucesso', detail: success.message });
       },
       error => {
         this.messageService.add({ severity: 'error', summary: 'Erro', detail: error.error.text });

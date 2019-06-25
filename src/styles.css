@@ -1192,7 +1192,7 @@ a {
   border-radius: 30px;
   color: #222;
   font-weight: 500;
-  padding: 12px 50px;
+  padding: 12px 25px;
   background: #384aeb;
   color: #fff;
   transition: all .4s ease
@@ -1468,9 +1468,15 @@ a {
       background: #384aeb
     }
 
+.danger-btn {
+  background-color: #dc3545;
+  border-color: #dc3545;
+}
+
 .causes_item {
   background: #fff
 }
+
 
   .causes_item .causes_img {
     position: relative

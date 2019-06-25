@@ -16,132 +16,132 @@
 </section>
 <!-- ================ end banner area ================= -->
 <!-- ================ category section start ================= -->
-  <section class="section-margin--small mb-5">
-    <div class="container">
-      <div class="row">
-        <div class="col-xl-3 col-lg-4 col-md-5">
-          <div class="sidebar-categories">
-            <div class="head">Plataforma</div>
-            <ul class="main-categories">
-              <li class="common-filter">
-                <ul *ngFor="let plataforma of plataformas; let i= index">
-                  <li class="filter-list"><input class="pixel-checkbox" type="checkbox" [(ngModel)]="camposPlata[i]" (change)="getPlataforma(plataforma.nome)">{{plataforma.nome}}</li>
-                </ul>
-              </li>
+<section class="section-margin--small mb-5">
+  <div class="container">
+    <div class="row">
+      <div class="col-xl-3 col-lg-4 col-md-5">
+        <div class="sidebar-categories">
+          <div class="head">Plataforma</div>
+          <ul class="main-categories">
+            <li class="common-filter">
+              <ul *ngFor="let plataforma of plataformas; let i= index">
+                <li class="filter-list"><input class="pixel-checkbox" type="checkbox" [(ngModel)]="camposPlata[i]" (change)="getPlataforma(plataforma.nome)">{{plataforma.nome}}</li>
+              </ul>
+            </li>
+          </ul>
+        </div>
+        <div class="sidebar-filter">
+          <div class="top-filter-head">Filtro de Jogos</div>
+          <div class="common-filter">
+            <div class="head">Genero</div>
+            <ul *ngFor="let genero of generos; let i= index">
+              <li class="filter-list"><input class="pixel-checkbox" type="checkbox" [(ngModel)]="camposGen[i]" (change)="getGenero(genero.nome)">{{genero.nome}}</li>
             </ul>
           </div>
-          <div class="sidebar-filter">
-            <div class="top-filter-head">Filtro de Jogos</div>
-            <div class="common-filter">
-              <div class="head">Genero</div>
-              <ul *ngFor="let genero of generos; let i= index">
-                <li class="filter-list"><input class="pixel-checkbox" type="checkbox" [(ngModel)]="camposGen[i]" (change)="getGenero(genero.nome)">{{genero.nome}}</li>
+          <!--<div class="common-filter">
+            <div class="head">Color</div>
+            <form action="#">
+              <ul>
+                <li class="filter-list"><input class="pixel-radio" type="radio" id="black" name="color"><label for="black">Black<span>(29)</span></label></li>
+                <li class="filter-list">
+                  <input class="pixel-radio" type="radio" id="balckleather" name="color"><label for="balckleather">
+                    Black
+                    Leather<span>(29)</span>
+                  </label>
+                </li>
+                <li class="filter-list">
+                  <input class="pixel-radio" type="radio" id="blackred" name="color"><label for="blackred">
+                    Black
+                    with red<span>(19)</span>
+                  </label>
+                </li>
+                <li class="filter-list"><input class="pixel-radio" type="che" id="gold" name="color"><label for="gold">Gold<span>(19)</span></label></li>
+                <li class="filter-list"><input class="pixel-radio" type="radio" id="spacegrey" name="color"><label for="spacegrey">Spacegrey<span>(19)</span></label></li>
               </ul>
-            </div>
-            <!--<div class="common-filter">
-              <div class="head">Color</div>
-              <form action="#">
-                <ul>
-                  <li class="filter-list"><input class="pixel-radio" type="radio" id="black" name="color"><label for="black">Black<span>(29)</span></label></li>
-                  <li class="filter-list">
-                    <input class="pixel-radio" type="radio" id="balckleather" name="color"><label for="balckleather">
-                      Black
-                      Leather<span>(29)</span>
-                    </label>
-                  </li>
-                  <li class="filter-list">
-                    <input class="pixel-radio" type="radio" id="blackred" name="color"><label for="blackred">
-                      Black
-                      with red<span>(19)</span>
-                    </label>
-                  </li>
-                  <li class="filter-list"><input class="pixel-radio" type="che" id="gold" name="color"><label for="gold">Gold<span>(19)</span></label></li>
-                  <li class="filter-list"><input class="pixel-radio" type="radio" id="spacegrey" name="color"><label for="spacegrey">Spacegrey<span>(19)</span></label></li>
-                </ul>
-              </form>
-            </div>
-            <div class="common-filter">
-              <div class="head">Price</div>
-              <div class="price-range-area">
-                <div id="price-range"></div>
-                <div class="value-wrapper d-flex">
-                  <div class="price">Price:</div>
-                  <span>$</span>
-                  <div id="lower-value"></div>
-                  <div class="to">to</div>
-                  <span>$</span>
-                  <div id="upper-value"></div>
-                </div>
-              </div>
-            </div>-->
+            </form>
           </div>
+          <div class="common-filter">
+            <div class="head">Price</div>
+            <div class="price-range-area">
+              <div id="price-range"></div>
+              <div class="value-wrapper d-flex">
+                <div class="price">Price:</div>
+                <span>$</span>
+                <div id="lower-value"></div>
+                <div class="to">to</div>
+                <span>$</span>
+                <div id="upper-value"></div>
+              </div>
+            </div>
+          </div>-->
         </div>
-        <div class="col-xl-9 col-lg-8 col-md-7">
-          <!-- Start Filter Bar -->
-          <div class="filter-bar d-flex flex-wrap align-items-center">
+      </div>
+      <div class="col-xl-9 col-lg-8 col-md-7">
+        <!-- Start Filter Bar -->
+        <div class="filter-bar d-flex flex-wrap align-items-center">
 
-            <div class="sorting">
-              <select (change)="ordenaJogos($event.target.value)">
-                <option value="0">Ordenação Padrão</option>
-                <option value="1">Ordem Alfabetica</option>
-                <option value="2">Mais Recente</option>
-                <!--<option value="1">Ordenação Lançamento</option>-->
-              </select>
-            </div>
-            <div class="sorting mr-auto">
-              <select>
-                <option value="10">Exibir 10</option>
-                <option value="20">Exibir 20</option>
-                <option value="30">Exibir 30</option>
-              </select>
-            </div>
-            <div class="sorting mr-auto">
-              <button class="btn btn-danger" (click)="limpar()">Limpar Filtros <i class="fas fa-trash-alt"></i></button>
-            </div>
-            <div>
-              <div class="input-group filter-bar-search">
-                <input type="text" placeholder="Pesquisar" (keyup.enter)="pegaJogos(filtros)" [(ngModel)]="filtros.jogo">
-                <div class="input-group-append">
-                  <button type="button" (click)="pegaJogos(filtros)"><i class="fas fa-search"></i></button>
-                </div>
+          <div class="sorting">
+            <select (change)="ordenaJogos($event.target.value)">
+              <option value="0">Ordenação Padrão</option>
+              <option value="1">Ordem Alfabetica</option>
+              <option value="2">Mais Recente</option>
+              <!--<option value="1">Ordenação Lançamento</option>-->
+            </select>
+          </div>
+          <div class="sorting mr-auto">
+            <select>
+              <option value="10">Exibir 10</option>
+              <option value="20">Exibir 20</option>
+              <option value="30">Exibir 30</option>
+            </select>
+          </div>
+          <div class="sorting mr-auto">
+            <button class="btn btn-danger" (click)="limpar()">Limpar Filtros <i class="fas fa-trash-alt"></i></button>
+          </div>
+          <div>
+            <div class="input-group filter-bar-search">
+              <input type="text" placeholder="Pesquisar" (keyup.enter)="pegaJogos(filtros)" [(ngModel)]="filtros.jogo">
+              <div class="input-group-append">
+                <button type="button" (click)="pegaJogos(filtros)"><i class="fas fa-search"></i></button>
               </div>
             </div>
-
           </div>
-          <!-- End Filter Bar -->
-          <!-- Start Best Seller -->
-          <p-progressSpinner *ngIf="!sucRequi" class="d-flex justify-content-center" [style]="{width: '250px', height: '250px'}"></p-progressSpinner>
-          <div *ngIf="sucRequi">
-            <section class="lattest-product-area pb-40 category-list">
-              <div class="row">
-                <ng-container *ngFor="let jogo of jogos">
-                  <div class="col-md-6 col-lg-4">
-                    <div class="card text-center card-product">
-                      <div class="card-product__img">
-                        <img class="card-img" src="{{jogo.urlimagem}}" alt="" height="293" width="255">
-                        <ul class="card-product__imgOverlay">
-                          <li><button data-toggle="modal" data-target="#myModal" (click)="selecionaJogo(jogo)"><i class="fas fa-info-circle"></i></button></li>
-                          <li><button><i class="ti-shopping-cart"></i></button></li>
-                          <li><button><i class="ti-heart"></i></button></li>
-                        </ul>
-                      </div>
-                      <div class="card-body">
-                        <!--<p>Accessories</p>-->
-                        <h4 class="card-product__title"><a href="#">{{jogo.nome}}</a></h4>
-                        <!--<p class="card-product__price">$150.00</p>-->
-                      </div>
+
+        </div>
+        <!-- End Filter Bar -->
+        <!-- Start Best Seller -->
+        <p-progressSpinner *ngIf="!sucRequi" class="d-flex justify-content-center" [style]="{width: '250px', height: '250px'}"></p-progressSpinner>
+        <div *ngIf="sucRequi">
+          <section class="lattest-product-area pb-40 category-list">
+            <div class="row">
+              <ng-container *ngFor="let jogo of jogos">
+                <div class="col-md-6 col-lg-4">
+                  <div class="card text-center card-product">
+                    <div class="card-product__img">
+                      <img class="card-img" src="{{jogo.urlimagem}}" alt="" height="293" width="255">
+                      <ul class="card-product__imgOverlay">
+                        <li><button data-toggle="modal" data-target="#myModal" (click)="selecionaJogo(jogo)"><i class="fas fa-info-circle"></i></button></li>
+                        <li class="view overlay zoom"><button (click)="cadPessoaJogo=true;selecionaJogo(jogo)"><i class="fas fa-store"></i></button></li>
+                        <li><button><i class="fas fa-cart-plus"></i></button></li>
+                      </ul>
+                    </div>
+                    <div class="card-body">
+                      <!--<p>Accessories</p>-->
+                      <h4 class="card-product__title"><a href="#">{{jogo.nome}}</a></h4>
+                      <!--<p class="card-product__price">$150.00</p>-->
                     </div>
                   </div>
-                </ng-container>
+                </div>
+              </ng-container>
 
-              </div>
-            </section>
-            <!-- End Best Seller -->
-          </div>
+            </div>
+          </section>
+          <!-- End Best Seller -->
         </div>
-        </div>
+      </div>
     </div>
-  </section>
+  </div>
+</section>
 
 
 
@@ -181,12 +181,24 @@
                   <p>
                     {{modalJogo?.descricao}}
                   </p>
-                  <div class="product_count" style="margin-left: 70px;">
-                    <button class="reduced items-count" type="button">
-                      <i class="ti-angle-right"></i>
-                    </button>
-                    <a class="button primary-btn" href="#">Alugar</a>
-                  </div>
+                  <ul class="nav nav-tabs d-flex justify-content-center" id="myTab" role="tablist" *ngIf="cookieExists">
+                    <li class="nav-item">
+                      <div class="product_count" (click)="cadPessoaJogo=true">
+                        <button class="reduced items-count" type="button">
+                          <i class="ti-angle-right"></i>
+                        </button>
+                        <a class="button primary-btn" [routerLink]=""><i class="fas fa-store"></i> Cadastrar</a>
+                      </div>
+                    </li>
+                    <li class="nav-item">
+                      <div class="product_count">
+                        <button class="reduced items-count" type="button">
+                          <i class="ti-angle-right"></i>
+                        </button>
+                        <a class="button primary-btn" [routerLink]=""><i class="fas fa-cart-plus"></i> Alugar</a>
+                      </div>
+                    </li>
+                  </ul>
                 </div>
               </div>
             </div>
@@ -201,129 +213,32 @@
   </div>
 </div>
 
-
-
-
-
-
-
-
-
-
-
-<!-- ================ category section end ================= -->
-<!-- ================ top product area start ================= -->
-<!--<section class="related-product-area">
-  <div class="container">
-    <div class="section-intro pb-60px">
-      <p>Popular Item in the market</p>
-      <h2>Top <span class="section-intro__style">Product</span></h2>
+<p-dialog [(visible)]="cadPessoaJogo" [baseZIndex]='1150'  *ngIf="cookieExists">
+    <p-header>
+      <i class="fas fa-money-bill-wave"></i> Qual valor será cobrado por dia?
+    </p-header>
+    <div>
+      <img class="img-fluid" src="{{modalJogo?.urlimagem}}" height="100" width="90" alt="">
+      <span style="text-align: center;font-family: Roboto,sans-serif;font-size: 24px;font-weight: 700;color: #384aeb;margin-bottom: 10px;">
+        {{modalJogo?.nome}}
+      </span>
     </div>
-    <div class="row mt-30">
-      <div class="col-sm-6 col-xl-3 mb-4 mb-xl-0">
-        <div class="single-search-product-wrapper">
-          <div class="single-search-product d-flex">
-            <a href="#"><img src="img/product/product-sm-1.png" alt=""></a>
-            <div class="desc">
-              <a href="#" class="title">Gray Coffee Cup</a>
-              <div class="price">$170.00</div>
-            </div>
-          </div>
-          <div class="single-search-product d-flex">
-            <a href="#"><img src="img/product/product-sm-2.png" alt=""></a>
-            <div class="desc">
-              <a href="#" class="title">Gray Coffee Cup</a>
-              <div class="price">$170.00</div>
-            </div>
-          </div>
-          <div class="single-search-product d-flex">
-            <a href="#"><img src="img/product/product-sm-3.png" alt=""></a>
-            <div class="desc">
-              <a href="#" class="title">Gray Coffee Cup</a>
-              <div class="price">$170.00</div>
-            </div>
-          </div>
-        </div>
-      </div>
-
-      <div class="col-sm-6 col-xl-3 mb-4 mb-xl-0">
-        <div class="single-search-product-wrapper">
-          <div class="single-search-product d-flex">
-            <a href="#"><img src="img/product/product-sm-4.png" alt=""></a>
-            <div class="desc">
-              <a href="#" class="title">Gray Coffee Cup</a>
-              <div class="price">$170.00</div>
-            </div>
-          </div>
-          <div class="single-search-product d-flex">
-            <a href="#"><img src="img/product/product-sm-5.png" alt=""></a>
-            <div class="desc">
-              <a href="#" class="title">Gray Coffee Cup</a>
-              <div class="price">$170.00</div>
-            </div>
-          </div>
-          <div class="single-search-product d-flex">
-            <a href="#"><img src="img/product/product-sm-6.png" alt=""></a>
-            <div class="desc">
-              <a href="#" class="title">Gray Coffee Cup</a>
-              <div class="price">$170.00</div>
-            </div>
-          </div>
-        </div>
-      </div>
-
-      <div class="col-sm-6 col-xl-3 mb-4 mb-xl-0">
-        <div class="single-search-product-wrapper">
-          <div class="single-search-product d-flex">
-            <a href="#"><img src="img/product/product-sm-7.png" alt=""></a>
-            <div class="desc">
-              <a href="#" class="title">Gray Coffee Cup</a>
-              <div class="price">$170.00</div>
-            </div>
-          </div>
-          <div class="single-search-product d-flex">
-            <a href="#"><img src="img/product/product-sm-8.png" alt=""></a>
-            <div class="desc">
-              <a href="#" class="title">Gray Coffee Cup</a>
-              <div class="price">$170.00</div>
-            </div>
-          </div>
-          <div class="single-search-product d-flex">
-            <a href="#"><img src="img/product/product-sm-9.png" alt=""></a>
-            <div class="desc">
-              <a href="#" class="title">Gray Coffee Cup</a>
-              <div class="price">$170.00</div>
-            </div>
-          </div>
-        </div>
-      </div>
-
-      <div class="col-sm-6 col-xl-3 mb-4 mb-xl-0">
-        <div class="single-search-product-wrapper">
-          <div class="single-search-product d-flex">
-            <a href="#"><img src="img/product/product-sm-1.png" alt=""></a>
-            <div class="desc">
-              <a href="#" class="title">Gray Coffee Cup</a>
-              <div class="price">$170.00</div>
-            </div>
-          </div>
-          <div class="single-search-product d-flex">
-            <a href="#"><img src="img/product/product-sm-2.png" alt=""></a>
-            <div class="desc">
-              <a href="#" class="title">Gray Coffee Cup</a>
-              <div class="price">$170.00</div>
-            </div>
-          </div>
-          <div class="single-search-product d-flex">
-            <a href="#"><img src="img/product/product-sm-3.png" alt=""></a>
-            <div class="desc">
-              <a href="#" class="title">Gray Coffee Cup</a>
-              <div class="price">$170.00</div>
-            </div>
-          </div>
-        </div>
-      </div>
+    <div class="input-group-prepend" style="padding-bottom: 10px;padding-top: 10px;">
+      <span class="input-group-text">Valor R$:</span>
+      <input [(ngModel)]="preco" type="number" pKeyFilter="pnum" class="form-control">
     </div>
-  </div>
-</section>-->
-<!-- ================ top product area end ================= -->
+
+    <p-footer>
+      <div class="d-flex justify-content-center">
+        <a class="button primary-btn" [routerLink]="" (click)="criaPessoaJogo()"><i class="fas fa-save"></i> Salvar</a>
+        <a class="button danger-btn" [routerLink]="" (click)="cadPessoaJogo=false;preco=null"><i class="fas fa-window-close"></i> Cancelar</a>
+      </div>
+    </p-footer>
+</p-dialog>
+
+<p-dialog [(visible)]="cadPessoaJogo" [baseZIndex]='1150' *ngIf="!cookieExists">
+    <p-header>
+      Faça o Login
+    </p-header>
+    <login></login>
+</p-dialog>
