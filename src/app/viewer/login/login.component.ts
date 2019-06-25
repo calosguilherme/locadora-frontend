@@ -28,7 +28,7 @@ export class LoginComponent implements OnInit {
     this.authService.login(this.login).subscribe(
       success => {
         this.authService.salvacookie(success)
-        this.router.navigate(['home']);
+        window.location.href = "/home"; 
       },
       error => {
           this.messageService.add({ severity: 'error', summary: 'Erro', detail: error.error.text });

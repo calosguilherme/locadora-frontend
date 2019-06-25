@@ -1,0 +1,44 @@
+#menuCenter ul li a:hover {
+  color: #6D6D6D;
+  border-bottom: 3px solid #EA0000;
+}
+
+#menuCenter ul li a {
+  padding: 2px 10px;
+  display: inline-block;
+  color: #333;
+  text-decoration: none;
+  border-bottom: 3px solid #EDEDED;
+}
+
+#menuCenter ul li {
+  display: inline;
+}
+
+#menuCenter ul {
+  padding: 0px;
+  margin: 0px;
+  list-style: none;
+}
+
+#menu ul li a:hover {
+  color: #6D6D6D;
+  border-bottom: 3px solid #EA0000;
+}
+
+#menu ul li a {
+  padding: 2px 10px;
+  display: inline-block;
+  color: #333;
+  text-decoration: none;
+}
+
+#menu ul li {
+  display: inline;
+}
+
+#menu ul {
+  padding: 0px;
+  margin: 0px;
+  list-style: none;
+}

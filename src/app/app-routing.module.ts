@@ -5,6 +5,8 @@ import { CadastroPessoaComponent } from './viewer/cadastroPessoa/cadastroPessoa.
 import { CatalogoJogosComponent } from './viewer/catalogoJogos/catalogoJogos.component';
 import { AdministrativoComponent } from './viewer/administrativo/administrativo.component';
 import { HomeComponent } from './viewer/home/home.component';
+import { AuthGuard } from './guards/auth.guard';
+import { AdminGuard } from './guards/admin.guard';
 
 const routes: Routes = [
   {
@@ -29,7 +31,8 @@ const routes: Routes = [
   },
   {
     path: "administrativo",
-    component: AdministrativoComponent
+    component: AdministrativoComponent,
+    canActivate: [AuthGuard, AdminGuard]
   }
 ];
 

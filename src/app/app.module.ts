@@ -18,6 +18,7 @@ import { CadastroJogocomponent } from './viewer/administrativo/gerenciarJogos/ca
 import { GerenciarPlataformas } from './viewer/administrativo/gerenciaPlataformas/gerenciarPlataformas.component';
 import { GerenciarGeneros } from './viewer/administrativo/gerenciarGeneros/gerenciarGeneros.component';
 import { RelatoriosComponent } from './viewer/administrativo/relatorios/relatorios.component';
+import { NavBarComponent } from './viewer/navbar/navbar.component';
 //Viewer Component
 //Services
 import { AuthService } from './services/authService';
@@ -28,6 +29,7 @@ import { PessoaService } from './services/pessoaService';
 import { GeneroService } from './services/generoService';
 import { PlataformaService } from './services/plataformaService';
 import { CookieService } from 'ngx-cookie-service';
+import { PessoaJogoService } from './services/pessoaJogoService';
 //Services
 //PrimeNG
 import { CalendarModule } from 'primeng/calendar';
@@ -43,8 +45,11 @@ import { InputSwitchModule } from 'primeng/inputswitch';
 import { ToastModule } from 'primeng/toast';
 import { MessageService } from 'primeng/components/common/messageservice';
 import { KeyFilterModule } from 'primeng/keyfilter';
-import { PessoaJogoService } from './services/pessoaJogoService';
 //PrimeNG
+//Guards
+import { AuthGuard } from './guards/auth.guard';
+import { AdminGuard } from './guards/admin.guard';
+//Guards
 
 @NgModule({
   declarations: [
@@ -59,7 +64,8 @@ import { PessoaJogoService } from './services/pessoaJogoService';
     GerenciarJogosComponent,
     GerenciarPessoasComponent,
     GerenciarPlataformas,
-    GerenciarGeneros
+    GerenciarGeneros,
+    NavBarComponent
   ],
   imports: [
     CommonModule,
@@ -83,7 +89,7 @@ import { PessoaJogoService } from './services/pessoaJogoService';
     ToastModule,
     KeyFilterModule,
   ],
-  providers: [PessoaService, EnderecoService, JogosService, VitrineService, AuthService, GeneroService, MessageService, PlataformaService, PessoaJogoService, CookieService],
+  providers: [PessoaService, EnderecoService, JogosService, VitrineService, AuthService, GeneroService, MessageService, PlataformaService, PessoaJogoService, CookieService, AuthGuard, AdminGuard],
   bootstrap: [AppComponent]
 })
 export class AppModule { }

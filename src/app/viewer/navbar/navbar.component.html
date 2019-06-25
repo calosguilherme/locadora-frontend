@@ -1,0 +1,25 @@
+<nav class="navbar  fixed-top navbar-dark bg-dark row">
+  <div class="col-md-auto">
+    <a class="navbar-brand" href="#">
+      <img src="https://www.maxpixel.net/static/photo/1x/Controller-Gamepad-Icon-Computer-Game-Video-Games-1784573.png" width="30" height="30" class="d-inline-block align-top" alt="">
+      Locadora Pessoal
+    </a>
+  </div>
+  <div id="menuCenter" class="col-6 ">
+    <ul class="d-flex justify-content-center">
+
+      <li *ngIf="admin"><a [routerLink]="['/administrativo']" style="color:white;padding-right: 10px;padding-left: 10px;">Administrativo</a></li>
+      <li><a [routerLink]="['/catalogo']" style="color:white;padding-right: 10px;padding-left: 10px;">Catalogo</a></li>
+    </ul>
+  </div>
+  <!--MENU CENTRAL-->
+  <div id="menu" class="col-md-auto">
+    <ul *ngIf="logado">
+      <li><a [routerLink]="['/home']" style="color:white;padding-right: 10px;padding-left: 10px;"><img [src]="user.urlimagem" alt="..." width="35px" height="35px" class="rounded-circle"> {{user.nome}}</a></li>
+      <li><a [routerLink]="" style="color:white;padding-right: 10px;padding-left: 10px;" (click)="sair()">Sair</a></li>
+    </ul>
+    <ul *ngIf="!logado">
+      <li><a [routerLink]="['/login']" style="color:white;padding-right: 10px;padding-left: 10px;">Logar</a></li>
+    </ul>
+  </div>
+</nav>
