@@ -27,6 +27,7 @@ export class LoginComponent implements OnInit {
     console.log(this.login)
     this.authService.login(this.login).subscribe(
       success => {
+        console.log(success)
         this.authService.salvacookie(success)
         window.location.href = "/home"; 
       },

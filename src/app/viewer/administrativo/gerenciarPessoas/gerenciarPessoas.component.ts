@@ -32,6 +32,9 @@ export class GerenciarPessoasComponent implements OnInit {
         console.log(suc)
       }
       this.pessoas = pessoa
+      for (let p of this.pessoas) {
+        p.datanascimento = new Date(p.datanascimento)
+      }
       this.sucRequi = true
     })
 

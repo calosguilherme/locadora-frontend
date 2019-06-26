@@ -41,13 +41,19 @@ export class AuthService {
   salvacookie(pessoa: any) {
     var dt = new Date();
     dt.setHours(dt.getHours() + 2);
+    if (pessoa.numeroregistro) {
+      this.cookieService.set('numeroregistro', pessoa.numeroregistro.toString(), dt)
+      this.cookieService.set('idpessoa', pessoa.pessoa.idpessoa.toString(), dt)
+      this.cookieService.set('nome', pessoa.pessoa.nome, dt)
+      this.cookieService.set('urlimagem', pessoa.pessoa.urlimagem, dt)
+      this.cookieService.set('cpf', pessoa.pessoa.cpf.toString(), dt)
+      return
+    }
     this.cookieService.set('idpessoa', pessoa.idpessoa.toString(), dt)
     this.cookieService.set('nome', pessoa.nome.toString(), dt)
     this.cookieService.set('urlimagem', pessoa.urlimagem.toString(), dt)
     this.cookieService.set('cpf', pessoa.cpf.toString(), dt)
-    if (pessoa.numeroregistro) {
-      this.cookieService.set('numeroregistro', pessoa.numeroregistro.toString(), dt)
-    }
+    
   }
 
 }

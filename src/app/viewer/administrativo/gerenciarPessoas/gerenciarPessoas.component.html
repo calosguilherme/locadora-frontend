@@ -25,14 +25,22 @@
     </ng-template>-->
   </p-table>
 
-  <p-dialog header="Detalhes do Usuário" [(visible)]="displayDialog" [responsive]="true" showEffect="fade" [modal]="true" [style]="{width: '300px'}">
+  <p-dialog header="Detalhes do Usuário" [(visible)]="displayDialog" [responsive]="true" showEffect="fade" [modal]="true" [style]="{width: '550px'}">
     <div class="ui-g ui-fluid" *ngIf="pessoa">
       <div class="ui-g-12">
         <div class="ui-g-4">
           <label>ID</label>
         </div>
         <div class="ui-g-8">
-          <input pInputText [value]="pessoa.idpessoa" disabled />
+          <input class="inputMaior" [value]="pessoa.idpessoa" disabled />
+        </div>
+      </div>
+      <div class="ui-g-12">
+        <div class="ui-g-4">
+          <label>CPF</label>
+        </div>
+        <div class="ui-g-8">
+          <input class="inputMaior" [value]="pessoa.cpf" disabled />
         </div>
       </div>
       <div class="ui-g-12">
@@ -40,7 +48,7 @@
           <label>Nome</label>
         </div>
         <div class="ui-g-8">
-          <input pInputText [(ngModel)]="pessoa.nome" />
+          <input class="inputMaior" [(ngModel)]="pessoa.nome" />
         </div>
       </div>
       <div class="ui-g-12">
@@ -48,7 +56,7 @@
           <label>User Name</label>
         </div>
         <div class="ui-g-8">
-          <input pInputText [(ngModel)]="pessoa.nomeusuario" />
+          <input class="inputMaior" [(ngModel)]="pessoa.nomeusuario" />
         </div>
       </div>
       <div class="ui-g-12">
@@ -56,7 +64,7 @@
           <label>Pontuação</label>
         </div>
         <div class="ui-g-8">
-          <input pInputText [(ngModel)]="pessoa.pontuacao" />
+          <input class="inputMaior" [(ngModel)]="pessoa.pontuacao" />
         </div>
       </div>
       <div class="ui-g-12">
@@ -64,7 +72,7 @@
           <label>Email</label>
         </div>
         <div class="ui-g-8">
-          <input pInputText [(ngModel)]="pessoa.email" />
+          <input class="inputMaior" [(ngModel)]="pessoa.email" />
         </div>
       </div>
       <div class="ui-g-12">
@@ -72,7 +80,15 @@
           <label>Data Nascimento</label>
         </div>
         <div class="ui-g-8">
-          <input type="date" [(ngModel)]="pessoa.datanascimento" />
+          <p-calendar [(ngModel)]="pessoa.datanascimento" dateFormat="dd/mm/yy"></p-calendar>
+        </div>
+      </div>
+      <div class="ui-g-12">
+        <div class="ui-g-4">
+          <label>URL Imagem</label>
+        </div>
+        <div class="ui-g-8">
+          <textarea class="inputMaior" [(ngModel)]="pessoa.urlimagem"></textarea>
         </div>
       </div>
     </div>
