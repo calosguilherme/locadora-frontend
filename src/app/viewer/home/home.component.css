@@ -50,7 +50,7 @@
 
 
 .blue {
-  text-shadow: 0 0 5px #7bacff, 0 0 10px #7bacff, 0 0 15px #7bacff, 0 0 25px #7bacff, 0 0 35px #7bacff, 0 0 45px #7bacff, 0 0 55px #7bacff, 0 0 65px #7bacff;
+  /*text-shadow: 0 0 5px #7bacff, 0 0 10px #7bacff, 0 0 15px #7bacff, 0 0 25px #7bacff, 0 0 35px #7bacff, 0 0 45px #7bacff, 0 0 55px #7bacff, 0 0 65px #7bacff;*/
   animation: green_lights 1s infinite;
 }
 

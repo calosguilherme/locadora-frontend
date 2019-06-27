@@ -8,7 +8,8 @@ import { Router } from '@angular/router';
 @Component({
   selector: 'login',
   templateUrl: './login.component.html',
-  styleUrls: ['./login.component.css']
+  styleUrls: ['./login.component.css'],
+
 })
 export class LoginComponent implements OnInit {
   login: Auth = new Auth()
@@ -35,6 +36,8 @@ export class LoginComponent implements OnInit {
           this.messageService.add({ severity: 'error', summary: 'Erro', detail: error.error.text });
       })
   }
+
+
 
 
 }

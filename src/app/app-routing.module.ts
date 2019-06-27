@@ -7,6 +7,7 @@ import { AdministrativoComponent } from './viewer/administrativo/administrativo.
 import { HomeComponent } from './viewer/home/home.component';
 import { AuthGuard } from './guards/auth.guard';
 import { AdminGuard } from './guards/admin.guard';
+import { PerfilComponent } from './viewer/perfil/perfil.component';
 
 const routes: Routes = [
   {
@@ -32,7 +33,12 @@ const routes: Routes = [
   {
     path: "administrativo",
     component: AdministrativoComponent,
-    canActivate: [AuthGuard, AdminGuard]
+    canActivate: [AuthGuard, AdminGuard],
+  },
+    {
+      path: "perfil",
+      component: PerfilComponent,
+    canActivate: [AuthGuard]
   }
 ];
 

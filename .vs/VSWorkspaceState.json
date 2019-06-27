@@ -1,7 +1,14 @@
 {
   "ExpandedNodes": [
-    ""
+    "",
+    "\\src",
+    "\\src\\app",
+    "\\src\\app\\viewer",
+    "\\src\\app\\viewer\\administrativo",
+    "\\src\\app\\viewer\\catalogoJogos",
+    "\\src\\app\\viewer\\perfil",
+    "\\src\\assets\\img"
   ],
-  "SelectedNode": "\\e2e",
+  "SelectedNode": "\\src\\app\\viewer\\administrativo\\administrativo.component.css",
   "PreviewInSolutionExplorer": false
 }

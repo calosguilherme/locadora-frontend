@@ -19,6 +19,7 @@ import { GerenciarPlataformas } from './viewer/administrativo/gerenciaPlataforma
 import { GerenciarGeneros } from './viewer/administrativo/gerenciarGeneros/gerenciarGeneros.component';
 import { RelatoriosComponent } from './viewer/administrativo/relatorios/relatorios.component';
 import { NavBarComponent } from './viewer/navbar/navbar.component';
+import { PerfilComponent } from './viewer/perfil/perfil.component';
 //Viewer Component
 //Services
 import { AuthService } from './services/authService';
@@ -65,7 +66,8 @@ import { AdminGuard } from './guards/admin.guard';
     GerenciarPessoasComponent,
     GerenciarPlataformas,
     GerenciarGeneros,
-    NavBarComponent
+    NavBarComponent,
+    PerfilComponent
   ],
   imports: [
     CommonModule,
