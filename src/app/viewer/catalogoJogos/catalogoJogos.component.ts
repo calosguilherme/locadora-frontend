@@ -43,10 +43,10 @@ export class CatalogoJogosComponent implements OnInit {
     private messageService: MessageService,
   ) {  }
 
-  ngOnInit() {
-    this.plataformaService.getComFiltros({ status: 0 }).subscribe(plataformas => this.plataformas = plataformas)
-    this.pegaJogos()
-    this.generoService.getComFiltros({status: 0}).subscribe(generos => this.generos = generos)
+  async ngOnInit() {
+    await this.plataformaService.getComFiltros({ status: 0 }).subscribe(plataformas => this.plataformas = plataformas)
+    await this.pegaJogos()
+    await this.generoService.getComFiltros({status: 0}).subscribe(generos => this.generos = generos)
   }
   pegaJogos(filtro?) {
     this.jogosService.getComFiltros(filtro).subscribe(jogos => {
