@@ -1,9 +1,9 @@
 import { Component, OnInit } from '@angular/core';
 import { Auth } from 'src/app/model/auth.model';
-import { AuthService } from 'src/app/services/authService';
+import { AuthServiceLocadora } from 'src/app/services/authService';
 import { MessageService } from 'primeng/components/common/messageservice';
 import { Router } from '@angular/router';
-declare var FB: any;
+import { AuthService, FacebookLoginProvider } from 'angularx-social-login';
 
 @Component({
   selector: 'login',
@@ -17,40 +17,21 @@ export class LoginComponent implements OnInit {
   erro: boolean = false
   test
   constructor(
-    private authService: AuthService,
+    private authServiceLocadora: AuthServiceLocadora,
     private messageService: MessageService,
     private router: Router,
+    private authService: AuthService
   ) {  }
 
   ngOnInit() {
-    (window as any).fbAsyncInit = function () {
-      FB.init({
-        appId: '718009998656993',
-        cookie: true,
-        xfbml: true,
-        version: 'v3.3'
-      });
-
-      FB.AppEvents.logPageView();
-
-    };
-
-    (function (d, s, id) {
-      var js, fjs = d.getElementsByTagName(s)[0];
-      if (d.getElementById(id)) { return; }
-      js = d.createElement(s); js.id = id;
-      js.src = "https://connect.facebook.net/en_US/sdk.js";
-      fjs.parentNode.insertBefore(js, fjs);
-    }(document, 'script', 'facebook-jssdk'));
-
   }
 
   logar() {
     console.log(this.login)
-    this.authService.login(this.login).subscribe(
+    this.authServiceLocadora.login(this.login).subscribe(
       success => {
         console.log(success)
-        this.authService.salvacookie(success)
+        this.authServiceLocadora.salvacookie(success)
         window.location.href = "/home"; 
       },
       error => {
@@ -58,23 +39,15 @@ export class LoginComponent implements OnInit {
       })
   }
 
-  loginFacebook() {
-    let permissao = ["public_profile", "email", "user_location", "user_gender", "user_birthday"]
-    console.log("submit login to facebook");
-    FB.login(permissao).then((response) => {
-      console.log(response)
-      let params = new Array<string>();
-
-      FB.api("/me?fields=name,email", params)
-        .then(res => {
-          console.log(res)
-        }, (error) => {
-          alert(error);
-          console.log('ERRO LOGIN: ', error);
-        })
-    }, (error) => {
-      alert(error);
+  signInWithFB(): void {
+    this.authService.signIn(FacebookLoginProvider.PROVIDER_ID);
+    this.authService.authState.subscribe((user) => {
+      console.log(user)
     });
+  }
+
+  signOut(): void {
+    this.authService.signOut();
   }
 
 

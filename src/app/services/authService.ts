@@ -3,7 +3,7 @@ import { HttpClient, HttpHeaders } from '@angular/common/http';
 import { CookieService } from 'ngx-cookie-service';
 
 @Injectable()
-export class AuthService {
+export class AuthServiceLocadora {
   httpOptions = {
     headers: new HttpHeaders({
       'Content-Type': 'application/json',

@@ -22,7 +22,7 @@ import { NavBarComponent } from './viewer/navbar/navbar.component';
 import { PerfilComponent } from './viewer/perfil/perfil.component';
 //Viewer Component
 //Services
-import { AuthService } from './services/authService';
+import { AuthServiceLocadora } from './services/authService';
 import { JogosService } from './services/jogosService';
 import { EnderecoService } from './services/enderecoService';
 import { VitrineService } from './services/vitrineService';
@@ -52,6 +52,32 @@ import { OverlayPanelModule } from 'primeng/overlaypanel';
 import { AuthGuard } from './guards/auth.guard';
 import { AdminGuard } from './guards/admin.guard';
 //Guards
+//Others
+import { SocialLoginModule, AuthServiceConfig, LoginOpt } from "angularx-social-login";
+import { GoogleLoginProvider, FacebookLoginProvider } from "angularx-social-login";
+
+let config = new AuthServiceConfig([
+  {
+    id: GoogleLoginProvider.PROVIDER_ID,
+    provider: new GoogleLoginProvider("Google-OAuth-Client-Id")
+  },
+  {
+    id: FacebookLoginProvider.PROVIDER_ID,
+    provider: new FacebookLoginProvider("718009998656993")
+  }
+]);
+
+const fbLoginOptions: LoginOpt = {
+  scope: 'public_profile, email, user_location, user_gender, user_birthday',
+  return_scopes: true,
+  enable_profile_selector: true
+}; 
+
+export function provideConfig() {
+  return config;
+}
+
+
 
 @NgModule({
   declarations: [
@@ -91,9 +117,16 @@ import { AdminGuard } from './guards/admin.guard';
     InputSwitchModule,
     ToastModule,
     KeyFilterModule,
-    OverlayPanelModule
+    OverlayPanelModule,
+    SocialLoginModule
   ],
-  providers: [PessoaService, EnderecoService, JogosService, VitrineService, AuthService, GeneroService, MessageService, PlataformaService, PessoaJogoService, CookieService, AuthGuard, AdminGuard],
+  providers: [PessoaService, EnderecoService, JogosService, VitrineService, AuthServiceLocadora, GeneroService, MessageService, PlataformaService, PessoaJogoService, CookieService, AuthGuard, AdminGuard,
+    {
+      provide: AuthServiceConfig,
+      useFactory: provideConfig
+    }
+],
+
   bootstrap: [AppComponent]
 })
 export class AppModule { }

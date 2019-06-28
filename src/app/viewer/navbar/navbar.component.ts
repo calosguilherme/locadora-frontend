@@ -1,6 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { Auth } from 'src/app/model/auth.model';
-import { AuthService } from 'src/app/services/authService';
+import { AuthServiceLocadora } from 'src/app/services/authService';
 import { MessageService } from 'primeng/components/common/messageservice';
 import { Router } from '@angular/router';
 import { CookieService } from 'ngx-cookie-service';
@@ -19,7 +19,7 @@ export class NavBarComponent implements OnInit {
   user: any
 
   constructor(
-    private authService: AuthService,
+    private authServiceLocadora: AuthServiceLocadora,
     private messageService: MessageService,
     private router: Router,
     private cookieService: CookieService,
@@ -33,15 +33,15 @@ export class NavBarComponent implements OnInit {
 
 
   sair() {
-    this.authService.logout()
+    this.authServiceLocadora.logout()
     window.location.href = "/"; 
   }
 
   logar() {
     console.log(this.login)
-    this.authService.login(this.login).subscribe(
+    this.authServiceLocadora.login(this.login).subscribe(
       success => {
-        this.authService.salvacookie(success)
+        this.authServiceLocadora.salvacookie(success)
         this.router.navigate(['home']);
       },
       error => {
