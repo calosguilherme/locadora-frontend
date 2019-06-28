@@ -35,7 +35,7 @@ export class AuthService {
   }
 
   teste() {
-    return this.http.get<any>('http://172.17.105.161:3000/auth/google')
+    return this.http.get<any>('https://locadora-pessoal.herokuapp.com/auth/google')
   }
 
   salvacookie(pessoa: any) {
@@ -54,6 +54,10 @@ export class AuthService {
     this.cookieService.set('urlimagem', pessoa.urlimagem.toString(), dt)
     this.cookieService.set('cpf', pessoa.cpf.toString(), dt)
     
+  }
+
+  salvacookieFacebook(facebook) {
+
   }
 
 }

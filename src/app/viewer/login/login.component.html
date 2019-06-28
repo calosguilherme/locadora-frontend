@@ -13,6 +13,7 @@
       
         <button class="btn btn-lg btn-primary btn-block" type="submit" (click)="logar()">Entrar</button>
         <button [routerLink]="['/cadastrar']" class="btn btn-lg btn-primary btn-block" type="submit">Criar Conta</button>
+        <button type="button" class="btn" (click)="loginFacebook();">Login with facebook</button>
       </div>
       <h2 *ngIf="erro" style="color:red">Login Invalido</h2>
   </div>

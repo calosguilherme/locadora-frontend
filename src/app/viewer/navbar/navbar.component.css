@@ -42,3 +42,6 @@
   margin: 0px;
   list-style: none;
 }
+.bg-dark {
+  background-color: rgb(56, 74, 235) !important;
+}

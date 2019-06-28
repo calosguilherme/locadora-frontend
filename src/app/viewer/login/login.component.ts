@@ -3,7 +3,7 @@ import { Auth } from 'src/app/model/auth.model';
 import { AuthService } from 'src/app/services/authService';
 import { MessageService } from 'primeng/components/common/messageservice';
 import { Router } from '@angular/router';
-
+declare var FB: any;
 
 @Component({
   selector: 'login',
@@ -12,6 +12,7 @@ import { Router } from '@angular/router';
 
 })
 export class LoginComponent implements OnInit {
+
   login: Auth = new Auth()
   erro: boolean = false
   test
@@ -22,6 +23,26 @@ export class LoginComponent implements OnInit {
   ) {  }
 
   ngOnInit() {
+    (window as any).fbAsyncInit = function () {
+      FB.init({
+        appId: '718009998656993',
+        cookie: true,
+        xfbml: true,
+        version: 'v3.3'
+      });
+
+      FB.AppEvents.logPageView();
+
+    };
+
+    (function (d, s, id) {
+      var js, fjs = d.getElementsByTagName(s)[0];
+      if (d.getElementById(id)) { return; }
+      js = d.createElement(s); js.id = id;
+      js.src = "https://connect.facebook.net/en_US/sdk.js";
+      fjs.parentNode.insertBefore(js, fjs);
+    }(document, 'script', 'facebook-jssdk'));
+
   }
 
   logar() {
@@ -37,6 +58,22 @@ export class LoginComponent implements OnInit {
       })
   }
 
+  loginFacebook() {
+    console.log("submit login to facebook");
+    // FB.login();
+    FB.login((response) => {
+      console.log('submitLogin', response);
+      if (response.authResponse) {
+        
+      }
+      else {
+        console.log('User login failed');
+      }
+    });
+
+
+
+  }
 
 
 
