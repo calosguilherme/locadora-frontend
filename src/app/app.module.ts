@@ -46,6 +46,7 @@ import { InputSwitchModule } from 'primeng/inputswitch';
 import { ToastModule } from 'primeng/toast';
 import { MessageService } from 'primeng/components/common/messageservice';
 import { KeyFilterModule } from 'primeng/keyfilter';
+import { OverlayPanelModule } from 'primeng/overlaypanel';
 //PrimeNG
 //Guards
 import { AuthGuard } from './guards/auth.guard';
@@ -90,6 +91,7 @@ import { AdminGuard } from './guards/admin.guard';
     InputSwitchModule,
     ToastModule,
     KeyFilterModule,
+    OverlayPanelModule
   ],
   providers: [PessoaService, EnderecoService, JogosService, VitrineService, AuthService, GeneroService, MessageService, PlataformaService, PessoaJogoService, CookieService, AuthGuard, AdminGuard],
   bootstrap: [AppComponent]
