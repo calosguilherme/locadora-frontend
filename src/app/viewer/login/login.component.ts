@@ -61,17 +61,34 @@ export class LoginComponent implements OnInit {
   loginFacebook() {
     let permissao = ["public_profile", "email", "user_location", "user_gender", "user_birthday"]
     console.log("submit login to facebook");
-    // FB.login();
-    FB.login(permissao).subscribe((response) => {
-      console.log('submitLogin', response);
-      console.log('submitLogin', response.name);
-      if (response.authResponse) {
-        
-      }
-      else {
-        console.log('User login failed');
-      }
+    FB.login(permissao).then((response) => {
+      console.log(response)
+      let params = new Array<string>();
+
+      FB.api("/me?fields=name,email", params)
+        .then(res => {
+          console.log(res)
+        }, (error) => {
+          alert(error);
+          console.log('ERRO LOGIN: ', error);
+        })
+    }, (error) => {
+      alert(error);
     });
+  }
+
+
+
+    //FB.login(permissao).subscribe((response) => {
+    //  console.log('submitLogin', response);
+    //  console.log('submitLogin', response.name);
+    //  if (response.authResponse) {
+        
+    //  }
+    //  else {
+    //    console.log('User login failed');
+    //  }
+    //});
 
 
 
