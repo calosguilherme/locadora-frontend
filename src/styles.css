@@ -1,6 +1,17 @@
 @import url("https://fonts.googleapis.com/css?family=Oswald:400,500,600");
 @import url("https://fonts.googleapis.com/css?family=Roboto:400,500");
 
+html, body {
+  /* min-height: 100vh; */
+  height: 95%;
+  margin: 0;
+}
+
+app-root, app-root > div{
+  height: 95%;
+  margin: 0;
+}
+
 body {
   color: #777;
   font-family: "Roboto",sans-serif;
