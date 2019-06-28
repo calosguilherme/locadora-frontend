@@ -59,9 +59,10 @@ export class LoginComponent implements OnInit {
   }
 
   loginFacebook() {
+    let permissao = ["public_profile", "email", "user_location", "user_gender", "user_birthday"]
     console.log("submit login to facebook");
     // FB.login();
-    FB.login('/me?fields=id,name,email,first_name,last_name,age_range,picture.type(large)',(response) => {
+    FB.login(permissao).subscribe((response) => {
       console.log('submitLogin', response);
       console.log('submitLogin', response.name);
       if (response.authResponse) {
