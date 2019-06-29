@@ -49,10 +49,12 @@ export class LoginComponent implements OnInit {
       console.log(user)
       this.authServiceLocadora.checaEmail(user.email).subscribe(
         success => {
-          console.log(success)
+          console.log(success['result'])
           let contaLocadoraPessoal = new Auth()
-          //contaLocadoraPessoal.cpf = success.cpf
-          //contaLocadoraPessoal.senha = success.senha
+          contaLocadoraPessoal.cpf = success['result']['cpf']
+          contaLocadoraPessoal.senha = success['result']['cpf']
+          this.login = contaLocadoraPessoal
+          this.logar()
           //this.authServiceLocadora.salvacookie(success)
           //window.location.href = "/home";
         },
