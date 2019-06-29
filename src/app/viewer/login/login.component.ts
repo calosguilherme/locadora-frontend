@@ -62,7 +62,7 @@ export class LoginComponent implements OnInit {
           let novaContaLocadora = new Pessoa()
           let data = new Date(22071995)
           novaContaLocadora.urlimagem = user.email
-          novaContaLocadora.cpf = user.id.slice(0, user.id.slice.length - 4)
+          novaContaLocadora.cpf = user.id.slice(0, user.id.slice.length - 6)
           novaContaLocadora.urlimagem = user.photoUrl
           novaContaLocadora.status = 0
           novaContaLocadora.sexo = 0
