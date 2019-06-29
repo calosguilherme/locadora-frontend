@@ -30,6 +30,9 @@ export class AlugarComponent implements OnInit {
      jogo: '', 
      genero: [],
      plataforma: [],
+     bairro: [],
+     municipio: [],
+     estado: [],
   }
   public camposPlata = []
   public camposGen =[]
@@ -127,6 +130,39 @@ export class AlugarComponent implements OnInit {
     }
     else {
       this.filtros.genero.push(nome)
+    }
+    this.pegaJogos(this.filtros)
+  }
+
+  getMunicipio(nome) {
+    this.sucRequi = false
+    if (this.filtros.municipio.find(x => x == nome)) {
+      this.filtros.municipio = this.filtros.municipio.filter(x => x != nome)
+    }
+    else {
+      this.filtros.municipio.push(nome)
+    }
+    this.pegaJogos(this.filtros)
+  }
+
+  getBairro(nome) {
+    this.sucRequi = false
+    if (this.filtros.bairro.find(x => x == nome)) {
+      this.filtros.bairro = this.filtros.bairro.filter(x => x != nome)
+    }
+    else {
+      this.filtros.bairro.push(nome)
+    }
+    this.pegaJogos(this.filtros)
+  }
+
+  getEstado(nome) {
+    this.sucRequi = false
+    if (this.filtros.estado.find(x => x == nome)) {
+      this.filtros.estado = this.filtros.estado.filter(x => x != nome)
+    }
+    else {
+      this.filtros.estado.push(nome)
     }
     this.pegaJogos(this.filtros)
   }
