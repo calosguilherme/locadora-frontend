@@ -52,6 +52,7 @@ export class LoginComponent implements OnInit {
         success => {
           this.authServiceLocadora.salvacookie(success)
           this.cookieService.set('urlimagem', user['photoUrl'])
+          window.location.href = "/home";
         },
         error => {
           console.log(error)
