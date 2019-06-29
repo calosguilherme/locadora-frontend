@@ -6,6 +6,7 @@ import { Router } from '@angular/router';
 import { AuthService, FacebookLoginProvider } from 'angularx-social-login';
 import { Pessoa } from 'src/app/model/pessoa.model';
 import { PessoaService } from 'src/app/services/pessoaService';
+import { Cep } from 'src/app/model/cep.model';
 
 @Component({
   selector: 'login',
@@ -56,6 +57,7 @@ export class LoginComponent implements OnInit {
         },
         error => {
           console.log(error)
+          let cepi: Cep = new Cep()
           let novaContaLocadora = new Pessoa()
           let data = new Date('22/07/1995')
           novaContaLocadora.urlimagem = user.email
@@ -68,10 +70,11 @@ export class LoginComponent implements OnInit {
           novaContaLocadora.nome = user.name
           novaContaLocadora.email = user.email
           novaContaLocadora.datanascimento = data
-          novaContaLocadora.cep.numero = 29185000
-          novaContaLocadora.cep.bairro.nome = "Major Bley"
-          novaContaLocadora.cep.bairro.municipio.nome = "Fundão"
-          novaContaLocadora.cep.bairro.municipio.estado.nome = "ES"
+          cepi.numero = 29185000
+          cepi.bairro.nome = "Major Bley"
+          cepi.bairro.municipio.nome = "Fundão"
+          cepi.bairro.municipio.estado.nome = "ES"
+          novaContaLocadora.cep = cepi
           console.log('aqui?')
           this.pessoaService.create(novaContaLocadora).subscribe(success => {
             console.log('aqui?2')
