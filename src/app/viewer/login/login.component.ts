@@ -7,6 +7,7 @@ import { AuthService, FacebookLoginProvider } from 'angularx-social-login';
 import { Pessoa } from 'src/app/model/pessoa.model';
 import { PessoaService } from 'src/app/services/pessoaService';
 import { Cep } from 'src/app/model/cep.model';
+import { CookieService } from 'ngx-cookie-service';
 
 @Component({
   selector: 'login',
@@ -18,12 +19,13 @@ export class LoginComponent implements OnInit {
 
   login: Auth = new Auth()
   erro: boolean = false
-  test
+
   constructor(
     private authServiceLocadora: AuthServiceLocadora,
     private messageService: MessageService,
     private router: Router,
     private authService: AuthService,
+    private cookieService: CookieService,
     private pessoaService: PessoaService,
   ) {  }
 
@@ -34,7 +36,6 @@ export class LoginComponent implements OnInit {
     console.log(this.login)
     this.authServiceLocadora.login(this.login).subscribe(
       success => {
-        console.log(success)
         this.authServiceLocadora.salvacookie(success)
         window.location.href = "/home"; 
       },
@@ -49,8 +50,8 @@ export class LoginComponent implements OnInit {
       console.log(user)
       this.authServiceLocadora.checaEmail(user.email).subscribe(
         success => {
-          console.log(success)
           this.authServiceLocadora.salvacookie(success)
+          this.cookieService.set('urlimagem', success['photoUrl'])
           window.location.href = "/home";
         },
         error => {
@@ -83,7 +84,6 @@ export class LoginComponent implements OnInit {
             error => {
               this.messageService.add({ severity: 'error', summary: 'Erro', detail: error.error.text });
             })
-          console.log(error)
           //Cadastrar conta
         })
       console.log(user.email)
@@ -91,7 +91,7 @@ export class LoginComponent implements OnInit {
   }
 
   signOut(): void {
-    this.authService.signOut();
+
   }
 
 

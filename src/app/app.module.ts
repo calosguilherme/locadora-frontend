@@ -65,7 +65,7 @@ let config = new AuthServiceConfig([
 ]);
 
 const fbLoginOptions: LoginOpt = {
-  scope: 'public_profile,email,user_location,user_gender,user_birthday,pages_messaging',
+  scope: 'public_profile,email,user_location,user_gender,user_birthday',
   return_scopes: true,
   enable_profile_selector: true
 }; 

@@ -4,6 +4,7 @@ import { AuthServiceLocadora } from 'src/app/services/authService';
 import { MessageService } from 'primeng/components/common/messageservice';
 import { Router } from '@angular/router';
 import { CookieService } from 'ngx-cookie-service';
+import { AuthService } from 'angularx-social-login';
 
 
 @Component({
@@ -23,6 +24,7 @@ export class NavBarComponent implements OnInit {
     private messageService: MessageService,
     private router: Router,
     private cookieService: CookieService,
+    private authService: AuthService,
   ) {  }
 
   ngOnInit() {
@@ -34,6 +36,7 @@ export class NavBarComponent implements OnInit {
 
   sair() {
     this.authServiceLocadora.logout()
+    this.authService.signOut();
     window.location.href = "/"; 
   }
 
