@@ -55,6 +55,7 @@ export class LoginComponent implements OnInit {
           //window.location.href = "/home";
         },
         error => {
+          console.log(error)
           let novaContaLocadora = new Pessoa()
           let data = new Date('22/07/1995')
           novaContaLocadora.urlimagem = user.email
@@ -71,7 +72,9 @@ export class LoginComponent implements OnInit {
           novaContaLocadora.cep.bairro.nome = "Major Bley"
           novaContaLocadora.cep.bairro.municipio.nome = "Fundão"
           novaContaLocadora.cep.bairro.municipio.estado.nome = "ES"
+          console.log('aqui?')
           this.pessoaService.create(novaContaLocadora).subscribe(success => {
+            console.log('aqui?2')
             this.login.cpf = Number (novaContaLocadora.cpf)
             this.login.senha = Number (novaContaLocadora.senha)
             this.logar()
