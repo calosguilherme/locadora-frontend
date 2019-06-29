@@ -51,8 +51,7 @@ export class LoginComponent implements OnInit {
       this.authServiceLocadora.checaEmail(user.email).subscribe(
         success => {
           this.authServiceLocadora.salvacookie(success)
-          this.cookieService.set('urlimagem', success['photoUrl'])
-          window.location.href = "/home";
+          this.cookieService.set('urlimagem', user['photoUrl'])
         },
         error => {
           console.log(error)
