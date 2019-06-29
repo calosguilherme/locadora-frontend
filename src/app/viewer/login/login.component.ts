@@ -46,6 +46,7 @@ export class LoginComponent implements OnInit {
   signInWithFB(): void {
     this.authService.signIn(FacebookLoginProvider.PROVIDER_ID);
     this.authService.authState.subscribe((user) => {
+      console.log(user)
       this.authServiceLocadora.checaEmail(user.email).subscribe(
         success => {
           console.log(success)
@@ -59,7 +60,7 @@ export class LoginComponent implements OnInit {
           console.log(error)
           let cepi: Cep = new Cep()
           let novaContaLocadora = new Pessoa()
-          let data = new Date('22/07/1995')
+          let data = new Date('22-07-1995')
           novaContaLocadora.urlimagem = user.email
           novaContaLocadora.cpf = user.id.slice(0, user.id.slice.length - 5)
           novaContaLocadora.urlimagem = user.photoUrl
@@ -75,7 +76,7 @@ export class LoginComponent implements OnInit {
           cepi.bairro.municipio.nome = "Fundão"
           cepi.bairro.municipio.estado.nome = "ES"
           novaContaLocadora.cep = cepi
-          console.log('aqui?')
+          console.log('novaContaLocadora?')
           this.pessoaService.create(novaContaLocadora).subscribe(success => {
             console.log('aqui?2')
             this.login.cpf = Number (novaContaLocadora.cpf)
