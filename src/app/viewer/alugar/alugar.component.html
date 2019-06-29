@@ -43,8 +43,8 @@
           <div class="head">Estado</div>
           <ul class="main-categories">
             <li class="common-filter">
-              <ul *ngFor="let plataforma of plataformas; let i= index">
-                <li class="filter-list"><input class="pixel-checkbox" type="checkbox" [(ngModel)]="camposPlata[i]" (change)="getPlataforma(plataforma.nome)">{{plataforma.nome}}</li>
+              <ul *ngFor="let estado of estados; let i= index">
+                <li class="filter-list"><input class="pixel-checkbox" type="checkbox" [(ngModel)]="camposPlata[i]" (change)="getEstado(estado.nome)">{{estado.nome}}</li>
               </ul>
             </li>
           </ul>
@@ -53,8 +53,8 @@
           <div class="head">Municipio</div>
           <ul class="main-categories">
             <li class="common-filter">
-              <ul *ngFor="let plataforma of plataformas; let i= index">
-                <li class="filter-list"><input class="pixel-checkbox" type="checkbox" [(ngModel)]="camposPlata[i]" (change)="getPlataforma(plataforma.nome)">{{plataforma.nome}}</li>
+              <ul *ngFor="let municipio of municipios; let i= index">
+                <li class="filter-list"><input class="pixel-checkbox" type="checkbox" [(ngModel)]="camposPlata[i]" (change)="getMunicipio(municipio.nome)">{{municipio.nome}}</li>
               </ul>
             </li>
           </ul>
@@ -63,8 +63,8 @@
           <div class="head">Bairro</div>
           <ul class="main-categories">
             <li class="common-filter">
-              <ul *ngFor="let plataforma of plataformas; let i= index">
-                <li class="filter-list"><input class="pixel-checkbox" type="checkbox" [(ngModel)]="camposPlata[i]" (change)="getPlataforma(plataforma.nome)">{{plataforma.nome}}</li>
+              <ul *ngFor="let bairro of bairros; let i= index">
+                <li class="filter-list"><input class="pixel-checkbox" type="checkbox" [(ngModel)]="camposPlata[i]" (change)="getBairro(bairro.nome)">{{bairro.nome}}</li>
               </ul>
             </li>
           </ul>

@@ -9,6 +9,10 @@ import { PessoaJogo } from "src/app/model/pessoajogo.model";
 import { CookieService } from "ngx-cookie-service";
 import { PessoaJogoService } from "src/app/services/pessoaJogoService";
 import { MessageService } from "primeng/components/common/messageservice";
+import { Estado } from "src/app/model/estado.model";
+import { Municipio } from "src/app/model/municipio.model";
+import { Bairro } from "src/app/model/bairro.model";
+import { EnderecoService } from "src/app/services/enderecoService";
 
 @Component({
   selector: "alugar",
@@ -17,6 +21,9 @@ import { MessageService } from "primeng/components/common/messageservice";
 })
 export class AlugarComponent implements OnInit {
   public plataformas: Plataforma[];
+  public estados: Estado[];
+  public municipios: Municipio[];
+  public bairros: Bairro[];
   public jogos: Jogo[];
   public generos: Genero[];
   public pesquisarNome: string;
@@ -37,7 +44,8 @@ export class AlugarComponent implements OnInit {
   public camposGen = [];
 
   constructor(
-    private jogosService: JogosService,
+    private jogosService: PessoaJogoService,
+    public enderecoService: EnderecoService,
     private generoService: GeneroService,
     private plataformaService: PlataformaService,
     private cookieService: CookieService,
@@ -53,12 +61,25 @@ export class AlugarComponent implements OnInit {
     this.generoService
       .getComFiltros({ status: 0 })
       .subscribe(generos => (this.generos = generos));
+    this.pegaEndereco();
   }
   pegaJogos(filtro?) {
     this.jogosService.getComFiltros(filtro).subscribe(jogos => {
       this.jogos = jogos;
       this.sucRequi = true;
     });
+  }
+  pegaEndereco() {
+    this.enderecoService.getAllBairro().subscribe(bairro => {
+      this.bairros = bairro;
+      console.log(bairro);
+    });
+    this.enderecoService
+      .getAllMunicipio()
+      .subscribe(municipio => (this.municipios = municipio));
+    this.enderecoService
+      .getAllEstado()
+      .subscribe(estado => (this.estados = estado));
   }
 
   ordenaJogos(i) {
