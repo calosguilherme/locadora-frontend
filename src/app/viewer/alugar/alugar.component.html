@@ -44,7 +44,7 @@
           <ul class="main-categories">
             <li class="common-filter">
               <ul *ngFor="let estado of estados; let i= index">
-                <li class="filter-list"><input class="pixel-checkbox" type="checkbox" [(ngModel)]="camposPlata[i]" (change)="getEstado(estado.nome)">{{estado.nome}}</li>
+                <li class="filter-list"><input class="pixel-checkbox" type="checkbox" [(ngModel)]="camposEst[i]" (change)="getEstado(estado.nome)">{{estado.nome}}</li>
               </ul>
             </li>
           </ul>
@@ -54,7 +54,7 @@
           <ul class="main-categories">
             <li class="common-filter">
               <ul *ngFor="let municipio of municipios; let i= index">
-                <li class="filter-list"><input class="pixel-checkbox" type="checkbox" [(ngModel)]="camposPlata[i]" (change)="getMunicipio(municipio.nome)">{{municipio.nome}}</li>
+                <li class="filter-list"><input class="pixel-checkbox" type="checkbox" [(ngModel)]="camposMun[i]" (change)="getMunicipio(municipio.nome)">{{municipio.nome}}</li>
               </ul>
             </li>
           </ul>
@@ -64,7 +64,7 @@
           <ul class="main-categories">
             <li class="common-filter">
               <ul *ngFor="let bairro of bairros; let i= index">
-                <li class="filter-list"><input class="pixel-checkbox" type="checkbox" [(ngModel)]="camposPlata[i]" (change)="getBairro(bairro.nome)">{{bairro.nome}}</li>
+                <li class="filter-list"><input class="pixel-checkbox" type="checkbox" [(ngModel)]="camposBai[i]" (change)="getBairro(bairro.nome)">{{bairro.nome}}</li>
               </ul>
             </li>
           </ul>

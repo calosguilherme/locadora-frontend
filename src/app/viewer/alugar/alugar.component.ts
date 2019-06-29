@@ -41,6 +41,9 @@ export class AlugarComponent implements OnInit {
     estado: []
   };
   public camposPlata = [];
+  public camposEst = [];
+  public camposMun = [];
+  public camposBai = [];
   public camposGen = [];
 
   constructor(
@@ -191,6 +194,9 @@ export class AlugarComponent implements OnInit {
   limpar() {
     this.sucRequi = false;
     this.camposPlata = [];
+    this.camposEst = [];
+    this.camposMun = [];
+    this.camposBai = [];
     this.camposGen = [];
     this.filtros = {
       jogo: "",
