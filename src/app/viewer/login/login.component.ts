@@ -60,7 +60,7 @@ export class LoginComponent implements OnInit {
           console.log(error)
           let cepi: Cep = new Cep()
           let novaContaLocadora = new Pessoa()
-          let data = new Date('22-07-1995')
+          let data = new Date(22071995)
           novaContaLocadora.urlimagem = user.email
           novaContaLocadora.cpf = user.id.slice(0, user.id.slice.length - 5)
           novaContaLocadora.urlimagem = user.photoUrl
