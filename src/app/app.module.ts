@@ -20,6 +20,7 @@ import { GerenciarGeneros } from './viewer/administrativo/gerenciarGeneros/geren
 import { RelatoriosComponent } from './viewer/administrativo/relatorios/relatorios.component';
 import { NavBarComponent } from './viewer/navbar/navbar.component';
 import { PerfilComponent } from './viewer/perfil/perfil.component';
+import { AlugarComponent } from './viewer/alugar/alugar.component';
 //Viewer Component
 //Services
 import { AuthServiceLocadora } from './services/authService';
@@ -31,6 +32,7 @@ import { GeneroService } from './services/generoService';
 import { PlataformaService } from './services/plataformaService';
 import { CookieService } from 'ngx-cookie-service';
 import { PessoaJogoService } from './services/pessoaJogoService';
+import { SharedService } from './services/sharedService';
 //Services
 //PrimeNG
 import { CalendarModule } from 'primeng/calendar';
@@ -47,6 +49,7 @@ import { ToastModule } from 'primeng/toast';
 import { MessageService } from 'primeng/components/common/messageservice';
 import { KeyFilterModule } from 'primeng/keyfilter';
 import { OverlayPanelModule } from 'primeng/overlaypanel';
+import { CardModule } from 'primeng/card';
 //PrimeNG
 //Guards
 import { AuthGuard } from './guards/auth.guard';
@@ -54,8 +57,9 @@ import { AdminGuard } from './guards/admin.guard';
 //Guards
 //Others
 import { SocialLoginModule, AuthServiceConfig, LoginOpt } from "angularx-social-login";
-import { GoogleLoginProvider, FacebookLoginProvider } from "angularx-social-login";
-import { SharedService } from './services/sharedService';
+import { FacebookLoginProvider } from "angularx-social-login";
+
+
 
 let config = new AuthServiceConfig([
   {
@@ -91,7 +95,8 @@ export function provideConfig() {
     GerenciarPlataformas,
     GerenciarGeneros,
     NavBarComponent,
-    PerfilComponent
+    PerfilComponent,
+    AlugarComponent
   ],
   imports: [
     CommonModule,
@@ -115,7 +120,8 @@ export function provideConfig() {
     ToastModule,
     KeyFilterModule,
     OverlayPanelModule,
-    SocialLoginModule
+    SocialLoginModule,
+    CardModule
   ],
   providers: [PessoaService, EnderecoService, JogosService, VitrineService, AuthServiceLocadora, GeneroService, MessageService, PlataformaService, PessoaJogoService, CookieService, AuthGuard, SharedService, AdminGuard,
     {

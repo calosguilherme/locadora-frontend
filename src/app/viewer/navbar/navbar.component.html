@@ -10,12 +10,13 @@
 
       <li *ngIf="admin"><a [routerLink]="['/administrativo']" style="color:white;padding-right: 10px;padding-left: 10px;">Administrativo</a></li>
       <li><a [routerLink]="['/catalogo']" style="color:white;padding-right: 10px;padding-left: 10px;">Catalogo</a></li>
+      <li><a [routerLink]="['/alugar']" style="color:white;padding-right: 10px;padding-left: 10px;">Alugar</a></li>
     </ul>
   </div>
   <!--MENU CENTRAL-->
   <div id="menu" class="col-md-auto">
     <ul *ngIf="logado">
-      <li><a [routerLink]="['/home']" style="color:white;padding-right: 10px;padding-left: 10px;"><img [src]="user.urlimagem" alt="..." width="35px" height="35px" class="rounded-circle"> {{user.nome}}</a></li>
+      <li><a  (click)="op.toggle($event)" style="color:white;padding-right: 10px;padding-left: 10px;"><img [src]="user.urlimagem" alt="..." width="35px" height="35px" class="rounded-circle"> {{user.nome}}</a></li>
       <li><a [routerLink]="" style="color:white;padding-right: 10px;padding-left: 10px;" (click)="sair()">Sair</a></li>
     </ul>
     <ul *ngIf="!logado">
@@ -24,5 +25,24 @@
   </div>
 </nav>
 <p-overlayPanel #op [dismissable]="true" [showCloseIcon]="true" [baseZIndex]="3000">
-<login></login>
+  <div *ngIf="!logado">
+    <login></login>
+  </div>
+  <div class="container" *ngIf="logado">
+    <p-card header="Advanced Card" subheader="Subheader" [style]="{width: '360px'}" styleClass="ui-card-shadow">
+      <p-header>
+        <img [src]="user.urlimagem" lt="..." width="35px" height="35px" class="rounded-circle" />
+      </p-header>
+      <div>
+        Lorem ipsum dolor sit amet, consectetur adipisicing elit. Inventore sed consequuntur error repudiandae numquam deserunt
+        quisquam repellat libero asperiores earum nam nobis, culpa ratione quam perferendis esse, cupiditate neque quas!
+      </div>
+      <p-footer>
+        <button pButton type="button" label="Save" icon="pi pi-check" style="margin-right: .25em"></button>
+        <button pButton type="button" label="Cancel" icon="pi pi-times" class="ui-button-secondary"></button>
+      </p-footer>
+    </p-card>
+
+
+  </div>
 </p-overlayPanel>

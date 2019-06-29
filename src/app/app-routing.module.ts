@@ -8,6 +8,7 @@ import { HomeComponent } from './viewer/home/home.component';
 import { AuthGuard } from './guards/auth.guard';
 import { AdminGuard } from './guards/admin.guard';
 import { PerfilComponent } from './viewer/perfil/perfil.component';
+import { AlugarComponent } from './viewer/alugar/alugar.component';
 
 const routes: Routes = [
   {
@@ -29,6 +30,10 @@ const routes: Routes = [
   {
     path: "catalogo",
     component: CatalogoJogosComponent
+  },
+  {
+    path: "alugar",
+    component: AlugarComponent
   },
   {
     path: "administrativo",
