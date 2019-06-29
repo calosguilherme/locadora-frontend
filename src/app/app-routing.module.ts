@@ -41,7 +41,7 @@ const routes: Routes = [
     canActivate: [AuthGuard, AdminGuard],
   },
     {
-      path: "perfil",
+      path: "perfil/:menu",
       component: PerfilComponent,
     canActivate: [AuthGuard]
   }

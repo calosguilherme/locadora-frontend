@@ -8,18 +8,18 @@
     <!--   side-menu   -->
     <ul id="side-menu">
       <li>
-        <a [routerLink]="" (click)="menuSelect=0">
+        <a [routerLink]="" (click)="menuSelect='0'">
           Perfil
           <span class="sub-icon"><i class="fa fa-user-cog"></i></span>
         </a>
       </li>
       <li>
-        <a [routerLink]="" (click)="menuSelect=1">
+        <a [routerLink]="" (click)="menuSelect='1'">
           Alugados
           <span class="sub-icon"><i class="fas fa-shopping-bag"></i></span>
         </a>
       <li>
-        <a [routerLink]="" (click)="menuSelect=2">
+        <a [routerLink]="" (click)="menuSelect='2'">
           Vitrine
           <span class="sub-icon"><i class="fas fa-store"></i></span>
         </a>
@@ -33,7 +33,8 @@
   <!-- Page-content-wrapper   -->
   <div class="page-content-wrapper">
     <div class="container-fluid main-content">
-      <ng-container *ngIf="menuSelect==2">
+      {{menuSelect}}
+      <ng-container *ngIf="menuSelect=='2'">
         <div class="row">
           <!--FILTRO E PRE-EXIBIÇÃO-->
           <div class="col"></div>
