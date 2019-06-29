@@ -55,6 +55,7 @@ import { AdminGuard } from './guards/admin.guard';
 //Others
 import { SocialLoginModule, AuthServiceConfig, LoginOpt } from "angularx-social-login";
 import { GoogleLoginProvider, FacebookLoginProvider } from "angularx-social-login";
+import { SharedService } from './services/sharedService';
 
 let config = new AuthServiceConfig([
   {
@@ -116,7 +117,7 @@ export function provideConfig() {
     OverlayPanelModule,
     SocialLoginModule
   ],
-  providers: [PessoaService, EnderecoService, JogosService, VitrineService, AuthServiceLocadora, GeneroService, MessageService, PlataformaService, PessoaJogoService, CookieService, AuthGuard, AdminGuard,
+  providers: [PessoaService, EnderecoService, JogosService, VitrineService, AuthServiceLocadora, GeneroService, MessageService, PlataformaService, PessoaJogoService, CookieService, AuthGuard, SharedService, AdminGuard,
     {
       provide: AuthServiceConfig,
       useFactory: provideConfig

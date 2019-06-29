@@ -30,6 +30,11 @@ export class AuthServiceLocadora {
     return this.http.post<any>('https://locadora-pessoal.herokuapp.com/auth', auth, this.options)
   }
 
+  checaEmail(mail) {
+    let auth = { 'email': mail }
+    return this.http.post<any>('https://locadora-pessoal.herokuapp.com/auth/email', auth, this.options)
+  }
+
   logout() {
     this.cookieService.deleteAll()
   }

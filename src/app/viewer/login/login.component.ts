@@ -20,7 +20,7 @@ export class LoginComponent implements OnInit {
     private authServiceLocadora: AuthServiceLocadora,
     private messageService: MessageService,
     private router: Router,
-    private authService: AuthService
+    private authService: AuthService,
   ) {  }
 
   ngOnInit() {
@@ -42,7 +42,19 @@ export class LoginComponent implements OnInit {
   signInWithFB(): void {
     this.authService.signIn(FacebookLoginProvider.PROVIDER_ID);
     this.authService.authState.subscribe((user) => {
-      console.log(user)
+      this.authServiceLocadora.checaEmail(user.email).subscribe(
+        success => {
+          let contaLocadoraPessoal = new Auth()
+          //contaLocadoraPessoal.cpf = success.cpf
+          //contaLocadoraPessoal.senha = success.senha
+          //this.authServiceLocadora.salvacookie(success)
+          //window.location.href = "/home";
+        },
+        error => {
+          console.log(error)
+          //Cadastrar conta
+        })
+      console.log(user.email)
     });
   }
 
