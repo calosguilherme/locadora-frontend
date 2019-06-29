@@ -4,6 +4,8 @@ import { AuthServiceLocadora } from 'src/app/services/authService';
 import { MessageService } from 'primeng/components/common/messageservice';
 import { Router } from '@angular/router';
 import { AuthService, FacebookLoginProvider } from 'angularx-social-login';
+import { Pessoa } from 'src/app/model/pessoa.model';
+import { PessoaService } from 'src/app/services/pessoaService';
 
 @Component({
   selector: 'login',
@@ -21,6 +23,7 @@ export class LoginComponent implements OnInit {
     private messageService: MessageService,
     private router: Router,
     private authService: AuthService,
+    private pessoaService: PessoaService,
   ) {  }
 
   ngOnInit() {
@@ -44,6 +47,7 @@ export class LoginComponent implements OnInit {
     this.authService.authState.subscribe((user) => {
       this.authServiceLocadora.checaEmail(user.email).subscribe(
         success => {
+          console.log(success)
           let contaLocadoraPessoal = new Auth()
           //contaLocadoraPessoal.cpf = success.cpf
           //contaLocadoraPessoal.senha = success.senha
@@ -51,6 +55,30 @@ export class LoginComponent implements OnInit {
           //window.location.href = "/home";
         },
         error => {
+          let novaContaLocadora = new Pessoa()
+          let data = new Date('22/07/1995')
+          novaContaLocadora.urlimagem = user.email
+          novaContaLocadora.cpf = user.id.slice(0, user.id.slice.length - 5)
+          novaContaLocadora.urlimagem = user.photoUrl
+          novaContaLocadora.status = 0
+          novaContaLocadora.sexo = 0
+          novaContaLocadora.senha = user.id
+          novaContaLocadora.nomeusuario = user.name
+          novaContaLocadora.nome = user.name
+          novaContaLocadora.email = user.email
+          novaContaLocadora.datanascimento = data
+          novaContaLocadora.cep.numero = 29185000
+          novaContaLocadora.cep.bairro.nome = "Major Bley"
+          novaContaLocadora.cep.bairro.municipio.nome = "Fundão"
+          novaContaLocadora.cep.bairro.municipio.estado.nome = "ES"
+          this.pessoaService.create(novaContaLocadora).subscribe(success => {
+            this.login.cpf = Number (novaContaLocadora.cpf)
+            this.login.senha = Number (novaContaLocadora.senha)
+            this.logar()
+            },
+            error => {
+              this.messageService.add({ severity: 'error', summary: 'Erro', detail: error.error.text });
+            })
           console.log(error)
           //Cadastrar conta
         })
