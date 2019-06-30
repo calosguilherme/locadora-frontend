@@ -1,7 +1,10 @@
-import { Plataforma } from "./plataforma.model";
-import { Genero } from "./genero.model";
 import { Jogo } from "./jogo.model";
-import { Pessoa } from "./pessoa.model";
+
+
+enum Status {
+  ativo = 0,
+  inativo = 1,
+}
 
 export class VitrineJogo {
   idpessoa: number
@@ -9,6 +12,6 @@ export class VitrineJogo {
   preco: number
   vitrine: boolean
   jogo: Jogo
-  pessoa: Pessoa
+  status: Status
   constructor() { }
 }

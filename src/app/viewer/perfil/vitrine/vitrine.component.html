@@ -1,0 +1,105 @@
+        <!--LISTA DE JOGOS-->
+        <div class="row">
+          <p-progressSpinner *ngIf="!sucRequi" class="d-flex justify-content-center" [style]="{width: '250px', height: '250px'}"></p-progressSpinner>
+          <ng-container *ngIf="sucRequi">
+            <div class="col-3">
+              <div class="sidebar-categories">
+                <div class="head">Plataforma</div>
+                <ul class="main-categories">
+                  <li class="common-filter">
+                    <ul *ngFor="let plataforma of plataformas; let i= index">
+                      <li class="filter-list"><input class="pixel-checkbox" type="checkbox" (change)="getPlataforma(plataforma.nome)"> {{plataforma.nome}}</li>
+                    </ul>
+                  </li>
+                </ul>
+              </div>
+              <div class="sidebar-categories">
+                <div class="head">Situação</div>
+                <ul class="main-categories">
+                  <li class="common-filter">
+                    <ul>
+                      <li class="filter-list"><input class="pixel-checkbox" type="checkbox" (change)="getAlugado()"> Alugado</li>
+                    </ul>
+                </ul>
+              </div>
+              <div class="sidebar-categories">
+                <div class="head">Genero</div>
+                <ul class="main-categories">
+                  <li class="common-filter">
+                    <ul *ngFor="let genero of generos; let i= index">
+                      <li class="filter-list"><input class="pixel-checkbox" type="checkbox" (change)="getGenero(genero.nome)"> {{genero.nome}}</li>
+                    </ul>
+                </ul>
+              </div>
+            </div>
+
+
+            <div class="col-9">
+              <div class="filter-bar d-flex flex-wrap align-items-center">
+
+                <div class="sorting  mr-auto">
+                  <select (change)="ordenaJogos($event.target.value)">
+                    <option value="0">Ordenação Padrão</option>
+                    <option value="1">Ordem Alfabetica</option>
+                    <option value="2">Mais Caro</option>
+                  </select>
+                </div>
+                <div class="sorting">
+                  <button class="btn btn-danger" (click)="limpar()">Limpar Filtros <i class="fas fa-trash-alt"></i></button>
+                </div>
+                <div>
+                  <div class="input-group filter-bar-search">
+                    <input type="text" placeholder="Pesquisar" [(ngModel)]="filtros.jogo" (keyup.enter)="aplicaFiltros()" >
+                    <div class="input-group-append">
+                      <button type="button" (click)="aplicaFiltros()"><i class="fas fa-search"></i></button>
+                    </div>
+                  </div>
+                </div>
+
+              </div>
+
+              <p-carousel [value]="pessoaJogo" numVisible="4" circular="circular" autoplayInterval="9000" easing="easeOutStrong" [style]="{marginRight: '10px'}">
+                <ng-template let-item pTemplate="item">
+                  <p-panel [header]="item.jogo.nome" [style]="{'text-align':'center', 'background-color':'#384aeb'}">
+                    <div class="card text-center card-product">
+                      <div class="card-product__img">
+                        <img class="card-img" src="{{item.jogo.urlimagem}}" alt="" height="293" width="255">
+                        <ul class="card-product__imgOverlay">
+                          <li class="lii"> <button (click)="editPessoaJogo=true;selecionaJogo(item)"><i class="fas fa-edit"></i></button></li>
+                        </ul>
+                      </div>
+                      <div class="card-body">
+                        <h4 class="card-product__title"><a href="#">{{item.jogo.nome}}</a></h4>
+                        <p class="card-product__price"><i class="far fa-money-bill-alt"></i> {{item.preco | currency:'BRL': true}}</p>
+                      </div>
+                    </div>
+                    <button class="btn btn-danger">Remover <i class="fas fa-trash-alt"></i></button>
+                  </p-panel>
+                </ng-template>
+              </p-carousel>
+            </div>
+          </ng-container>
+        </div>
+
+        <p-dialog [(visible)]="editPessoaJogo" [baseZIndex]='1150'>
+          <p-header>
+            <i class="fas fa-money-bill-wave"></i> Qual valor será cobrado por dia?
+          </p-header>
+          <div>
+            <img class="img-fluid" src="{{modalJogo?.jogo.urlimagem}}" height="100" width="90" alt="">
+            <span style="text-align: center;font-family: Roboto,sans-serif;font-size: 24px;font-weight: 700;color: #384aeb;margin-bottom: 10px;">
+              {{modalJogo?.jogo.nome}}
+            </span>
+          </div>
+          <div class="input-group-prepend" style="padding-bottom: 10px;padding-top: 10px;">
+            <span class="input-group-text">Valor R$:</span>
+            <input [(ngModel)]="preco" type="number" pKeyFilter="pnum" class="form-control">
+          </div>
+
+          <p-footer>
+            <div class="d-flex justify-content-center">
+              <a class="button primary-btn" [routerLink]="" (click)="atualizaPreco()"><i class="fas fa-save"></i> Salvar</a>
+              <a class="button danger-btn" [routerLink]="" (click)="editPessoaJogo=false;preco=null"><i class="fas fa-window-close"></i> Cancelar</a>
+            </div>
+          </p-footer>
+        </p-dialog>

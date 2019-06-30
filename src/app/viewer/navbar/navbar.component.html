@@ -37,22 +37,32 @@
   <div *ngIf="!logado">
     <login></login>
   </div>
-  <div class="container" *ngIf="logado">
-    <p-card header="Advanced Card" subheader="Subheader" [style]="{width: '360px'}" styleClass="ui-card-shadow">
-      <p-header>
-        <img [src]="user.urlimagem" lt="..." width="35px" height="35px" class="rounded-circle" />
-      </p-header>
-      <div>
-        Lorem ipsum dolor sit amet, consectetur adipisicing elit. Inventore sed consequuntur error repudiandae numquam
-        deserunt
-        quisquam repellat libero asperiores earum nam nobis, culpa ratione quam perferendis esse, cupiditate neque quas!
+    <p-card  styleClass="ui-card-shadow bg-dark" *ngIf="logado">
+      <div class="row justify-content-center">
+        <h5 style="color:white">Ola {{user.nome}}</h5>
       </div>
-      <p-footer>
-        <button pButton type="button" label="Save" icon="pi pi-check" style="margin-right: .25em"></button>
-        <button pButton type="button" label="Cancel" icon="pi pi-times" class="ui-button-secondary"></button>
-      </p-footer>
+      <div class="row  justify-content-center">
+          <img [src]="user.urlimagem" lt="..." width="70px" height="70x" class="rounded-circle" />
+        </div>
+      <div class="row justify-content-center" style="padding-top: 10px;">
+        <div class="btn-group btn-group-toggle" data-toggle="buttons">
+          <div class="btn-group-vertical">
+            <button [routerLink]="['/perfil', 0]" routerLinkActive="active" class="btn btn-secondary">
+              Configurações
+            </button>
+            <button [routerLink]="['/perfil', 1]" routerLinkActive="active" class="btn btn-secondary">
+              Alugados
+            </button>
+          </div>
+          <div class="btn-group-vertical">
+            <button  [routerLink]="['/perfil', 3]" routerLinkActive="active" class="btn btn-secondary">
+             Recomendações
+            </button>
+            <button [routerLink]="['/perfil', 2]" routerLinkActive="active" class="btn btn-secondary">
+              Vitrine
+            </button>
+            </div>
+          </div>
+        </div>
     </p-card>
-
-
-  </div>
 </p-overlayPanel>

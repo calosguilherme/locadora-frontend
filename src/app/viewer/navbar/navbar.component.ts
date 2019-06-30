@@ -5,6 +5,7 @@ import { MessageService } from 'primeng/components/common/messageservice';
 import { Router } from '@angular/router';
 import { CookieService } from 'ngx-cookie-service';
 import { AuthService } from 'angularx-social-login';
+import { BlockUI, NgBlockUI } from 'ng-block-ui';
 
 
 @Component({
@@ -13,6 +14,7 @@ import { AuthService } from 'angularx-social-login';
   styleUrls: ['./navbar.component.css']
 })
 export class NavBarComponent implements OnInit {
+  @BlockUI() blockUI: NgBlockUI;
   login: Auth = new Auth()
   erro: boolean = false
   admin: boolean = this.cookieService.check('numeroregistro');
@@ -35,21 +37,11 @@ export class NavBarComponent implements OnInit {
 
 
   sair() {
+    this.blockUI.start('Carregando');
     this.authServiceLocadora.logout()
     this.authService.signOut();
-    window.location.href = "/"; 
-  }
-
-  logar() {
-    console.log(this.login)
-    this.authServiceLocadora.login(this.login).subscribe(
-      success => {
-        this.authServiceLocadora.salvacookie(success)
-        this.router.navigate(['home']);
-      },
-      error => {
-          this.messageService.add({ severity: 'error', summary: 'Erro', detail: error.error.text });
-      })
+    window.location.href = "/";
+    this.blockUI.stop();
   }
 
 

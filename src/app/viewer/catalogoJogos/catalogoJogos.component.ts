@@ -27,6 +27,7 @@ export class CatalogoJogosComponent implements OnInit {
   public preco: number
   cookieExists: boolean = this.cookieService.check('idpessoa');
   public filtros = {
+     status: 0,
      jogo: '', 
      genero: [],
      plataforma: [],
@@ -45,7 +46,7 @@ export class CatalogoJogosComponent implements OnInit {
 
   ngOnInit() {
      this.plataformaService.getComFiltros({ status: 0 }).subscribe(plataformas => this.plataformas = plataformas)
-     this.pegaJogos()
+     this.pegaJogos(this.filtros)
      this.generoService.getComFiltros({status: 0}).subscribe(generos => this.generos = generos)
   }
   pegaJogos(filtro?) {
@@ -142,6 +143,7 @@ export class CatalogoJogosComponent implements OnInit {
     this.camposPlata = []
     this.camposGen = []
     this.filtros = {
+      status: 0,
       jogo: '',
       genero: [],
       plataforma: [],
@@ -154,6 +156,7 @@ export class CatalogoJogosComponent implements OnInit {
     pessoaJogo.idjogo = this.modalJogo.idjogo
     pessoaJogo.idpessoa = Number(this.cookieService.get('idpessoa'))
     pessoaJogo.preco = this.preco
+    pessoaJogo.status = 0
     this.pessoaJogoService.create(pessoaJogo).subscribe(
       success => {
         this.cadPessoaJogo = false;

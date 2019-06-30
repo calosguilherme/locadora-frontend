@@ -21,6 +21,9 @@ import { RelatoriosComponent } from './viewer/administrativo/relatorios/relatori
 import { NavBarComponent } from './viewer/navbar/navbar.component';
 import { PerfilComponent } from './viewer/perfil/perfil.component';
 import { AlugarComponent } from './viewer/alugar/alugar.component';
+import { VitrineComponent } from './viewer/perfil/vitrine/vitrine.component';
+import { RecomendacaoComponent } from './viewer/perfil/recomendacao/recomendacao.component';
+import { ProfileComponent } from './viewer/perfil/profile/profile.component';
 //Viewer Component
 //Services
 import { AuthServiceLocadora } from './services/authService';
@@ -50,6 +53,10 @@ import { MessageService } from 'primeng/components/common/messageservice';
 import { KeyFilterModule } from 'primeng/keyfilter';
 import { OverlayPanelModule } from 'primeng/overlaypanel';
 import { CardModule } from 'primeng/card';
+import { DataViewModule } from 'primeng/dataview';
+import { PanelModule } from 'primeng/panel';
+import { CarouselModule } from 'primeng/carousel';
+
 //PrimeNG
 //Guards
 import { AuthGuard } from './guards/auth.guard';
@@ -58,6 +65,10 @@ import { AdminGuard } from './guards/admin.guard';
 //Others
 import { SocialLoginModule, AuthServiceConfig, LoginOpt } from "angularx-social-login";
 import { FacebookLoginProvider } from "angularx-social-login";
+import { BlockUIModule } from 'ng-block-ui';
+
+
+
 
 
 
@@ -96,7 +107,10 @@ export function provideConfig() {
     GerenciarGeneros,
     NavBarComponent,
     PerfilComponent,
-    AlugarComponent
+    AlugarComponent,
+    VitrineComponent,
+    RecomendacaoComponent,
+    ProfileComponent,
   ],
   imports: [
     CommonModule,
@@ -121,7 +135,11 @@ export function provideConfig() {
     KeyFilterModule,
     OverlayPanelModule,
     SocialLoginModule,
-    CardModule
+    CardModule,
+    DataViewModule,
+    PanelModule,
+    CarouselModule,
+    BlockUIModule.forRoot()
   ],
   providers: [PessoaService, EnderecoService, JogosService, VitrineService, AuthServiceLocadora, GeneroService, MessageService, PlataformaService, PessoaJogoService, CookieService, AuthGuard, SharedService, AdminGuard,
     {
