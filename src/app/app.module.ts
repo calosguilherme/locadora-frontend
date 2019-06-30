@@ -22,6 +22,7 @@ import { NavBarComponent } from './viewer/navbar/navbar.component';
 import { PerfilComponent } from './viewer/perfil/perfil.component';
 import { AlugarComponent } from './viewer/alugar/alugar.component';
 import { VitrineComponent } from './viewer/perfil/vitrine/vitrine.component';
+import { RecomendacaoComponent } from './viewer/perfil/recomendacao/recomendacao.component';
 //Viewer Component
 //Services
 import { AuthServiceLocadora } from './services/authService';
@@ -67,6 +68,7 @@ import { FacebookLoginProvider } from "angularx-social-login";
 
 
 
+
 let config = new AuthServiceConfig([
   {
     id: FacebookLoginProvider.PROVIDER_ID,
@@ -103,7 +105,8 @@ export function provideConfig() {
     NavBarComponent,
     PerfilComponent,
     AlugarComponent,
-    VitrineComponent
+    VitrineComponent,
+    RecomendacaoComponent,
   ],
   imports: [
     CommonModule,

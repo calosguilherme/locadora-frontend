@@ -2,35 +2,33 @@ import { Component, OnInit } from '@angular/core';
 import { ActivatedRoute, ParamMap } from '@angular/router';
 import { switchMap } from 'rxjs/operators';
 import { PessoaJogoService } from 'src/app/services/pessoaJogoService';
-import { PessoaJogo } from 'src/app/model/pessoajogo.model';
 import { CookieService } from 'ngx-cookie-service';
-import { VitrineJogo } from 'src/app/model/vitrineJogo.model';
 import { GeneroService } from 'src/app/services/generoService';
 import { PlataformaService } from 'src/app/services/plataformaService';
 import { Plataforma } from 'src/app/model/plataforma.model';
 import { Genero } from 'src/app/model/genero.model';
-import { MessageService } from 'primeng/components/common/messageservice';
+import { Jogo } from 'src/app/model/jogo.model';
 
 
 @Component({
-  selector: 'vitrine',
-  templateUrl: './vitrine.component.html',
-  styleUrls: ['./vitrine.component.css'],
+  selector: 'recomendacao',
+  templateUrl: './recomendacao.component.html',
+  styleUrls: ['./recomendacao.component.css'],
 })
-export class VitrineComponent implements OnInit {
+export class RecomendacaoComponent implements OnInit {
   menuSelect: string = '0'
   active: boolean = false
-  pessoaJogo: VitrineJogo[]
+  pessoaJogo: Jogo[]
   user: any = this.cookieService.getAll()
   sucRequi: boolean = false
   plataformas: Plataforma[]
   generos: Genero[]
   editPessoaJogo: boolean = false
-  origi: VitrineJogo[]
-  modalJogo: VitrineJogo
+  origi: Jogo[]
+  modalJogo: Jogo
   preco: number
   public filtros = {
-    vitrine: true,
+    status: 0,
     jogo: '',
     genero: [],
     plataforma: [],
@@ -41,7 +39,6 @@ export class VitrineComponent implements OnInit {
     private cookieService: CookieService,
     private generoService: GeneroService,
     private plataformaService: PlataformaService,
-    private messageService: MessageService,
   ) {  }
 
   ngOnInit() {
@@ -51,11 +48,12 @@ export class VitrineComponent implements OnInit {
   }
 
   getPessoaJogo() {
-    this.pessoaJogoService.getById(this.user.idpessoa).subscribe(pessoaJogo => {
+    this.pessoaJogoService.getRecomendacao(this.user.idpessoa).subscribe(pessoaJogo => {
       console.log(pessoaJogo)
       this.pessoaJogo = pessoaJogo
       this.origi = pessoaJogo
       this.sucRequi = true
+      this.aplicaFiltros()
     })
   }
 
@@ -70,19 +68,15 @@ export class VitrineComponent implements OnInit {
         this.jogosOrdemAlfabetica()
         break;
       }
-      case '2': {
-        this.jogosOrdemPreco()
-        break;
-      }
     }
   }
 
   jogosOrdemAlfabetica() {
     this.pessoaJogo = this.pessoaJogo.sort(function (a, b) {
-      if (a.jogo.nome > b.jogo.nome) {
+      if (a.nome > b.nome) {
         return 1;
       }
-      if (a.jogo.nome < b.jogo.nome) {
+      if (a.nome < b.nome) {
         return -1;
       }
       return 0;
@@ -95,19 +89,6 @@ export class VitrineComponent implements OnInit {
         return 1;
       }
       if (a.idjogo < b.idjogo) {
-        return -1;
-      }
-      return 0;
-    });
-  }
-
-
-  jogosOrdemPreco() {
-    this.pessoaJogo = this.pessoaJogo.sort(function (a, b) {
-      if (a.preco < b.preco) {
-        return 1;
-      }
-      if (a.preco > b.preco) {
         return -1;
       }
       return 0;
@@ -138,15 +119,10 @@ export class VitrineComponent implements OnInit {
     this.sucRequi = true
   }
 
-  getAlugado() {
-    this.filtros.vitrine = !this.filtros.vitrine
-    this.aplicaFiltros()
-  }
-
   aplicaFiltros() {
     if (this.filtros.plataforma.length != 0) {
       for (let filtro of this.filtros.plataforma) {
-        this.pessoaJogo = this.origi.filter(x => x.jogo.plataforma.find(y => y.nome == filtro))
+        this.pessoaJogo = this.origi.filter(x => x.plataforma.find(y => y.nome == filtro))
       }
     }
     else {
@@ -154,48 +130,29 @@ export class VitrineComponent implements OnInit {
     }
     if (this.filtros.genero.length != 0) {
       for (let filtro of this.filtros.genero) {
-        this.pessoaJogo = this.pessoaJogo.filter(x => x.jogo.genero.find(y => y.nome == filtro))
+        this.pessoaJogo = this.pessoaJogo.filter(x => x.genero.find(y => y.nome == filtro))
       }
     }
-    if (!this.filtros.vitrine) {
-      this.pessoaJogo = this.pessoaJogo.filter(x => x.vitrine == this.filtros.vitrine)
+    if (!this.filtros.status) {
+      this.pessoaJogo = this.pessoaJogo.filter(x => x.status == this.filtros.status)
     }
-    if (this.filtros.jogo) this.pessoaJogo = this.pessoaJogo.filter(x => !x.jogo.nome.toUpperCase().search(this.filtros.jogo.toUpperCase()))
+    if (this.filtros.jogo) this.pessoaJogo = this.pessoaJogo.filter(x => !x.nome.toUpperCase().search(this.filtros.jogo.toUpperCase()))
   }
 
   selecionaJogo(jogo) {
     this.modalJogo = jogo
-    this.preco = this.modalJogo.preco
   }
 
-  atualizaPreco(){
-    let pessoaJogo = new PessoaJogo()
-    pessoaJogo.idjogo = this.modalJogo.idjogo
-    pessoaJogo.idpessoa = Number(this.cookieService.get('idpessoa'))
-    pessoaJogo.preco = this.preco
-    pessoaJogo.status = 0
-    this.pessoaJogoService.update(pessoaJogo).subscribe(
-      success => {
-        this.editPessoaJogo = false;
-        this.messageService.add({ severity: 'success', summary: 'Sucesso', detail: success.message });
-        this.getPessoaJogo()
-        this.aplicaFiltros()
-      },
-      error => {
-        this.messageService.add({ severity: 'error', summary: 'Erro', detail: error.error.text });
-      })
-  }
 
   limpar() {
+    this.sucRequi = false
     this.filtros = {
-      vitrine: true,
+      status: 0,
       jogo: '',
       genero: [],
       plataforma: [],
     }
     this.aplicaFiltros()
   }
-
-
 
 }

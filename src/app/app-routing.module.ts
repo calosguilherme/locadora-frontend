@@ -32,7 +32,7 @@ const routes: Routes = [
     component: CatalogoJogosComponent
   },
   {
-    path: "alugar",
+    path: "alugar/:id",
     component: AlugarComponent
   },
   {

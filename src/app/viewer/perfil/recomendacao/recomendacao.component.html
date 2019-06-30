@@ -1,0 +1,119 @@
+        <!--LISTA DE JOGOS-->
+<div class="row">
+  <p-progressSpinner *ngIf="!sucRequi" class="d-flex justify-content-center" [style]="{width: '250px', height: '250px'}"></p-progressSpinner>
+  <ng-container *ngIf="sucRequi">
+    <div class="col-3">
+      <div class="sidebar-categories">
+        <div class="head">Plataforma</div>
+        <ul class="main-categories">
+          <li class="common-filter">
+            <ul *ngFor="let plataforma of plataformas; let i= index">
+              <li class="filter-list"><input class="pixel-checkbox" type="checkbox" (change)="getPlataforma(plataforma.nome)"> {{plataforma.nome}}</li>
+            </ul>
+          </li>
+        </ul>
+      </div>
+      <div class="sidebar-categories">
+        <div class="head">Genero</div>
+        <ul class="main-categories">
+          <li class="common-filter">
+            <ul *ngFor="let genero of generos; let i= index">
+              <li class="filter-list"><input class="pixel-checkbox" type="checkbox" (change)="getGenero(genero.nome)"> {{genero.nome}}</li>
+            </ul>
+        </ul>
+      </div>
+    </div>
+
+
+    <div class="col-9">
+      <div class="filter-bar d-flex flex-wrap align-items-center">
+
+        <div class="sorting  mr-auto">
+          <select (change)="ordenaJogos($event.target.value)">
+            <option value="0">Ordenação Padrão</option>
+            <option value="1">Ordem Alfabetica</option>
+          </select>
+        </div>
+        <div class="sorting">
+          <button class="btn btn-danger" (click)="limpar()">Limpar Filtros <i class="fas fa-trash-alt"></i></button>
+        </div>
+        <div>
+          <div class="input-group filter-bar-search">
+            <input type="text" placeholder="Pesquisar" [(ngModel)]="filtros.jogo" (keyup.enter)="aplicaFiltros()">
+            <div class="input-group-append">
+              <button type="button" (click)="aplicaFiltros()"><i class="fas fa-search"></i></button>
+            </div>
+          </div>
+        </div>
+
+      </div>
+
+      <p-carousel [value]="pessoaJogo" numVisible="4" circular="circular" autoplayInterval="9000" easing="easeOutStrong" [style]="{marginRight: '10px'}">
+        <ng-template let-item pTemplate="item">
+          <p-panel [header]="item.nome" [style]="{'text-align':'center', 'background-color':'#384aeb'}">
+            <div class="card text-center card-product">
+              <div class="card-product__img">
+                <img class="card-img" src="{{item.urlimagem}}" alt="" height="293" width="255">
+                <ul class="card-product__imgOverlay">
+                  <li class="lii"><button data-toggle="modal" data-target="#myModal" (click)="selecionaJogo(item)"><i class="fas fa-info-circle"></i></button></li>
+                </ul>
+              </div>
+              <div class="card-body">
+                <h4 class="card-product__title"><a href="#">{{item.nome}}</a></h4>
+              </div>
+            </div>
+            <button class="btn btn-success" [routerLink]="['/alugar', item.idjogo]">Alugar <i class="fas fa-cart-plus"></i></button>
+          </p-panel>
+        </ng-template>
+      </p-carousel>
+    </div>
+  </ng-container>
+</div>
+
+
+<!-- Modal -->
+<div id="myModal" class="modal fade" role="dialog">
+  <div class="modal-dialog">
+
+    <!-- Modal content-->
+    <div class="modal-content">
+      <div class="modal-body">
+        <div class="product_image_area">
+          <div class="container">
+            <div class="row s_product_inner">
+              <div class="col-lg-6">
+                <div class="owl-carousel owl-theme s_Product_carousel">
+                  <div class="single-prd-item">
+                    <img class="img-fluid" src="{{modalJogo?.urlimagem}}" height="500" width="455" alt="">
+                  </div>
+                </div>
+              </div>
+              <div class="col-lg-5 offset-lg-1">
+                <div class="s_product_text">
+                  <h2 style="text-align: center;">{{modalJogo?.nome}}</h2>
+                  <ul class="list">
+                    <li *ngIf="modalJogo?.multiplayer"><span>Número de Jogadores</span> : <i class="fas fa-gamepad"></i><i class="fas fa-gamepad"></i> Multiplayer</li>
+                    <li *ngIf="!modalJogo?.multiplayer"><span>Número de Jogadores</span> : <i class="fas fa-gamepad"></i>Singleplayer</li>
+                    <li><span>Produtora</span> : {{modalJogo?.produtora}}</li>
+                    <li><span>Classificação</span> : {{modalJogo?.classificacao}}</li>
+                    <li><span>Plataformas</span> : <ng-container *ngFor="let plataforma of modalJogo?.plataforma">{{plataforma.nome}} </ng-container></li>
+                    <li><span>Generos</span> : <ng-container *ngFor="let genero of modalJogo?.genero">{{genero.nome}} </ng-container></li>
+                    <li><span>Data de Lançamento</span> : {{modalJogo?.anolancamento | date}}</li>
+
+                  </ul>
+                  <p>
+                    {{modalJogo?.descricao}}
+                  </p>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+      <div class="modal-footer">
+        <button type="button" class="btn btn-danger" data-dismiss="modal">Fechar</button>
+      </div>
+    </div>
+
+  </div>
+</div>

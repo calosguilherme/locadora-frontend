@@ -19,7 +19,7 @@
           <span class="sub-icon"><i class="fas fa-shopping-bag"></i></span>
         </a>
       <li>
-        <a [routerLink]="" (click)="loadVitrine()">
+        <a [routerLink]="" (click)="menuSelect='2'">
           Vitrine
           <span class="sub-icon"><i class="fas fa-store"></i></span>
         </a>
@@ -41,6 +41,9 @@
     <div class="container-fluid main-content">
       <div *ngIf="menuSelect=='2'">
         <vitrine></vitrine>
+      </div>
+      <div *ngIf="menuSelect=='3'">
+        <recomendacao></recomendacao>
       </div>
     </div>
 

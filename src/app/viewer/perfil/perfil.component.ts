@@ -28,39 +28,6 @@ export class PerfilComponent implements OnInit {
   ngOnInit() {
     this.route.params.subscribe(params => {
       this.menuSelect = params['menu']
-      console.log(this.menuSelect)
-      this.verificaTelaIni(this.menuSelect) 
-    })
-  }
-
-  verificaTelaIni(menu) {
-    console.log(menu)
-    switch (menu) {
-      case '0': {
-        break
-      }
-      case '1': {
-        break
-      }
-      case '2': {
-        this.loadVitrine()
-        break
-      }
-      case '3': {
-        break
-      }
-    }
-  }
-
-  loadVitrine() {
-    this.menuSelect = '2'
-    this.getPessoaJogo()
-  }
-  getPessoaJogo() {
-    this.pessoaJogoService.getById(this.user.idpessoa).subscribe(pessoaJogo => {
-      console.log(pessoaJogo)
-      this.pessoaJogo = pessoaJogo
-      this.sucRequi = true
     })
   }
 

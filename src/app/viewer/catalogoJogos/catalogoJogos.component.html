@@ -122,7 +122,7 @@
                       <ul class="card-product__imgOverlay">
                         <li><button data-toggle="modal" data-target="#myModal" (click)="selecionaJogo(jogo)"><i class="fas fa-info-circle"></i></button></li>
                         <li class="view overlay zoom"><button (click)="cadPessoaJogo=true;selecionaJogo(jogo)"><i class="fas fa-store"></i></button></li>
-                        <li><button><i class="fas fa-cart-plus"></i></button></li>
+                        <li><button [routerLink]="['/alugar', jogo.idjogo]"><i class="fas fa-cart-plus"></i></button></li>
                       </ul>
                     </div>
                     <div class="card-body">
