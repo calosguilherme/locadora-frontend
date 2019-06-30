@@ -14,6 +14,8 @@ import { Municipio } from "src/app/model/municipio.model";
 import { Bairro } from "src/app/model/bairro.model";
 import { EnderecoService } from "src/app/services/enderecoService";
 import { logging } from 'protractor';
+import { LocacaoService } from "src/app/services/locacaoService";
+import { Router } from '@angular/router';
 
 @Component({
   selector: "alugar",
@@ -33,6 +35,7 @@ export class AlugarComponent implements OnInit {
   public alugarJogo: boolean = false;
   public pessoaJogos: PessoaJogo[];
   public confirmarAluguel: boolean;
+  public metodopagamento: number
   public sucRequi: boolean = false;
   public preco: number;
   public avaliacao: number[]
@@ -97,6 +100,31 @@ export class AlugarComponent implements OnInit {
     this.alugarJogo  = true
   }
 
+  confirmarLocacao() {
+    const { idpessoa, idjogo } = this.pessoaJogo;
+
+    const body = {
+      idcartao: 1,
+      metodopagamento: this.metodopagamento,
+      datadevolucao: this.dataDevolucao,
+      datalocacao: this.dataLocacao,
+      pessoa: 5,
+      idpessoa,
+      idjogo
+    }
+
+    console.log(body);
+    
+    // this.locacaoService.create(body).subscribe(
+    //   success => {
+    //     this.router.navigate(['home']);
+    //     this.messageService.add({ severity: 'success', summary: 'Sucesso', detail: success.message });
+    //   },
+    //   error => {
+    //     this.messageService.add({ severity: 'error', summary: 'Erro', detail: error.error.text });
+    //   }
+    // )
+  }
   
 
   listarPessoaJogo(jogo) {
