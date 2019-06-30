@@ -154,6 +154,7 @@ export class CatalogoJogosComponent implements OnInit {
     pessoaJogo.idjogo = this.modalJogo.idjogo
     pessoaJogo.idpessoa = Number(this.cookieService.get('idpessoa'))
     pessoaJogo.preco = this.preco
+    pessoaJogo.status = 0
     this.pessoaJogoService.create(pessoaJogo).subscribe(
       success => {
         this.cadPessoaJogo = false;

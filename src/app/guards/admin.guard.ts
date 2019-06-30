@@ -13,7 +13,6 @@ export class AdminGuard implements CanActivate {
     private cookieService: CookieService,
     private router: Router,
   ) { }
-  private isAuthenticated: boolean = false;
 
   canActivate(
     rote: ActivatedRouteSnapshot,

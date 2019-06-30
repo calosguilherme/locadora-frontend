@@ -19,7 +19,7 @@
           <span class="sub-icon"><i class="fas fa-shopping-bag"></i></span>
         </a>
       <li>
-        <a [routerLink]="" (click)="menuSelect='2'">
+        <a [routerLink]="" (click)="loadVitrine()">
           Vitrine
           <span class="sub-icon"><i class="fas fa-store"></i></span>
         </a>
@@ -35,51 +35,16 @@
     <!-- /. side-menu  -->
 
   </div>
-  <!--/. side-bar-wrapper    -->
-  <!-- Page-content-wrapper   -->
+
+
   <div class="page-content-wrapper">
     <div class="container-fluid main-content">
-      {{menuSelect}}
-      <ng-container *ngIf="menuSelect=='2'">
-        <div class="row">
-          <!--FILTRO E PRE-EXIBIÇÃO-->
-          <div class="col"></div>
-          <div class="col"></div>
-          <!--FILTRO E PRE-EXIBIÇÃO-->
-        </div>
-        <!--LISTA DE JOGOS-->
-        <div class="row">
-          <p-progressSpinner *ngIf="!sucRequi" class="d-flex justify-content-center" [style]="{width: '250px', height: '250px'}"></p-progressSpinner>
-          <div *ngIf="sucRequi">
-            <section class="lattest-product-area pb-40 category-list">
-              <div class="row">
-                <ng-container *ngFor="let jogo of jogos">
-                  <div class="col-md-6 col-lg-4">
-                    <div class="card text-center card-product">
-                      <div class="card-product__img">
-                        <img class="card-img" src="https://upload.wikimedia.org/wikipedia/pt/thumb/b/be/Destiny_box_art.png/265px-Destiny_box_art.png" alt="" height="293" width="255">
-                        <ul class="card-product__imgOverlay">
-                          <li><button><i class="fas fa-cart-plus"></i></button></li>
-                        </ul>
-                      </div>
-                      <div class="card-body">
-                        <!--<p>Accessories</p>-->
-                        <h4 class="card-product__title"><a href="#">{{jogo.nome}}</a></h4>
-                        <!--<p class="card-product__price">$150.00</p>-->
-                      </div>
-                    </div>
-                  </div>
-                </ng-container>
-
-              </div>
-            </section>
-            <!-- End Best Seller -->
-          </div>
-        </div>
-        <!--LISTA DE JOGOS-->
-      </ng-container>
+      <div *ngIf="menuSelect=='2'">
+        <vitrine></vitrine>
+      </div>
     </div>
-    <!-- top fixed navigation -->
 
   </div>
+
+
 </div>
