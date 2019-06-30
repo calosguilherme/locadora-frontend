@@ -494,9 +494,8 @@ a {
   }
 
   .navbar-toggler[aria-expanded="true"] span:first-child {
-    transform: rotate(-45deg);
-    position: relative;
-    top: 7.5px
+   
+  
   }
 
   .navbar-toggler[aria-expanded="true"] span: last-child {
@@ -509,7 +508,7 @@ a {
     display: block;
     width: 25px;
     height: 3px;
-    background: #384aeb;
+    background: #384aeb00;
     margin: auto;
     margin-bottom: 4px;
     transition: all 400ms linear;

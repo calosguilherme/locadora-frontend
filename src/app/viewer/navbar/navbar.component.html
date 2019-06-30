@@ -1,29 +1,38 @@
-<nav class="navbar  fixed-top navbar-dark bg-dark row">
-  <div class="col-md-auto">
+<nav class="navbar navbar-expand-lg navbar-dark bg-primary texto">
+  <button class="navbar-toggler " type="button" data-toggle="collapse" data-target="#navbarTogglerDemo01"
+    aria-controls="navbarTogglerDemo01" aria-expanded="false" aria-label="Alterna navegação">
+    <span class="navbar-toggler-icon imagem"></span>
+  </button>
+  <div class="collapse navbar-collapse" id="navbarTogglerDemo01">
+
     <a class="navbar-brand" href="#">
-      <img src="https://www.maxpixel.net/static/photo/1x/Controller-Gamepad-Icon-Computer-Game-Video-Games-1784573.png" width="30" height="30" class="d-inline-block align-top" alt="">
+      <img src="https://www.maxpixel.net/static/photo/1x/Controller-Gamepad-Icon-Computer-Game-Video-Games-1784573.png"
+        width="30" height="30" class="d-inline-block align-top" alt="">
       Locadora Pessoal
     </a>
-  </div>
-  <div id="menuCenter" class="col-6 ">
-    <ul class="d-flex justify-content-center">
 
-      <li *ngIf="admin"><a [routerLink]="['/administrativo']" style="color:white;padding-right: 10px;padding-left: 10px;">Administrativo</a></li>
-      <li><a [routerLink]="['/catalogo']" style="color:white;padding-right: 10px;padding-left: 10px;">Catalogo</a></li>
-      <li><a [routerLink]="['/alugar']" style="color:white;padding-right: 10px;padding-left: 10px;">Alugar</a></li>
+    <ul class="navbar-nav mr-auto">
+      <li class="nav-item active" *ngIf="admin"><a class="nav-link" [routerLink]="['/administrativo']"
+          style="color:white;">Administrativo</a></li>
+      <li class="nav-item"><a class="nav-link" [routerLink]="['/catalogo']" style="color:white;">Catalogo</a></li>
+      <li class="nav-item"><a class="nav-link" [routerLink]="['/alugar']" style="color:white;">Alugar</a></li>
     </ul>
-  </div>
-  <!--MENU CENTRAL-->
-  <div id="menu" class="col-md-auto">
-    <ul *ngIf="logado">
-      <li><a  (click)="op.toggle($event)" style="color:white;padding-right: 10px;padding-left: 10px;"><img [src]="user.urlimagem" alt="..." width="35px" height="35px" class="rounded-circle"> {{user.nome}}</a></li>
-      <li><a [routerLink]="" style="color:white;padding-right: 10px;padding-left: 10px;" (click)="sair()">Sair</a></li>
+
+    <ul class="navbar-nav ml-auto" *ngIf="logado">
+      <li class="nav-item"><a class="nav-link" (click)="op.toggle($event)" style="color:white;"><img
+            [src]="user.urlimagem" alt="..." width="35px" height="35px" class="rounded-circle"> {{user.nome}}</a></li>
+      <li class="nav-item "><a class="nav-link" [routerLink]="" style="color:white;" (click)="sair()">Sair</a></li>
     </ul>
-    <ul *ngIf="!logado">
-      <li><a [routerLink]="" (click)="op.toggle($event)" style="color:white;padding-right: 10px;padding-left: 10px;">Logar</a></li>
+
+    <ul class="navbar-nav ml-auto" *ngIf="!logado">
+      <li class="nav-item texto"><a style="color:white;padding-right: 10px;padding-left: 10px;" class="nav-link texto"
+          [routerLink]="" (click)="op.toggle($event)" style="color:white;">Logar</a></li>
     </ul>
+
+
   </div>
 </nav>
+
 <p-overlayPanel #op [dismissable]="true" [showCloseIcon]="true" [baseZIndex]="3000">
   <div *ngIf="!logado">
     <login></login>
@@ -34,7 +43,8 @@
         <img [src]="user.urlimagem" lt="..." width="35px" height="35px" class="rounded-circle" />
       </p-header>
       <div>
-        Lorem ipsum dolor sit amet, consectetur adipisicing elit. Inventore sed consequuntur error repudiandae numquam deserunt
+        Lorem ipsum dolor sit amet, consectetur adipisicing elit. Inventore sed consequuntur error repudiandae numquam
+        deserunt
         quisquam repellat libero asperiores earum nam nobis, culpa ratione quam perferendis esse, cupiditate neque quas!
       </div>
       <p-footer>
