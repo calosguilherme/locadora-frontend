@@ -336,6 +336,11 @@
                     </div>
                   </div>
                 </div>
+                <h5>Dono do Jogo: </h5>
+                <img style="margin: 5px" class="img-fluid" src="{{pessoaJogo.pessoa.urlimagem}}" height="20" width="30"
+                alt="">
+                <h6 style="display: inline-block">{{pessoaJogo.pessoa.nome}}</h6>
+                <span style="font-size: 12px"> @{{pessoaJogo.pessoa.nomeusuario}}</span>
               </div>
               <div class="col-md-8">
                 <h6>Método de Pagamento</h6>
@@ -403,7 +408,7 @@
       </div>
       <div class="modal-footer">
         <button (click)="confirmarAluguel= true;" type="button" class="btn btn-primary" >Confirmar</button>
-        <button (click)="preco = 0"  type="button" class="btn primary-btn" data-dismiss="modal">Cancelar</button>
+        <button (click)="preco = 0; dataDevolucao = null ; dataLocacao = null"  type="button" class="btn primary-btn" data-dismiss="modal">Cancelar</button>
       </div>
     </div>
 
