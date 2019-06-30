@@ -234,7 +234,7 @@
                     </td>
                     <td>R$ {{pessoaJogo.preco}}</td>
                     <td> 
-                        <button type="button" (click)="alugar(pessoaJogo)" class="btn btn-primary">Alugar</button>
+                        <button data-toggle="modal"  data-target="#myModal3"  type="button" (click)="alugar(pessoaJogo)" class="btn btn-primary">Alugar</button>
                     </td>
                 </tbody>
             </table>
@@ -277,43 +277,86 @@
     <login></login>
 </p-dialog>
 
-<p-dialog [(visible)]="alugarJogo" [baseZIndex]='1150' >
-    <p-header>
-      <h6>Confirme a locação</h6>
-    </p-header>
 
-    <div class="card">
-        <div class="card-body"> 
-          <div class = "row">
-            <div class="card text-center card-product">
-              <div class="card-product__img">
-                  <img class="card-img" src="{{modalJogo?.urlimagem}}" alt="" height="210" width="182">
-                  <div class="card-body">
-                    <!--<p>Accessories</p>-->
-                    <h4 class="card-product__title"><a href="#">{{modalJogo?.nome}}</a></h4>
-                    <!--<p class="card-product__price">$150.00</p>-->
+
+<div id="myModal3" class="modal fade" role="dialog">
+    <div class="modal-dialog">
+  
+      <!-- Modal content-->
+      <div class="modal-content">
+        <div class="modal-body">
+            <div class="modal-header">
+              <h6 class="modal-title">Confirme a Locação</h6>
+              
+            </div>
+            <div class="card">
+                <div class="card-body"> 
+                  <div class = "row">
+                    <div class= "col-md-4">
+                      <h5>Jogo escolhido:</h5>
+                      <div class="card text-center card-product">
+                        <div class="card-product__img">
+                            <img class="card-img" src="{{modalJogo?.urlimagem}}" alt="" height="210" width="182">
+                            <div class="card-body">
+                              <!--<p>Accessories</p>-->
+                              <h4 class="card-product__title"><a href="#">{{modalJogo?.nome}}</a></h4>
+                              <!--<p class="card-product__price">$150.00</p>-->
+                            </div>
+                        </div>
+                      </div>
+                    </div>
+                    <div class="col-md-8">
+                      <div class="row">
+                        <div class = "row">
+                          <h6>Método de Pagamento</h6>
+                        </div>
+                        <div class = "row">
+                          <div class = "card">
+                            <div class = "card-body">
+                              <div class="form-check form-check-inline">
+                                  <input class="form-check-input" type="radio" name="inlineRadioOptions" id="inlineRadio1" value="option1">
+                                  <label class="form-check-label" for="inlineRadio1">
+                                    <span class="glyphicon glyphicon-credit-card" aria-hidden="true"></span>
+                                    Cartão de Crédito
+                                  </label>
+                              </div>
+                              <div class="form-check form-check-inline">
+                                  <input class="form-check-input" type="radio" name="inlineRadioOptions" id="inlineRadio2" value="option2">
+                                  <label class="form-check-label" for="inlineRadio2">Boleto Bancário</label>
+                              </div> 
+                            </div>
+                          </div>
+                       </div>
+                      </div>
+                      <div class = "row">
+                        <div class = "col-md-6">
+                          <label class="control-label">Data de Locação</label>
+                          <div class="input-group mb-3">
+                            <div class="input-group-prepend">
+                              <span class="input-group-text" id="basic-addon1"><i class="fas fa-calendar-alt"></i></span>
+                            </div>
+                            <p-calendar formControlName="datanascimento" dateFormat="dd/mm/yy"></p-calendar>
+                          </div>
+                        </div>
+                        <div class = "col-md-6">
+                          <label class="control-label">Data de Devolução</label>
+                          <div class="input-group mb-3">
+                            <div class="input-group-prepend">
+                              <span class="input-group-text" id="basic-addon1"><i class="fas fa-calendar-alt"></i></span>
+                            </div>
+                            <p-calendar formControlName="datanascimento" dateFormat="dd/mm/yy"></p-calendar>
+                          </div>
+                        </div>
+                      </div>
+                    </div>
                   </div>
-              </div>
-            </div>
-          </div>
-          <div class= "row">
-            <div class=" col-md-12">
-              <label class="control-label">Data de Locação</label>
-              <div class="input-group mb-3">
-                <div class="input-group-prepend">
-                  <span class="input-group-text" id="basic-addon1"><i class="fas fa-calendar-alt"></i></span>
                 </div>
-                <p-calendar formControlName="datalocacao" dateFormat="dd/mm/yy"></p-calendar>
-              </div>
-              <label class="control-label">Data de Devolução</label>
-              <div class="input-group mb-3">
-                <div class="input-group-prepend">
-                  <span class="input-group-text" id="basic-addon1"><i class="fas fa-calendar-alt"></i></span>
-                </div>
-                <p-calendar formControlName="datadevolucao" dateFormat="dd/mm/yy"></p-calendar>
-              </div>
             </div>
-          </div>
         </div>
+        <div class="modal-footer">
+          <button type="button" class="btn btn-danger" data-dismiss="modal">Fechar</button>
+        </div>
+      </div>
+  
     </div>
-</p-dialog>
+  </div>

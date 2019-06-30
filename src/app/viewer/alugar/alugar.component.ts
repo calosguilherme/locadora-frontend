@@ -35,7 +35,8 @@ export class AlugarComponent implements OnInit {
   public sucRequi: boolean = false;
   public preco: number;
   public avaliacao: number[]
-  public pessoaJogo = PessoaJogo
+  public pessoaJogo: PessoaJogo
+  public dataLoacao: Date
   cookieExists: boolean = this.cookieService.check("idpessoa");
   public filtros = {
     jogo: "",
@@ -81,6 +82,7 @@ export class AlugarComponent implements OnInit {
   alugar(pessoajogo) {
     this.pessoaJogo = pessoajogo  
     this.alugarJogo  = true
+    this.dataLoacao = new Date()
   }
 
 
@@ -88,8 +90,6 @@ export class AlugarComponent implements OnInit {
     this.modalJogo = jogo
     
     this.pessoaJogos = jogo.pessoajogo    
-    console.log(this.pessoaJogos);
-    
   }
   pegaEndereco() {
     this.enderecoService.getAllBairro().subscribe(bairro => {
