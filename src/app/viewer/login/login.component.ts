@@ -43,7 +43,8 @@ export class LoginComponent implements OnInit {
         this.blockUI.stop();
       },
       error => {
-          this.messageService.add({ severity: 'error', summary: 'Erro', detail: error.error.text });
+        this.messageService.add({ severity: 'error', summary: 'Erro', detail: error.error.text });
+        this.blockUI.stop();
       })
   }
 
