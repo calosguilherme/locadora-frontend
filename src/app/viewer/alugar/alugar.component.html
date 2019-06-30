@@ -1,4 +1,4 @@
- <!-- ================ start banner area ================= -->
+<!-- ================ start banner area ================= -->
 <section class="blog-banner-area" id="category">
   <div class="container h-100">
     <div class="blog-banner">
@@ -25,7 +25,8 @@
           <ul class="main-categories">
             <li class="common-filter">
               <ul *ngFor="let plataforma of plataformas; let i= index">
-                <li class="filter-list"><input class="pixel-checkbox" type="checkbox" [(ngModel)]="camposPlata[i]" (change)="getPlataforma(plataforma.nome)">{{plataforma.nome}}</li>
+                <li class="filter-list"><input class="pixel-checkbox" type="checkbox" [(ngModel)]="camposPlata[i]"
+                    (change)="getPlataforma(plataforma.nome)">{{plataforma.nome}}</li>
               </ul>
             </li>
           </ul>
@@ -35,7 +36,8 @@
           <div class="common-filter">
             <div class="head">Genero</div>
             <ul *ngFor="let genero of generos; let i= index">
-              <li class="filter-list"><input class="pixel-checkbox" type="checkbox" [(ngModel)]="camposGen[i]" (change)="getGenero(genero.nome)">{{genero.nome}}</li>
+              <li class="filter-list"><input class="pixel-checkbox" type="checkbox" [(ngModel)]="camposGen[i]"
+                  (change)="getGenero(genero.nome)">{{genero.nome}}</li>
             </ul>
           </div>
         </div>
@@ -44,7 +46,8 @@
           <ul class="main-categories">
             <li class="common-filter">
               <ul *ngFor="let estado of estados; let i= index">
-                <li class="filter-list"><input class="pixel-checkbox" type="checkbox" [(ngModel)]="camposEst[i]" (change)="getEstado(estado.nome)">{{estado.nome}}</li>
+                <li class="filter-list"><input class="pixel-checkbox" type="checkbox" [(ngModel)]="camposEst[i]"
+                    (change)="getEstado(estado.nome)">{{estado.nome}}</li>
               </ul>
             </li>
           </ul>
@@ -54,7 +57,8 @@
           <ul class="main-categories">
             <li class="common-filter">
               <ul *ngFor="let municipio of municipios; let i= index">
-                <li class="filter-list"><input class="pixel-checkbox" type="checkbox" [(ngModel)]="camposMun[i]" (change)="getMunicipio(municipio.nome)">{{municipio.nome}}</li>
+                <li class="filter-list"><input class="pixel-checkbox" type="checkbox" [(ngModel)]="camposMun[i]"
+                    (change)="getMunicipio(municipio.nome)">{{municipio.nome}}</li>
               </ul>
             </li>
           </ul>
@@ -64,7 +68,8 @@
           <ul class="main-categories">
             <li class="common-filter">
               <ul *ngFor="let bairro of bairros; let i= index">
-                <li class="filter-list"><input class="pixel-checkbox" type="checkbox" [(ngModel)]="camposBai[i]" (change)="getBairro(bairro.nome)">{{bairro.nome}}</li>
+                <li class="filter-list"><input class="pixel-checkbox" type="checkbox" [(ngModel)]="camposBai[i]"
+                    (change)="getBairro(bairro.nome)">{{bairro.nome}}</li>
               </ul>
             </li>
           </ul>
@@ -103,7 +108,8 @@
         </div>
         <!-- End Filter Bar -->
         <!-- Start Best Seller -->
-        <p-progressSpinner *ngIf="!sucRequi" class="d-flex justify-content-center" [style]="{width: '250px', height: '250px'}"></p-progressSpinner>
+        <p-progressSpinner *ngIf="!sucRequi" class="d-flex justify-content-center"
+          [style]="{width: '250px', height: '250px'}"></p-progressSpinner>
         <div *ngIf="sucRequi">
           <section class="lattest-product-area pb-40 category-list">
             <div class="row">
@@ -113,9 +119,12 @@
                     <div class="card-product__img">
                       <img class="card-img" src="{{jogo.urlimagem}}" alt="" height="293" width="255">
                       <ul class="card-product__imgOverlay">
-                        <li><button data-toggle="modal" data-target="#myModal" (click)="selecionaJogo(jogo)"><i class="fas fa-info-circle"></i></button></li>
-                        <li class="view overlay zoom"><button (click)="cadPessoaJogo=true;selecionaJogo(jogo)"><i class="fas fa-store"></i></button></li>
-                        <li><button data-toggle="modal" data-target="#myModal2"  (click)="listarPessoaJogo(jogo, filtros)"><i class="fas fa-cart-plus"></i></button></li>
+                        <li><button data-toggle="modal" data-target="#myModal" (click)="selecionaJogo(jogo)"><i
+                              class="fas fa-info-circle"></i></button></li>
+                        <li class="view overlay zoom"><button (click)="cadPessoaJogo=true;selecionaJogo(jogo)"><i
+                              class="fas fa-store"></i></button></li>
+                        <li><button data-toggle="modal" data-target="#myModal2"
+                            (click)="listarPessoaJogo(jogo, filtros)"><i class="fas fa-cart-plus"></i></button></li>
                       </ul>
                     </div>
                     <div class="card-body">
@@ -162,12 +171,18 @@
                 <div class="s_product_text">
                   <h2 style="text-align: center;">{{modalJogo?.nome}}</h2>
                   <ul class="list">
-                    <li *ngIf="modalJogo?.multiplayer"><span>Número de Jogadores</span> : <i class="fas fa-gamepad"></i><i class="fas fa-gamepad"></i> Multiplayer</li>
-                    <li *ngIf="!modalJogo?.multiplayer"><span>Número de Jogadores</span> : <i class="fas fa-gamepad"></i>Singleplayer</li>
+                    <li *ngIf="modalJogo?.multiplayer"><span>Número de Jogadores</span> : <i
+                        class="fas fa-gamepad"></i><i class="fas fa-gamepad"></i> Multiplayer</li>
+                    <li *ngIf="!modalJogo?.multiplayer"><span>Número de Jogadores</span> : <i
+                        class="fas fa-gamepad"></i>Singleplayer</li>
                     <li><span>Produtora</span> : {{modalJogo?.produtora}}</li>
                     <li><span>Classificação</span> : {{modalJogo?.classificacao}}</li>
-                    <li><span>Plataformas</span> : <ng-container *ngFor="let plataforma of modalJogo?.plataforma">{{plataforma.nome}} </ng-container></li>
-                    <li><span>Generos</span> : <ng-container *ngFor="let genero of modalJogo?.genero">{{genero.nome}} </ng-container></li>
+                    <li><span>Plataformas</span> : <ng-container *ngFor="let plataforma of modalJogo?.plataforma">
+                        {{plataforma.nome}} </ng-container>
+                    </li>
+                    <li><span>Generos</span> : <ng-container *ngFor="let genero of modalJogo?.genero">{{genero.nome}}
+                      </ng-container>
+                    </li>
                     <li><span>Data de Lançamento</span> : {{modalJogo?.anolancamento | date}}</li>
 
                   </ul>
@@ -210,153 +225,187 @@
 
 
 <div id="myModal2" class="modal fade" role="dialog">
-    <div class="modal-dialog">
-  
-      <!-- Modal content-->
-      <div class="modal-content">
-        <div class="modal-body">
-            <div class="modal-header">
-              <h5 class="modal-title"> Pessoas que possuem {{modalJogo?.nome}}</h5>
-            </div>
-            <table class="table">
-                <thead>
-                  <tr>
-                      <th scope="col">Usuário</th>
-                      <th scope="col">Preço</th>
-                  </tr>
-                </thead>
-                <tbody  *ngFor="let pessoaJogo of pessoaJogos; let i= index">
-                    <td>
-                        <img style= "margin: 5px" class="img-fluid" src="{{pessoaJogo.pessoa.urlimagem}}" height="20" width="30" alt="">
-                        <h6 style="display: inline-block">{{pessoaJogo.pessoa.nome}}</h6>
-                        <span style="font-size: 12px"> @{{pessoaJogo.pessoa.nomeusuario}}</span>
-              
-                    </td>
-                    <td>R$ {{pessoaJogo.preco}}</td>
-                    <td> 
-                        <button data-toggle="modal"  data-target="#myModal3"  type="button" (click)="alugar(pessoaJogo)" class="btn btn-primary">Alugar</button>
-                    </td>
-                </tbody>
-            </table>
+  <div class="modal-dialog">
+
+    <!-- Modal content-->
+    <div class="modal-content">
+      <div class="modal-body">
+        <div class="modal-header">
+          <h5 class="modal-title"> Pessoas que possuem {{modalJogo?.nome}}</h5>
         </div>
-        <div class="modal-footer">
-          <button type="button" class="btn btn-danger" data-dismiss="modal">Fechar</button>
-        </div>
+        <table class="table">
+          <thead>
+            <tr>
+              <th scope="col">Usuário</th>
+              <th scope="col">Preço</th>
+            </tr>
+          </thead>
+          <tbody *ngFor="let pessoaJogo of pessoaJogos; let i= index">
+            <td>
+              <img style="margin: 5px" class="img-fluid" src="{{pessoaJogo.pessoa.urlimagem}}" height="20" width="30"
+                alt="">
+              <h6 style="display: inline-block">{{pessoaJogo.pessoa.nome}}</h6>
+              <span style="font-size: 12px"> @{{pessoaJogo.pessoa.nomeusuario}}</span>
+
+            </td>
+            <td>R$ {{pessoaJogo.preco}}</td>
+            <td>
+              <button data-toggle="modal" data-target="#myModal3" type="button" (click)="alugar(pessoaJogo)"
+                class="btn btn-primary">Alugar</button>
+            </td>
+          </tbody>
+        </table>
       </div>
-  
+      <div class="modal-footer">
+        <button type="button" class="btn btn-danger" data-dismiss="modal">Fechar</button>
+      </div>
     </div>
+
+  </div>
+</div>
+
+<p-dialog [(visible)]="cadPessoaJogo" [baseZIndex]='1150' *ngIf="cookieExists">
+  <p-header>
+    <i class="fas fa-money-bill-wave"></i> Qual valor será cobrado por dia?
+  </p-header>
+  <div>
+    <img class="img-fluid" src="{{modalJogo?.urlimagem}}" height="100" width="90" alt="">
+    <span
+      style="text-align: center;font-family: Roboto,sans-serif;font-size: 24px;font-weight: 700;color: #384aeb;margin-bottom: 10px;">
+      {{modalJogo?.nome}}
+    </span>
+  </div>
+  <div class="input-group-prepend" style="padding-bottom: 10px;padding-top: 10px;">
+    <span class="input-group-text">Valor R$:</span>
+    <input [(ngModel)]="preco" type="number" pKeyFilter="pnum" class="form-control">
   </div>
 
-<p-dialog [(visible)]="cadPessoaJogo" [baseZIndex]='1150'  *ngIf="cookieExists">
-    <p-header>
-      <i class="fas fa-money-bill-wave"></i> Qual valor será cobrado por dia?
-    </p-header>
-    <div>
-      <img class="img-fluid" src="{{modalJogo?.urlimagem}}" height="100" width="90" alt="">
-      <span style="text-align: center;font-family: Roboto,sans-serif;font-size: 24px;font-weight: 700;color: #384aeb;margin-bottom: 10px;">
-        {{modalJogo?.nome}}
-      </span>
+  <p-footer>
+    <div class="d-flex justify-content-center">
+      <a class="button primary-btn" [routerLink]="" (click)="criaPessoaJogo()"><i class="fas fa-save"></i> Salvar</a>
+      <a class="button danger-btn" [routerLink]="" (click)="cadPessoaJogo=false;preco=null"><i
+          class="fas fa-window-close"></i> Cancelar</a>
     </div>
-    <div class="input-group-prepend" style="padding-bottom: 10px;padding-top: 10px;">
-      <span class="input-group-text">Valor R$:</span>
-      <input [(ngModel)]="preco" type="number" pKeyFilter="pnum" class="form-control">
-    </div>
-
-    <p-footer>
-      <div class="d-flex justify-content-center">
-        <a class="button primary-btn" [routerLink]="" (click)="criaPessoaJogo()"><i class="fas fa-save"></i> Salvar</a>
-        <a class="button danger-btn" [routerLink]="" (click)="cadPessoaJogo=false;preco=null"><i class="fas fa-window-close"></i> Cancelar</a>
-      </div>
-    </p-footer>
+  </p-footer>
 </p-dialog>
 
 <p-dialog [(visible)]="cadPessoaJogo" [baseZIndex]='1150' *ngIf="!cookieExists">
-    <p-header>
-      Faça o Login
-    </p-header>
-    <login></login>
+  <p-header>
+    Faça o Login
+  </p-header>
+  <login></login>
 </p-dialog>
 
 
+<p-dialog [(visible)]="confirmarAluguel" [baseZIndex]='1150' *ngIf="!cookieExists">
+  <p-header>
+    Confirmar Locação?
+  </p-header>
+  <div class = "row">
+    <div class= "col-md-6">
+      <button  type="button" class="btn btn-primary" >Sim</button>
+    </div>
+    <div class= "col-lg-6">
+      <button (click)="confirmarAluguel= false;" type="button" class="btn primary-btn" >Não</button>
+    </div>
+  </div>
+</p-dialog>
+
 
 <div id="myModal3" class="modal fade" role="dialog">
-    <div class="modal-dialog">
-  
-      <!-- Modal content-->
-      <div class="modal-content">
-        <div class="modal-body">
-            <div class="modal-header">
-              <h6 class="modal-title">Confirme a Locação</h6>
-              
-            </div>
-            <div class="card">
-                <div class="card-body"> 
-                  <div class = "row">
-                    <div class= "col-md-4">
-                      <h5>Jogo escolhido:</h5>
-                      <div class="card text-center card-product">
-                        <div class="card-product__img">
-                            <img class="card-img" src="{{modalJogo?.urlimagem}}" alt="" height="210" width="182">
-                            <div class="card-body">
-                              <!--<p>Accessories</p>-->
-                              <h4 class="card-product__title"><a href="#">{{modalJogo?.nome}}</a></h4>
-                              <!--<p class="card-product__price">$150.00</p>-->
-                            </div>
-                        </div>
-                      </div>
+  <div class="modal-dialog">
+
+    <!-- Modal content-->
+    <div class="modal-content">
+      <div class="modal-header">
+        <h4 class="modal-title">Confirme a Locação</h4>
+      </div>
+      <div class="modal-body">
+        <div class="card">
+          <div class="card-body">
+            <div class="row">
+              <div class="col-md-4">
+                <h5>Jogo escolhido:</h5>
+                <div class="card text-center card-product">
+                  <div class="card-product__img">
+                    <img class="card-img" src="{{modalJogo?.urlimagem}}" alt="" height="210" width="182">
+                    <div class="card-body">
+                      <!--<p>Accessories</p>-->
+                      <h4 class="card-product__title"><a href="#">{{modalJogo?.nome}}</a></h4>
+                      <!--<p class="card-product__price">$150.00</p>-->
                     </div>
-                    <div class="col-md-8">
-                      <div class="row">
-                        <div class = "row">
-                          <h6>Método de Pagamento</h6>
+                  </div>
+                </div>
+              </div>
+              <div class="col-md-8">
+                <h6>Método de Pagamento</h6>
+                  <div class="row">
+                    <div class="card">
+                      <div class="card-body">
+                        <div class="form-check form-check-inline">
+                          <input class="form-check-input" type="radio" name="inlineRadioOptions" id="inlineRadio1"
+                            value="option1">
+                          <label class="form-check-label" for="inlineRadio1">
+                            <span class="glyphicon glyphicon-credit-card" aria-hidden="true"></span>
+                            Cartão de Crédito
+                          </label>
                         </div>
-                        <div class = "row">
-                          <div class = "card">
-                            <div class = "card-body">
-                              <div class="form-check form-check-inline">
-                                  <input class="form-check-input" type="radio" name="inlineRadioOptions" id="inlineRadio1" value="option1">
-                                  <label class="form-check-label" for="inlineRadio1">
-                                    <span class="glyphicon glyphicon-credit-card" aria-hidden="true"></span>
-                                    Cartão de Crédito
-                                  </label>
-                              </div>
-                              <div class="form-check form-check-inline">
-                                  <input class="form-check-input" type="radio" name="inlineRadioOptions" id="inlineRadio2" value="option2">
-                                  <label class="form-check-label" for="inlineRadio2">Boleto Bancário</label>
-                              </div> 
-                            </div>
-                          </div>
-                       </div>
-                      </div>
-                      <div class = "row">
-                        <div class = "col-md-6">
-                          <label class="control-label">Data de Locação</label>
-                          <div class="input-group mb-3">
-                            <div class="input-group-prepend">
-                              <span class="input-group-text" id="basic-addon1"><i class="fas fa-calendar-alt"></i></span>
-                            </div>
-                            <p-calendar formControlName="datanascimento" dateFormat="dd/mm/yy"></p-calendar>
-                          </div>
-                        </div>
-                        <div class = "col-md-6">
-                          <label class="control-label">Data de Devolução</label>
-                          <div class="input-group mb-3">
-                            <div class="input-group-prepend">
-                              <span class="input-group-text" id="basic-addon1"><i class="fas fa-calendar-alt"></i></span>
-                            </div>
-                            <p-calendar formControlName="datanascimento" dateFormat="dd/mm/yy"></p-calendar>
-                          </div>
+                        <div class="form-check form-check-inline">
+                          <input class="form-check-input" type="radio" name="inlineRadioOptions" id="inlineRadio2"
+                            value="option2">
+                          <label class="form-check-label" for="inlineRadio2">Boleto Bancário</label>
                         </div>
                       </div>
                     </div>
                   </div>
+                <div class="row" style="margin-top: 7px">
+                  <div class="col-md-6">
+                    <label class="control-label"><h6>Data de Locação</h6></label>
+                    <div class="input-group mb-3">
+                      <div class="input-group-prepend">
+                        <span class="input-group-text" id="basic-addon1"><i class="fas fa-calendar-alt"></i></span>
+                      </div>
+                      <p-calendar  (onSelect)="calcularPreco()"  [(ngModel)]="dataLocacao"  dateFormat="dd/mm/yy"></p-calendar>
+                    </div>
+                  </div>
+                  <div class="col-md-6">
+                    <label class="control-label"><h6>Data de Devolução</h6></label>
+                    <div class="input-group mb-3">
+                      <div class="input-group-prepend">
+                        <span class="input-group-text" id="basic-addon1"><i class="fas fa-calendar-alt"></i></span>
+                      </div>
+                      <p-calendar (onSelect)="calcularPreco()" [(ngModel)]="dataDevolucao"  dateFormat="dd/mm/yy"></p-calendar>
+                    </div>
+                  </div>
                 </div>
+                <div class = "row">
+                  <div class = "col-md-4">
+                    <h6>Diária:</h6>
+                    <h5 style = "color: #4169E1">R$ {{pessoaJogo?.preco}}</h5>
+                   </div>
+                </div>
+                <div class = "row">
+                  <div class = "col-md-3">
+                    <h5 >Total:</h5>
+                  </div>
+                  <div class = "col-md-5">
+                    <div class = "card">  
+                      <div style = "text-align: center" class = "card-body">
+                        <h1 style= "color: #384aeb">R$ {{preco}}</h1>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+              </div>
             </div>
-        </div>
-        <div class="modal-footer">
-          <button type="button" class="btn btn-danger" data-dismiss="modal">Fechar</button>
+          </div>
         </div>
       </div>
-  
+      <div class="modal-footer">
+        <button (click)="confirmarAluguel= true;" type="button" class="btn btn-primary" >Confirmar</button>
+        <button (click)="preco = 0"  type="button" class="btn primary-btn" data-dismiss="modal">Cancelar</button>
+      </div>
     </div>
+
   </div>
+</div>

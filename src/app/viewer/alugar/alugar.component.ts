@@ -32,11 +32,13 @@ export class AlugarComponent implements OnInit {
   public cadPessoaJogo: boolean = false;
   public alugarJogo: boolean = false;
   public pessoaJogos: PessoaJogo[];
+  public confirmarAluguel: boolean;
   public sucRequi: boolean = false;
   public preco: number;
   public avaliacao: number[]
   public pessoaJogo: PessoaJogo
-  public dataLoacao: Date
+  public dataLocacao: Date
+  public dataDevolucao: Date
   cookieExists: boolean = this.cookieService.check("idpessoa");
   public filtros = {
     jogo: "",
@@ -71,6 +73,7 @@ export class AlugarComponent implements OnInit {
       .getComFiltros({ status: 0 })
       .subscribe(generos => (this.generos = generos));
     this.pegaEndereco();
+    this.preco = 0
   }
   pegaJogos(filtro?) {
     this.jogosService.getComFiltros(filtro).subscribe(jogos => {
@@ -79,12 +82,22 @@ export class AlugarComponent implements OnInit {
     });
   }
 
+  calcularPreco() {
+    if (this.dataLocacao && this.dataDevolucao && (this.dataLocacao< this.dataDevolucao )) {
+      var timeDiff = Math.abs(this.dataDevolucao.getTime() - this.dataLocacao.getTime());
+      var diffDays = Math.ceil(timeDiff / (1000 * 3600 * 24));
+      this.preco = (this.pessoaJogo.preco * diffDays)
+    } else {
+      this.preco = 0
+    }
+  }
+
   alugar(pessoajogo) {
     this.pessoaJogo = pessoajogo  
     this.alugarJogo  = true
-    this.dataLoacao = new Date()
   }
 
+  
 
   listarPessoaJogo(jogo) {
     this.modalJogo = jogo
