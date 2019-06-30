@@ -42,6 +42,7 @@ export class AlugarComponent implements OnInit {
   public pessoaJogo: PessoaJogo
   public dataLocacao: Date
   public dataDevolucao: Date
+  private router: Router
   cookieExists: boolean = this.cookieService.check("idpessoa");
   public filtros = {
     jogo: "",
@@ -58,6 +59,7 @@ export class AlugarComponent implements OnInit {
   public camposGen = [];
 
   constructor(
+    private locacaoService: LocacaoService,
     private jogosService: PessoaJogoService,
     public enderecoService: EnderecoService,
     private generoService: GeneroService,
@@ -65,6 +67,7 @@ export class AlugarComponent implements OnInit {
     private cookieService: CookieService,
     private pessoaJogoService: PessoaJogoService,
     private messageService: MessageService
+
   ) {}
 
   ngOnInit() {
@@ -106,24 +109,22 @@ export class AlugarComponent implements OnInit {
     const body = {
       idcartao: 1,
       metodopagamento: this.metodopagamento,
-      datadevolucao: this.dataDevolucao,
-      datalocacao: this.dataLocacao,
-      pessoa: 5,
+      datadevolucao: this.dataDevolucao.toString(),
+      datalocacao: this.dataLocacao.toString(),
+      pessoa: 4,
       idpessoa,
       idjogo
     }
-
-    console.log(body);
     
-    // this.locacaoService.create(body).subscribe(
-    //   success => {
-    //     this.router.navigate(['home']);
-    //     this.messageService.add({ severity: 'success', summary: 'Sucesso', detail: success.message });
-    //   },
-    //   error => {
-    //     this.messageService.add({ severity: 'error', summary: 'Erro', detail: error.error.text });
-    //   }
-    // )
+    this.locacaoService.create(body).subscribe(
+      success => {
+        this.router.navigate(['home']);
+        this.messageService.add({ severity: 'success', summary: 'Sucesso', detail: success.message });
+      },
+      error => {
+        this.messageService.add({ severity: 'error', summary: 'Erro', detail: error.error.text });
+      }
+    )
   }
   
 
