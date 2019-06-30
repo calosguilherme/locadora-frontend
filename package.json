@@ -30,6 +30,7 @@
     "express": "^4.17.1",
     "jwt-decode": "^2.2.0",
     "moment": "^2.24.0",
+    "ng-block-ui": "^2.1.5",
     "ngx-cookie-service": "^2.2.0",
     "primeicons": "^1.0.0",
     "primeng": "^8.0.0",

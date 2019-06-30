@@ -8,6 +8,7 @@ import { Pessoa } from 'src/app/model/pessoa.model';
 import { PessoaService } from 'src/app/services/pessoaService';
 import { Cep } from 'src/app/model/cep.model';
 import { CookieService } from 'ngx-cookie-service';
+import { BlockUI, NgBlockUI } from 'ng-block-ui';
 
 @Component({
   selector: 'login',
@@ -16,7 +17,7 @@ import { CookieService } from 'ngx-cookie-service';
 
 })
 export class LoginComponent implements OnInit {
-
+  @BlockUI() blockUI: NgBlockUI;
   login: Auth = new Auth()
   erro: boolean = false
 
@@ -33,11 +34,13 @@ export class LoginComponent implements OnInit {
   }
 
   logar() {
+    this.blockUI.start('Carregando');
     console.log(this.login)
     this.authServiceLocadora.login(this.login).subscribe(
       success => {
         this.authServiceLocadora.salvacookie(success)
-        window.location.href = "/home"; 
+        window.location.href = "/home";
+        this.blockUI.stop();
       },
       error => {
           this.messageService.add({ severity: 'error', summary: 'Erro', detail: error.error.text });
@@ -45,6 +48,7 @@ export class LoginComponent implements OnInit {
   }
 
   signInWithFB(): void {
+    this.blockUI.start('Carregando');
     this.authService.signIn(FacebookLoginProvider.PROVIDER_ID);
     this.authService.authState.subscribe((user) => {
       console.log(user)
@@ -53,6 +57,7 @@ export class LoginComponent implements OnInit {
           this.authServiceLocadora.salvacookie(success)
           this.cookieService.set('urlimagem', user['photoUrl'])
           window.location.href = "/home";
+          this.blockUI.stop();
         },
         error => {
           console.log(error)
@@ -75,7 +80,8 @@ export class LoginComponent implements OnInit {
           cepi.bairro.municipio.estado.nome = "ES"
           novaContaLocadora.cep = cepi
           console.log('novaContaLocadora?')
-          this.pessoaService.create(novaContaLocadora).subscribe(success => {
+          this.pessoaService.create(novaContaLocadora).subscribe(
+            success => {
             console.log('aqui?2')
             this.login.cpf = Number (novaContaLocadora.cpf)
             this.login.senha = Number (novaContaLocadora.senha)
@@ -83,29 +89,13 @@ export class LoginComponent implements OnInit {
             },
             error => {
               this.messageService.add({ severity: 'error', summary: 'Erro', detail: error.error.text });
+              this.blockUI.stop();
             })
           //Cadastrar conta
         })
       console.log(user.email)
     });
   }
-
-  signOut(): void {
-
-  }
-
-
-
-    //FB.login(permissao).subscribe((response) => {
-    //  console.log('submitLogin', response);
-    //  console.log('submitLogin', response.name);
-    //  if (response.authResponse) {
-        
-    //  }
-    //  else {
-    //    console.log('User login failed');
-    //  }
-    //});
 
 
 

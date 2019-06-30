@@ -39,6 +39,9 @@
 
   <div class="page-content-wrapper">
     <div class="container-fluid main-content">
+      <div *ngIf="menuSelect=='0'">
+        <profile></profile>
+      </div>
       <div *ngIf="menuSelect=='2'">
         <vitrine></vitrine>
       </div>
