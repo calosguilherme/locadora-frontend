@@ -13,6 +13,8 @@
       </div>
     </div>
   </div>
+  
+
 </section>
 <!-- ================ end banner area ================= -->
 <!-- ================ category section start ================= -->
@@ -122,7 +124,7 @@
                       <ul class="card-product__imgOverlay">
                         <li><button data-toggle="modal" data-target="#myModal" (click)="selecionaJogo(jogo)"><i class="fas fa-info-circle"></i></button></li>
                         <li class="view overlay zoom"><button (click)="cadPessoaJogo=true;selecionaJogo(jogo)"><i class="fas fa-store"></i></button></li>
-                        <li><button><i class="fas fa-cart-plus"></i></button></li>
+                        <li><button data-toggle="modal" data-target="#myModal2" (click)="selecionaJogo(jogo)" ><i class="fas fa-cart-plus"></i></button></li>
                       </ul>
                     </div>
                     <div class="card-body">
@@ -144,14 +146,10 @@
 </section>
 
 
-
-
-
-
 <!-- Modal -->
 <div id="myModal" class="modal fade" role="dialog">
   <div class="modal-dialog">
-
+    
     <!-- Modal content-->
     <div class="modal-content">
       <div class="modal-body">
@@ -212,6 +210,8 @@
 
   </div>
 </div>
+
+
 
 <p-dialog [(visible)]="cadPessoaJogo" [baseZIndex]='1150'  *ngIf="cookieExists">
     <p-header>

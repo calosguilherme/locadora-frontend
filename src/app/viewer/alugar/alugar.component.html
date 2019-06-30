@@ -73,7 +73,6 @@
       <div class="col-xl-9 col-lg-8 col-md-7">
         <!-- Start Filter Bar -->
         <div class="filter-bar d-flex flex-wrap align-items-center">
-
           <div class="sorting">
             <select (change)="ordenaJogos($event.target.value)">
               <option value="0">Ordenação Padrão</option>
@@ -116,7 +115,7 @@
                       <ul class="card-product__imgOverlay">
                         <li><button data-toggle="modal" data-target="#myModal" (click)="selecionaJogo(jogo)"><i class="fas fa-info-circle"></i></button></li>
                         <li class="view overlay zoom"><button (click)="cadPessoaJogo=true;selecionaJogo(jogo)"><i class="fas fa-store"></i></button></li>
-                        <li><button><i class="fas fa-cart-plus"></i></button></li>
+                        <li><button data-toggle="modal" data-target="#myModal2"  (click)="listarPessoaJogo(jogo, filtros)"><i class="fas fa-cart-plus"></i></button></li>
                       </ul>
                     </div>
                     <div class="card-body">
@@ -207,6 +206,47 @@
   </div>
 </div>
 
+
+
+
+<div id="myModal2" class="modal fade" role="dialog">
+    <div class="modal-dialog">
+  
+      <!-- Modal content-->
+      <div class="modal-content">
+        <div class="modal-body">
+            <div class="modal-header">
+              <h5 class="modal-title"> Pessoas que possuem {{modalJogo?.nome}}</h5>
+            </div>
+            <table class="table">
+                <thead>
+                  <tr>
+                      <th scope="col">Usuário</th>
+                      <th scope="col">Preço</th>
+                  </tr>
+                </thead>
+                <tbody  *ngFor="let pessoaJogo of pessoaJogos; let i= index">
+                    <td>
+                        <img style= "margin: 5px" class="img-fluid" src="{{pessoaJogo.pessoa.urlimagem}}" height="20" width="30" alt="">
+                        <h6 style="display: inline-block">{{pessoaJogo.pessoa.nome}}</h6>
+                        <span style="font-size: 12px"> @{{pessoaJogo.pessoa.nomeusuario}}</span>
+              
+                    </td>
+                    <td>R$ {{pessoaJogo.preco}}</td>
+                    <td> 
+                        <button type="button" (click)="alugar(pessoaJogo)" class="btn btn-primary">Alugar</button>
+                    </td>
+                </tbody>
+            </table>
+        </div>
+        <div class="modal-footer">
+          <button type="button" class="btn btn-danger" data-dismiss="modal">Fechar</button>
+        </div>
+      </div>
+  
+    </div>
+  </div>
+
 <p-dialog [(visible)]="cadPessoaJogo" [baseZIndex]='1150'  *ngIf="cookieExists">
     <p-header>
       <i class="fas fa-money-bill-wave"></i> Qual valor será cobrado por dia?
@@ -235,4 +275,45 @@
       Faça o Login
     </p-header>
     <login></login>
+</p-dialog>
+
+<p-dialog [(visible)]="alugarJogo" [baseZIndex]='1150' >
+    <p-header>
+      <h6>Confirme a locação</h6>
+    </p-header>
+
+    <div class="card">
+        <div class="card-body"> 
+          <div class = "row">
+            <div class="card text-center card-product">
+              <div class="card-product__img">
+                  <img class="card-img" src="{{modalJogo?.urlimagem}}" alt="" height="210" width="182">
+                  <div class="card-body">
+                    <!--<p>Accessories</p>-->
+                    <h4 class="card-product__title"><a href="#">{{modalJogo?.nome}}</a></h4>
+                    <!--<p class="card-product__price">$150.00</p>-->
+                  </div>
+              </div>
+            </div>
+          </div>
+          <div class= "row">
+            <div class=" col-md-12">
+              <label class="control-label">Data de Locação</label>
+              <div class="input-group mb-3">
+                <div class="input-group-prepend">
+                  <span class="input-group-text" id="basic-addon1"><i class="fas fa-calendar-alt"></i></span>
+                </div>
+                <p-calendar formControlName="datalocacao" dateFormat="dd/mm/yy"></p-calendar>
+              </div>
+              <label class="control-label">Data de Devolução</label>
+              <div class="input-group mb-3">
+                <div class="input-group-prepend">
+                  <span class="input-group-text" id="basic-addon1"><i class="fas fa-calendar-alt"></i></span>
+                </div>
+                <p-calendar formControlName="datadevolucao" dateFormat="dd/mm/yy"></p-calendar>
+              </div>
+            </div>
+          </div>
+        </div>
+    </div>
 </p-dialog>
