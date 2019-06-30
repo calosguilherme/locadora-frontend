@@ -13,6 +13,7 @@ import { Estado } from "src/app/model/estado.model";
 import { Municipio } from "src/app/model/municipio.model";
 import { Bairro } from "src/app/model/bairro.model";
 import { EnderecoService } from "src/app/services/enderecoService";
+import { logging } from 'protractor';
 
 @Component({
   selector: "alugar",
@@ -29,8 +30,13 @@ export class AlugarComponent implements OnInit {
   public pesquisarNome: string;
   public modalJogo: Jogo;
   public cadPessoaJogo: boolean = false;
+  public alugarJogo: boolean = false;
+  public pessoaJogos: PessoaJogo[];
   public sucRequi: boolean = false;
   public preco: number;
+  public avaliacao: number[]
+  public pessoaJogo: PessoaJogo
+  public dataLoacao: Date
   cookieExists: boolean = this.cookieService.check("idpessoa");
   public filtros = {
     jogo: "",
@@ -71,6 +77,19 @@ export class AlugarComponent implements OnInit {
       this.jogos = jogos;
       this.sucRequi = true;
     });
+  }
+
+  alugar(pessoajogo) {
+    this.pessoaJogo = pessoajogo  
+    this.alugarJogo  = true
+    this.dataLoacao = new Date()
+  }
+
+
+  listarPessoaJogo(jogo) {
+    this.modalJogo = jogo
+    
+    this.pessoaJogos = jogo.pessoajogo    
   }
   pegaEndereco() {
     this.enderecoService.getAllBairro().subscribe(bairro => {
@@ -190,6 +209,7 @@ export class AlugarComponent implements OnInit {
   selecionaJogo(jogo) {
     this.modalJogo = jogo;
   }
+  
 
   limpar() {
     this.sucRequi = false;

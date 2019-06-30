@@ -32,6 +32,10 @@ const routes: Routes = [
     component: CatalogoJogosComponent
   },
   {
+    path: "alugar",
+    component: AlugarComponent
+  },
+  {
     path: "alugar/:id",
     component: AlugarComponent
   },
