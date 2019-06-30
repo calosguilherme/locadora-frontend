@@ -111,6 +111,7 @@ export class AlugarComponent implements OnInit {
       metodopagamento: this.metodopagamento,
       datadevolucao: this.dataDevolucao.toString(),
       datalocacao: this.dataLocacao.toString(),
+      tipopagamento:1,
       pessoa: 4,
       idpessoa,
       idjogo
