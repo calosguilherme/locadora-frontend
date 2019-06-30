@@ -24,6 +24,7 @@ import { AlugarComponent } from './viewer/alugar/alugar.component';
 import { VitrineComponent } from './viewer/perfil/vitrine/vitrine.component';
 import { RecomendacaoComponent } from './viewer/perfil/recomendacao/recomendacao.component';
 import { ProfileComponent } from './viewer/perfil/profile/profile.component';
+import { AlugadosComponent } from './viewer/perfil/alugados/alugados.component';
 //Viewer Component
 //Services
 import { AuthServiceLocadora } from './services/authService';
@@ -36,6 +37,7 @@ import { PlataformaService } from './services/plataformaService';
 import { CookieService } from 'ngx-cookie-service';
 import { PessoaJogoService } from './services/pessoaJogoService';
 import { SharedService } from './services/sharedService';
+import { LocacaoService } from './services/locacaoService';
 //Services
 //PrimeNG
 import { CalendarModule } from 'primeng/calendar';
@@ -111,6 +113,7 @@ export function provideConfig() {
     VitrineComponent,
     RecomendacaoComponent,
     ProfileComponent,
+    AlugadosComponent,
   ],
   imports: [
     CommonModule,
@@ -141,7 +144,7 @@ export function provideConfig() {
     CarouselModule,
     BlockUIModule.forRoot()
   ],
-  providers: [PessoaService, EnderecoService, JogosService, VitrineService, AuthServiceLocadora, GeneroService, MessageService, PlataformaService, PessoaJogoService, CookieService, AuthGuard, SharedService, AdminGuard,
+  providers: [PessoaService, EnderecoService, JogosService, VitrineService, AuthServiceLocadora, GeneroService, MessageService, PlataformaService, PessoaJogoService, CookieService, AuthGuard, SharedService, LocacaoService, AdminGuard,
     {
       provide: AuthServiceConfig,
       useFactory: provideConfig
