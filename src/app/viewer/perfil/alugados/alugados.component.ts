@@ -216,7 +216,7 @@ export class AlugadosComponent implements OnInit {
 
   entregue(dataDevo) {
     let data = new Date()
-    if (dataDevo < data.getDate) return ("Entregue")
+    if (dataDevo < data.getDate()) return ("Entregue")
     else {
       return("Não Entregue")
     }
