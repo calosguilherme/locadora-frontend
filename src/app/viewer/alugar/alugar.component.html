@@ -245,7 +245,7 @@
             </td>
             <td>R$ {{pessoaJogo.preco}}</td>
             <td>
-              <button data-toggle="modal" data-target="#myModal3" type="button" (click)="alugar(pessoaJogo)"
+              <button data-dismiss="modal" data-toggle="modal" data-target="#myModal3" type="button" (click)="alugar(pessoaJogo); dataLocacao = null; dataDevolucao = null"
                 class="btn btn-primary">Alugar</button>
             </td>
           </tbody>
