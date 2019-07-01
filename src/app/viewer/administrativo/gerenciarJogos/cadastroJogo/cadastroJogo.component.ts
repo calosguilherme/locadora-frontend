@@ -34,7 +34,6 @@ export class CadastroJogocomponent implements OnInit {
   }
 
   feedback() {
-    console.log('feedback')
     return (this.retornoJogo.emit(this.jogo));
   }
 
@@ -47,9 +46,6 @@ export class CadastroJogocomponent implements OnInit {
     return select
   }
 
-  print(a) {
-    console.log(a)
-  }
 
 
 }

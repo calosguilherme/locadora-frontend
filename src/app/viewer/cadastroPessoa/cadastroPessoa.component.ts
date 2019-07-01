@@ -137,7 +137,6 @@ export class CadastroPessoaComponent implements OnInit {
     else pessoa.urlimagem = "https://d12swbtw719y4s.cloudfront.net/images/jjeUS6nn/2I5SMJe9DNNUHdqLO0Xk/FaceQ1468032328760.jpeg?w=463"
     pessoa.cep = cep
     pessoa.status = 0
-    console.log(JSON.stringify(pessoa))
     return(pessoa)
   }
 

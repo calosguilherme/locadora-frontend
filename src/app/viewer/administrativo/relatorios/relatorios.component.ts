@@ -36,7 +36,6 @@ export class RelatoriosComponent implements OnInit {
   ngOnInit() {
     this.vitrineService.getJogosVitrine().subscribe(vitrineJogo => {
       this.vitrineJogo = vitrineJogo;
-      console.log("vitrine", this.vitrineJogo);
       this.generoService.getComFiltros({ status: 0 }).subscribe(generos => {
         this.generos = generos;
         this.graficoJogoGenero = this.montaGraficoJogoGenero();

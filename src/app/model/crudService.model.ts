@@ -14,16 +14,14 @@ export class CrudService<T> {
   list() {
     return this.http.get<T[]>(this.API_URL)
       .pipe(
-        delay(2000),
-        tap(console.log)
+        delay(2000)
       );
   }
 
   getComFiltros(filtros?) {
     return this.http.get<T[]>(this.API_URL, { params: filtros })
       .pipe(
-        delay(2000),
-        tap(console.log)
+        delay(2000)
       );
   }
 

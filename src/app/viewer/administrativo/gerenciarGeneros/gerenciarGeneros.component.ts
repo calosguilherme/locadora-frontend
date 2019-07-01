@@ -39,9 +39,7 @@ export class GerenciarGeneros implements OnInit {
 
   getDados() {
     return (this.generoService.getComFiltros({status: 0}).subscribe(generos => {
-      success => {
-        console.log(success)
-      }
+      success => {}
       this.generos = generos
       this.sucRequi = true
     }))
@@ -84,17 +82,14 @@ export class GerenciarGeneros implements OnInit {
 
   delete() {
     let index = this.generos.indexOf(this.selected);
-    console.log(this.generos[index].idgenero)
     this.generoService.remove(this.generos[index].idgenero).subscribe(
       success => {
           this.generos = this.generos.filter((val, i) => i != index);
           this.genero = null;
           this.displayDialog = false;
-          console.log(success)
           this.messageService.add({ severity: 'success', summary: 'Sucesso', detail: success.message });
       },
       error => {
-        console.log(error)
         this.messageService.add({ severity: 'error', summary: 'Erro', detail: error.error.text });
       }
 

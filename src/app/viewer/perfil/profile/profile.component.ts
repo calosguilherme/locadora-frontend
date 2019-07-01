@@ -45,7 +45,6 @@ export class ProfileComponent implements OnInit {
       this.pessoa = pessoa
       this.pessoaOri = pessoa
       this.pessoa.datanascimento = new Date(pessoa.datanascimento);
-      console.log(pessoa)
       this.suc= true
     },
       error => {

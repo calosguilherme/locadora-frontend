@@ -35,7 +35,6 @@ export class LoginComponent implements OnInit {
 
   logar() {
     this.blockUI.start('Carregando');
-    console.log(this.login)
     this.authServiceLocadora.login(this.login).subscribe(
       success => {
         this.authServiceLocadora.salvacookie(success)
@@ -52,7 +51,6 @@ export class LoginComponent implements OnInit {
     this.blockUI.start('Carregando');
     this.authService.signIn(FacebookLoginProvider.PROVIDER_ID);
     this.authService.authState.subscribe((user) => {
-      console.log(user)
       this.authServiceLocadora.checaEmail(user.email).subscribe(
         success => {
           this.authServiceLocadora.salvacookie(success)
@@ -61,7 +59,6 @@ export class LoginComponent implements OnInit {
           this.blockUI.stop();
         },
         error => {
-          console.log(error)
           let cepi: Cep = new Cep()
           let novaContaLocadora = new Pessoa()
           let data = new Date(22071995)
@@ -80,10 +77,8 @@ export class LoginComponent implements OnInit {
           cepi.bairro.municipio.nome = "Fundão"
           cepi.bairro.municipio.estado.nome = "ES"
           novaContaLocadora.cep = cepi
-          console.log('novaContaLocadora?')
           this.pessoaService.create(novaContaLocadora).subscribe(
             success => {
-            console.log('aqui?2')
             this.login.cpf = Number (novaContaLocadora.cpf)
             this.login.senha = Number (novaContaLocadora.senha)
             this.logar()
@@ -94,7 +89,6 @@ export class LoginComponent implements OnInit {
             })
           //Cadastrar conta
         })
-      console.log(user.email)
     });
   }
 

@@ -28,7 +28,7 @@ export class CatalogoJogosComponent implements OnInit {
   cookieExists: boolean = this.cookieService.check('idpessoa');
   public filtros = {
      status: 0,
-     jogo: '', 
+     jogo: '',
      genero: [],
      plataforma: [],
   }
@@ -160,11 +160,9 @@ export class CatalogoJogosComponent implements OnInit {
     this.pessoaJogoService.create(pessoaJogo).subscribe(
       success => {
         this.cadPessoaJogo = false;
-        console.log(success)
         this.messageService.add({ severity: 'success', summary: 'Sucesso', detail: success.message });
       },
       error => {
-        console.log(error)
         this.messageService.add({ severity: 'error', summary: 'Erro', detail: error.error.text });
       })
   }

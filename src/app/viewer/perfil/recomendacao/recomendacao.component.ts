@@ -49,7 +49,6 @@ export class RecomendacaoComponent implements OnInit {
 
   getPessoaJogo() {
     this.pessoaJogoService.getRecomendacao(this.user.idpessoa).subscribe(pessoaJogo => {
-      console.log(pessoaJogo)
       this.pessoaJogo = pessoaJogo
       this.origi = pessoaJogo
       this.sucRequi = true

@@ -29,7 +29,6 @@ export class GerenciarPessoasComponent implements OnInit {
   ngOnInit() {
     this.pessoaService.getComFiltros({ status: 0}).subscribe(pessoa => {
       suc => {
-        console.log(suc)
       }
       this.pessoas = pessoa
       for (let p of this.pessoas) {
@@ -75,7 +74,6 @@ export class GerenciarPessoasComponent implements OnInit {
 
   delete() {
     let index = this.pessoas.indexOf(this.selected);
-    console.log(this.pessoas[index].idpessoa)
     this.pessoaService.remove(this.pessoas[index].idpessoa).subscribe(
     success => {
           this.pessoas = this.pessoas.filter((val, i) => i != index);

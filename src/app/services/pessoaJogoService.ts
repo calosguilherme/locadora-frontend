@@ -3,7 +3,7 @@ import { HttpClient } from '@angular/common/http';
 import { environment } from '../../environments/environment';
 import { CrudService } from '../model/crudService.model';
 import { PessoaJogo } from '../model/pessoajogo.model';
-import { take } from 'rxjs/operators';
+import { take, delay } from 'rxjs/operators';
 import { VitrineJogo } from '../model/vitrineJogo.model';
 import { Jogo } from '../model/jogo.model';
 
@@ -19,6 +19,13 @@ export class PessoaJogoService extends CrudService<PessoaJogo>{
 
   getById(id) {
     return this.http.get<VitrineJogo[]>(`${environment.API}pessoajogo/${id}`).pipe(take(1));
+  }
+
+  getAll(filtros?) {
+    return this.http.get<VitrineJogo[]>(`${environment.API}pessoajogo/`, { params: filtros })
+      .pipe(
+        delay(2000)
+      );
   }
 
   getRecomendacao(id) {

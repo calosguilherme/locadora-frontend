@@ -32,7 +32,6 @@ export class GerenciarJogosComponent implements OnInit {
   ngOnInit() {
     this.jogosService.getComFiltros({status: 0}).subscribe(jogos => {
       suc => {
-        console.log(suc)
       }
       this.jogos = jogos
       this.sucRequi = true
@@ -59,14 +58,12 @@ export class GerenciarJogosComponent implements OnInit {
     if (this.newJogo) {
       this.jogosService.create(this.jogo).subscribe(
         suc => {
-          console.log(this.jogo)
           jogos.push(this.jogo);
         })
     }
     else {
       this.jogosService.update(this.jogo).subscribe(
         suc => {
-          console.log(this.jogo)
           jogos[this.jogos.indexOf(this.selected)] = this.jogo;
         })
     }

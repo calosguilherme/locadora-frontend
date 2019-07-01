@@ -54,7 +54,6 @@ export class AlugadosComponent implements OnInit {
 
   getPessoaJogo() {
     this.locacaoService.loadByID(this.user.idpessoa).subscribe(pessoaJogo => {
-      console.log(pessoaJogo)
       this.pessoaJogo = pessoaJogo
       this.origi = pessoaJogo
       this.sucRequi = true
@@ -162,7 +161,6 @@ export class AlugadosComponent implements OnInit {
 
   aplicaFiltros() {
     if (this.filtros.plataforma.length != 0) {
-      console.log(this.pessoaJogo)
       for (let filtro of this.filtros.plataforma) {
         this.pessoaJogo = this.origi.filter(x => x.pessoajogo.jogo.plataforma.find(y => y.nome == filtro))
       }

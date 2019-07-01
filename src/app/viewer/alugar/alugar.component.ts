@@ -28,13 +28,13 @@ export class AlugarComponent implements OnInit {
   public estados: Estado[];
   public municipios: Municipio[];
   public bairros: Bairro[];
-  public jogos: Jogo[];
+  public jogos: any[];
   public generos: Genero[];
   public pesquisarNome: string;
   public modalJogo: Jogo;
   public cadPessoaJogo: boolean = false;
   public alugarJogo: boolean = false;
-  public pessoaJogos: PessoaJogo[];
+  public pessoaJogos: any[];
   public confirmarAluguel: boolean;
   public metodopagamento: number
   public sucRequi: boolean = false;
@@ -51,7 +51,8 @@ export class AlugarComponent implements OnInit {
     plataforma: [],
     bairro: [],
     municipio: [],
-    estado: []
+    estado: [],
+    status: 0,
   };
   public camposPlata = [];
   public camposEst = [];
@@ -68,16 +69,18 @@ export class AlugarComponent implements OnInit {
     private cookieService: CookieService,
     private pessoaJogoService: PessoaJogoService,
     private messageService: MessageService
-  ) {}
+  ) { }
 
   ngOnInit() {
     this.plataformaService
       .getComFiltros({ status: 0 })
-      .subscribe(plataformas => (this.plataformas = plataformas));
-    this.pegaJogos();
-    this.generoService
-      .getComFiltros({ status: 0 })
-      .subscribe(generos => (this.generos = generos));
+      .subscribe(plataformas => {
+      this.plataformas = plataformas
+      this.generoService
+        .getComFiltros({ status: 0 })
+        .subscribe(generos => (this.generos = generos));
+      });
+    this.pegaJogos(this.filtros);
     this.pegaEndereco();
     this.preco = 0
     this.metodopagamento = 1
@@ -90,7 +93,7 @@ export class AlugarComponent implements OnInit {
   }
 
   calcularPreco() {
-    if (this.dataLocacao && this.dataDevolucao && (this.dataLocacao< this.dataDevolucao )) {
+    if (this.dataLocacao && this.dataDevolucao && (this.dataLocacao < this.dataDevolucao)) {
       var timeDiff = Math.abs(this.dataDevolucao.getTime() - this.dataLocacao.getTime());
       var diffDays = Math.ceil(timeDiff / (1000 * 3600 * 24));
       this.preco = (this.pessoaJogo.preco * diffDays)
@@ -100,24 +103,24 @@ export class AlugarComponent implements OnInit {
   }
 
   alugar(pessoajogo) {
-    this.pessoaJogo = pessoajogo  
-    this.alugarJogo  = true
+    this.pessoaJogo = pessoajogo
+    this.alugarJogo = true
   }
 
   confirmarLocacao() {
     const { idpessoa, idjogo } = this.pessoaJogo;
-    
+
     const body = {
       idcartao: 1,
       metodopagamento: this.metodopagamento,
       datadevolucao: moment(this.dataDevolucao).format('YYYY-MM-D'),
       datalocacao: moment(this.dataLocacao).format('YYYY-MM-D'),
-      tipopagamento:1,
+      tipopagamento: 1,
       pessoa: Number(this.cookieService.get("idpessoa")),
       idpessoa,
       idjogo
     }
-        
+
     this.locacaoService.create(body).subscribe(
       success => {
         this.messageService.add({ severity: 'success', summary: 'Sucesso', detail: success.message });
@@ -127,17 +130,16 @@ export class AlugarComponent implements OnInit {
       }
     )
   }
-  
+
 
   listarPessoaJogo(jogo) {
     this.modalJogo = jogo
-    
-    this.pessoaJogos = jogo.pessoajogo    
+
+    this.pessoaJogos = jogo.pessoajogo
   }
   pegaEndereco() {
     this.enderecoService.getAllBairro().subscribe(bairro => {
       this.bairros = bairro;
-      console.log(bairro);
     });
     this.enderecoService
       .getAllMunicipio()
@@ -165,7 +167,7 @@ export class AlugarComponent implements OnInit {
   }
 
   jogosOrdemAlfabetica() {
-    this.jogos = this.jogos.sort(function(a, b) {
+    this.jogos = this.jogos.sort(function (a, b) {
       if (a.nome > b.nome) {
         return 1;
       }
@@ -177,7 +179,7 @@ export class AlugarComponent implements OnInit {
   }
 
   jogosOrdemId() {
-    this.jogos = this.jogos.sort(function(a, b) {
+    this.jogos = this.jogos.sort(function (a, b) {
       if (a.idjogo > b.idjogo) {
         return 1;
       }
@@ -189,7 +191,7 @@ export class AlugarComponent implements OnInit {
   }
 
   jogosOrdemMaisRecente() {
-    this.jogos = this.jogos.sort(function(a, b) {
+    this.jogos = this.jogos.sort(function (a, b) {
       if (a.anolancamento < b.anolancamento) {
         return 1;
       }
@@ -252,7 +254,7 @@ export class AlugarComponent implements OnInit {
   selecionaJogo(jogo) {
     this.modalJogo = jogo;
   }
-  
+
 
   limpar() {
     this.sucRequi = false;
@@ -267,7 +269,8 @@ export class AlugarComponent implements OnInit {
       plataforma: [],
       bairro: [],
       municipio: [],
-      estado: []
+      estado: [],
+      status: 0,
     };
     this.pegaJogos();
   }
@@ -280,7 +283,6 @@ export class AlugarComponent implements OnInit {
     this.pessoaJogoService.create(pessoaJogo).subscribe(
       success => {
         this.cadPessoaJogo = false;
-        console.log(success);
         this.messageService.add({
           severity: "success",
           summary: "Sucesso",
@@ -288,7 +290,6 @@ export class AlugarComponent implements OnInit {
         });
       },
       error => {
-        console.log(error);
         this.messageService.add({
           severity: "error",
           summary: "Erro",

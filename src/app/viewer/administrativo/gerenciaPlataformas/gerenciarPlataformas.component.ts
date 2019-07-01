@@ -30,7 +30,6 @@ export class GerenciarPlataformas implements OnInit {
   ngOnInit() {
     this.plataformaService.getComFiltros({status: 0}).subscribe(plataformas => {
       suc => {
-        console.log(suc)
       }
       this.plataformas = plataformas
       this.sucRequi = true

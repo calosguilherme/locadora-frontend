@@ -26,7 +26,6 @@ export class EnderecoService {
 
   getCep(cep: number) {
     this.apenasNumeros(cep)
-    console.log(this.apenasNumeros(cep))
     return this.http.get<number>('https://viacep.com.br/ws/' +cep+ '/json/')
   }
 
