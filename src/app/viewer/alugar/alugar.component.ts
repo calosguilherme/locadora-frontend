@@ -39,6 +39,9 @@ export class AlugarComponent implements OnInit {
   public metodopagamento: number
   public sucRequi: boolean = false;
   public preco: number;
+  public boleto_barcode: string;
+  public boleto_url: string;
+  public boleto: boolean = false;
   public avaliacao: number[]
   public pessoaJogo: PessoaJogo
   public dataLocacao: Date
@@ -120,9 +123,18 @@ export class AlugarComponent implements OnInit {
       idpessoa,
       idjogo
     }
-
+        
     this.locacaoService.create(body).subscribe(
       success => {
+        const {boleto} = success;
+
+        if (boleto.url) {
+          this.boleto = true
+          this.boleto_url = boleto.url
+          this.boleto_barcode = boleto.codigo
+
+        }
+        
         this.messageService.add({ severity: 'success', summary: 'Sucesso', detail: success.message });
       },
       error => {
@@ -130,8 +142,25 @@ export class AlugarComponent implements OnInit {
       }
     )
   }
+  copyInputMessage(inputElement){
+    inputElement.select();
+    document.execCommand('copy');
+    inputElement.setSelectionRange(0, 0);
+  }
 
-
+  copyText(val: string){
+    let selBox = document.createElement('textarea');
+      selBox.style.position = 'fixed';
+      selBox.style.left = '0';
+      selBox.style.top = '0';
+      selBox.style.opacity = '0';
+      selBox.value = val;
+      document.body.appendChild(selBox);
+      selBox.focus();
+      selBox.select();
+      document.execCommand('copy');
+      document.body.removeChild(selBox);
+    }
   listarPessoaJogo(jogo) {
     this.modalJogo = jogo
 

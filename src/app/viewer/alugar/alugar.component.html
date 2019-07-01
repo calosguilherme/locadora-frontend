@@ -334,6 +334,31 @@
   </div>
 </p-dialog>
 
+<p-dialog [(visible)]="boleto" [baseZIndex]='1150' *ngIf="cookieExists">
+    <p-header>
+      Dados do boleto
+    </p-header>
+    <div class= "row">
+      <table class = "table">
+        <thead>
+          <tr>
+            <th scope="col">Código de Barras</th>
+            <th scope="col">URL</th>
+          </tr>
+        </thead>
+        <tbody>
+          <td>
+            <a>{{boleto_barcode}}</a>
+          </td>
+          <td>
+              <a target="_blank" href={{boleto_url}}>Abrir Boleto.</a>
+          </td>
+        </tbody>
+        <button class= "btn btn-light" (click)="copyText(boleto_barcode)" value="click to copy" >Copiar para área de transferência</button>
+      </table>
+    </div>
+</p-dialog>
+
 <div id="myModal3" class="modal fade" role="dialog">
   <div class="modal-dialog">
 
