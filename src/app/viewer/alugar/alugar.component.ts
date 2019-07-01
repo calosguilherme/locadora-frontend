@@ -14,6 +14,9 @@ import { Municipio } from "src/app/model/municipio.model";
 import { Bairro } from "src/app/model/bairro.model";
 import { EnderecoService } from "src/app/services/enderecoService";
 import { logging } from 'protractor';
+import { LocacaoService } from "src/app/services/locacaoService";
+import { Router } from '@angular/router';
+import * as moment from 'moment';
 
 @Component({
   selector: "alugar",
@@ -32,11 +35,15 @@ export class AlugarComponent implements OnInit {
   public cadPessoaJogo: boolean = false;
   public alugarJogo: boolean = false;
   public pessoaJogos: PessoaJogo[];
+  public confirmarAluguel: boolean;
+  public metodopagamento: number
   public sucRequi: boolean = false;
   public preco: number;
   public avaliacao: number[]
   public pessoaJogo: PessoaJogo
-  public dataLoacao: Date
+  public dataLocacao: Date
+  public dataDevolucao: Date
+  private router: Router
   cookieExists: boolean = this.cookieService.check("idpessoa");
   public filtros = {
     jogo: "",
@@ -53,6 +60,7 @@ export class AlugarComponent implements OnInit {
   public camposGen = [];
 
   constructor(
+    private locacaoService: LocacaoService,
     private jogosService: PessoaJogoService,
     public enderecoService: EnderecoService,
     private generoService: GeneroService,
@@ -71,6 +79,8 @@ export class AlugarComponent implements OnInit {
       .getComFiltros({ status: 0 })
       .subscribe(generos => (this.generos = generos));
     this.pegaEndereco();
+    this.preco = 0
+    this.metodopagamento = 1
   }
   pegaJogos(filtro?) {
     this.jogosService.getComFiltros(filtro).subscribe(jogos => {
@@ -79,12 +89,45 @@ export class AlugarComponent implements OnInit {
     });
   }
 
+  calcularPreco() {
+    if (this.dataLocacao && this.dataDevolucao && (this.dataLocacao< this.dataDevolucao )) {
+      var timeDiff = Math.abs(this.dataDevolucao.getTime() - this.dataLocacao.getTime());
+      var diffDays = Math.ceil(timeDiff / (1000 * 3600 * 24));
+      this.preco = (this.pessoaJogo.preco * diffDays)
+    } else {
+      this.preco = 0
+    }
+  }
+
   alugar(pessoajogo) {
     this.pessoaJogo = pessoajogo  
     this.alugarJogo  = true
-    this.dataLoacao = new Date()
   }
 
+  confirmarLocacao() {
+    const { idpessoa, idjogo } = this.pessoaJogo;
+    
+    const body = {
+      idcartao: 1,
+      metodopagamento: this.metodopagamento,
+      datadevolucao: moment(this.dataDevolucao).format('YYYY-MM-D'),
+      datalocacao: moment(this.dataLocacao).format('YYYY-MM-D'),
+      tipopagamento:1,
+      pessoa: Number(this.cookieService.get("idpessoa")),
+      idpessoa,
+      idjogo
+    }
+        
+    this.locacaoService.create(body).subscribe(
+      success => {
+        this.messageService.add({ severity: 'success', summary: 'Sucesso', detail: success.message });
+      },
+      error => {
+        this.messageService.add({ severity: 'error', summary: 'Erro', detail: error.error.text });
+      }
+    )
+  }
+  
 
   listarPessoaJogo(jogo) {
     this.modalJogo = jogo
