@@ -14,15 +14,6 @@
                 </ul>
               </div>
               <div class="sidebar-categories">
-                <div class="head">Situação</div>
-                <ul class="main-categories">
-                  <li class="common-filter">
-                    <ul>
-                      <li class="filter-list"><input class="pixel-checkbox" type="checkbox" (change)="getAlugado()"> Alugado</li>
-                    </ul>
-                </ul>
-              </div>
-              <div class="sidebar-categories">
                 <div class="head">Genero</div>
                 <ul class="main-categories">
                   <li class="common-filter">
@@ -42,6 +33,7 @@
                     <option value="0">Ordenação Padrão</option>
                     <option value="1">Ordem Alfabetica</option>
                     <option value="2">Mais Caro</option>
+                    <option value="3">Maior Data Devolução</option>
                   </select>
                 </div>
                 <div class="sorting">
@@ -59,50 +51,57 @@
               </div>
               <p-carousel [value]="pessoaJogo" numVisible="4" circular="circular" autoplayInterval="9000" easing="easeOutStrong" [style]="{marginRight: '10px'}">
                 <ng-template let-item pTemplate="item">
-                  <p-panel [header]="item.jogo.nome" [style]="{'text-align':'center', 'background-color':'#384aeb'}">
+                  <p-panel [header]="item.pessoajogo.jogo.nome" [style]="{'text-align':'center', 'background-color':'#384aeb'}">
                     <div class="card text-center card-product">
                       <div class="card-product__img">
-                        <img class="card-img" src="{{item.jogo.urlimagem}}" alt="" height="293" width="255">
+                        <img class="card-img" src="{{item.pessoajogo.jogo.urlimagem}}" alt="" height="293" width="255">
                         <ul class="card-product__imgOverlay">
-                          <li class="lii"> <button (click)="editPessoaJogo=true;selecionaJogo(item)"><i class="fas fa-edit"></i></button></li>
+                          <li class="lii"> <button (click)="infoPessoaJogo=true;selecionaJogo(item)"><i class="fas fa-info-circle"></i></button></li>
                         </ul>
                       </div>
                       <div class="card-body">
-                        <h4 class="card-product__title"><a href="#">{{item.jogo.nome}}</a></h4>
-                        <p class="card-product__price"><i class="far fa-money-bill-alt"></i> {{item.preco | currency:'BRL': true}}</p>
+                        <h4 class="card-product__title"><a href="#">{{item.pessoajogo.jogo.nome}}</a></h4>
+                        <p class="card-product__price">{{entregue(item.datadevolucao)}}</p>
                       </div>
                     </div>
-                    <button class="btn btn-danger">Remover <i class="fas fa-trash-alt"></i></button>
                   </p-panel>
                 </ng-template>
               </p-carousel>
-              <div *ngIf="pessoaJogo.jogo?.length<1">
+              <!--<div *ngIf="pessoaJogo.jogo?.length<1">
                 <h1 class="text-center"> Você não possui jogos cadastrado</h1>
                 <h2 class="text-center"> Clique <a [routerLink]='["../../catalogo"]'>AQUI</a> para <a [routerLink]='["../../catalogo"]'>CADASTRAR</a></h2>
-              </div>
+              </div>-->
             </div>
           </ng-container>
         </div>
 
-        <p-dialog [(visible)]="editPessoaJogo" [baseZIndex]='1150'>
+        <p-dialog [(visible)]="infoPessoaJogo" [baseZIndex]='1150' [width]="390" >
           <p-header>
-            <i class="fas fa-money-bill-wave"></i> Qual valor será cobrado por dia?
+            <i class="fas fa-money-bill-wave"></i> Informações da Locação
           </p-header>
-          <div>
-            <img class="img-fluid" src="{{modalJogo?.jogo.urlimagem}}" height="100" width="90" alt="">
-            <span style="text-align: center;font-family: Roboto,sans-serif;font-size: 24px;font-weight: 700;color: #384aeb;margin-bottom: 10px;">
-              {{modalJogo?.jogo.nome}}
-            </span>
+          <div class="row">
+            <div class="col" style=" height:100px; width:90px">
+              <img class="img-fluid" src="{{modalJogo?.pessoajogo.jogo.urlimagem}}" height="100" width="90" alt="">
+            </div>
+            <div class="col">
+              <span class="row" style="font-family: Roboto,sans-serif;font-size: 14px;font-weight: 700;color: #384aeb;margin-bottom: 10px;">
+                Nome: {{modalJogo?.pessoajogo.jogo.nome}}
+              </span>
+              <span class="row" style="font-family: Roboto,sans-serif;font-size: 14px;font-weight: 700;color: #384aeb;margin-bottom: 10px;">
+                Data Locação: {{modalJogo?.datalocacao | date: 'dd/MM/yyyy'}}
+              </span>
+              <span class="row" style="font-family: Roboto,sans-serif;font-size: 14px;font-weight: 700;color: #384aeb;margin-bottom: 10px;">
+                Data Devolução: {{modalJogo?.datadevolucao | date: 'dd/MM/yyyy'}}
+              </span>
+              <span class="row" style="font-family: Roboto,sans-serif;font-size: 14px;font-weight: 700;color: #384aeb;margin-bottom: 10px;">
+                Valor por dia: {{modalJogo?.preco | currency: 'BRL'}}
+              </span>
+            </div>
           </div>
-          <div class="input-group-prepend" style="padding-bottom: 10px;padding-top: 10px;">
-            <span class="input-group-text">Valor R$:</span>
-            <input [(ngModel)]="preco" type="number" pKeyFilter="pnum" class="form-control">
-          </div>
-
           <p-footer>
             <div class="d-flex justify-content-center">
-              <a class="button primary-btn" [routerLink]="" (click)="atualizaPreco()"><i class="fas fa-save"></i> Salvar</a>
-              <a class="button danger-btn" [routerLink]="" (click)="editPessoaJogo=false;preco=null"><i class="fas fa-window-close"></i> Cancelar</a>
+
+              <a class="button danger-btn" [routerLink]="" (click)="infoPessoaJogo=false"><i class="fas fa-window-close"></i> Fechar</a>
             </div>
           </p-footer>
         </p-dialog>

@@ -75,7 +75,6 @@ export class GerenciarPlataformas implements OnInit {
         })
     }
     this.plataformas = plataformas;
-    this.plataforma = null;
     this.displayDialog = false;
   }
 

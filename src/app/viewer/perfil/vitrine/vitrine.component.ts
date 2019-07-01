@@ -34,6 +34,7 @@ export class VitrineComponent implements OnInit {
     jogo: '',
     genero: [],
     plataforma: [],
+    status: 1,
   }
 
   constructor(
@@ -46,6 +47,7 @@ export class VitrineComponent implements OnInit {
 
   ngOnInit() {
     this.getPessoaJogo()
+
     this.plataformaService.getComFiltros({ status: 0 }).subscribe(plataformas => this.plataformas = plataformas)
     this.generoService.getComFiltros({ status: 0 }).subscribe(generos => this.generos = generos)
   }
@@ -56,6 +58,7 @@ export class VitrineComponent implements OnInit {
       this.pessoaJogo = pessoaJogo
       this.origi = pessoaJogo
       this.sucRequi = true
+      this.aplicaFiltros()
     })
   }
 
@@ -160,6 +163,9 @@ export class VitrineComponent implements OnInit {
     if (!this.filtros.vitrine) {
       this.pessoaJogo = this.pessoaJogo.filter(x => x.vitrine == this.filtros.vitrine)
     }
+    if (this.filtros.status) {
+      this.pessoaJogo = this.pessoaJogo.filter(x => x.status != this.filtros.status)
+    }
     if (this.filtros.jogo) this.pessoaJogo = this.pessoaJogo.filter(x => !x.jogo.nome.toUpperCase().search(this.filtros.jogo.toUpperCase()))
   }
 
@@ -179,7 +185,6 @@ export class VitrineComponent implements OnInit {
         this.editPessoaJogo = false;
         this.messageService.add({ severity: 'success', summary: 'Sucesso', detail: success.message });
         this.getPessoaJogo()
-        this.aplicaFiltros()
       },
       error => {
         this.messageService.add({ severity: 'error', summary: 'Erro', detail: error.error.text });
@@ -192,10 +197,20 @@ export class VitrineComponent implements OnInit {
       jogo: '',
       genero: [],
       plataforma: [],
+      status: 1,
     }
     this.aplicaFiltros()
   }
 
-
+  remove(idjogo) {
+    this.pessoaJogoService.removeJogo(this.user.idpessoa, idjogo).subscribe(
+      success => {
+        this.messageService.add({ severity: 'success', summary: 'Sucesso', detail: success.message });
+        this.getPessoaJogo()
+      },
+      error => {
+        this.messageService.add({ severity: 'error', summary: 'Erro', detail: error.error.text });
+      })
+  }
 
 }
