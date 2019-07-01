@@ -61,14 +61,15 @@ export class GerenciarPessoasComponent implements OnInit {
     if (!this.newPessoa){
       this.pessoaService.update(this.pessoa).subscribe(
         success => {
+          pessoas[this.pessoas.indexOf(this.selected)] = this.pessoa;
           this.messageService.add({ severity: 'success', summary: 'Sucesso', detail: success.message });
+
         },
         error => {
           this.messageService.add({ severity: 'error', summary: 'Erro', detail: error.error.text });
         })
     }
     this.pessoas = pessoas;
-    this.pessoa = null;
     this.displayDialog = false;
   }
 

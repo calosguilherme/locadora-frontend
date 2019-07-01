@@ -72,14 +72,14 @@
                         <p class="card-product__price"><i class="far fa-money-bill-alt"></i> {{item.preco | currency:'BRL': true}}</p>
                       </div>
                     </div>
-                    <button class="btn btn-danger">Remover <i class="fas fa-trash-alt"></i></button>
+                    <button class="btn btn-danger" (click)="remove(item.jogo.idjogo)">Remover <i class="fas fa-trash-alt"></i></button>
                   </p-panel>
                 </ng-template>
               </p-carousel>
-              <div *ngIf="pessoaJogo.jogo?.length<1">
+              <!--<div *ngIf="pessoaJogo.jogo.length<1 && sucRequi">
                 <h1 class="text-center"> Você não possui jogos cadastrado</h1>
                 <h2 class="text-center"> Clique <a [routerLink]='["../../catalogo"]'>AQUI</a> para <a [routerLink]='["../../catalogo"]'>CADASTRAR</a></h2>
-              </div>
+              </div>-->
             </div>
           </ng-container>
         </div>

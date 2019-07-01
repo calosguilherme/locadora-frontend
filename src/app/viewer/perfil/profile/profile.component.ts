@@ -122,12 +122,11 @@ export class ProfileComponent implements OnInit {
 
 
   envia() {
-    console.log("qq")
-    console.log(JSON.stringify(this.pessoa))
     this.pessoaService.update(this.pessoa).subscribe(
       success => {
         this.router.navigate(['perfil/0']);
         this.messageService.add({ severity: 'success', summary: 'Sucesso', detail: success.message });
+        this.edit = false
       },
       error => {
         this.messageService.add({ severity: 'error', summary: 'Erro', detail: error.error.text });
