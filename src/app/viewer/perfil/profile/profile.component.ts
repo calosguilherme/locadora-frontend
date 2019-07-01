@@ -1,13 +1,15 @@
 import { Component, OnInit } from '@angular/core';
-import { ActivatedRoute, ParamMap } from '@angular/router';
-import { switchMap } from 'rxjs/operators';
-import { PessoaJogoService } from 'src/app/services/pessoaJogoService';
+import { Pessoa } from 'src/app/model/pessoa.model';
+import { FormGroup, FormBuilder, Validators } from '@angular/forms';
+import { Municipio } from 'src/app/model/municipio.model';
+import { Estado } from 'src/app/model/estado.model';
+import { Bairro } from 'src/app/model/bairro.model';
+import { PessoaService } from 'src/app/services/pessoaService';
+import { EnderecoService } from 'src/app/services/enderecoService';
+import { MessageService } from 'primeng/components/common/messageservice';
+import { Router } from '@angular/router';
+import { Cep } from 'src/app/model/cep.model';
 import { CookieService } from 'ngx-cookie-service';
-import { GeneroService } from 'src/app/services/generoService';
-import { PlataformaService } from 'src/app/services/plataformaService';
-import { Plataforma } from 'src/app/model/plataforma.model';
-import { Genero } from 'src/app/model/genero.model';
-import { Jogo } from 'src/app/model/jogo.model';
 
 
 @Component({
@@ -16,143 +18,120 @@ import { Jogo } from 'src/app/model/jogo.model';
   styleUrls: ['./profile.component.css'],
 })
 export class ProfileComponent implements OnInit {
-  menuSelect: string = '0'
-  active: boolean = false
-  pessoaJogo: Jogo[]
-  user: any = this.cookieService.getAll()
-  sucRequi: boolean = false
-  plataformas: Plataforma[]
-  generos: Genero[]
-  editPessoaJogo: boolean = false
-  origi: Jogo[]
-  modalJogo: Jogo
-  preco: number
-  public filtros = {
-    status: 0,
-    jogo: '',
-    genero: [],
-    plataforma: [],
-  }
+  pessoa: Pessoa = new Pessoa()
+  pessoaOri: Pessoa = new Pessoa()
+  pessoaForm: FormGroup
+  endereco: any
+  municipios: Municipio[]
+  estados: Estado[]
+  bairros: Bairro[]
+  listmunicipio: string[] = []
+  listbairro: string[] = []
+  listestado: string[] = []
+  suc = false
+  edit = false
 
   constructor(
-    private pessoaJogoService: PessoaJogoService,
+    private formBuilder: FormBuilder,
+    private pessoaService: PessoaService,
+    private enderecoService: EnderecoService,
+    private messageService: MessageService,
+    private router: Router,
     private cookieService: CookieService,
-    private generoService: GeneroService,
-    private plataformaService: PlataformaService,
-  ) {  }
+  ) { }
 
   ngOnInit() {
-    this.getPessoaJogo()
-    this.plataformaService.getComFiltros({ status: 0 }).subscribe(plataformas => this.plataformas = plataformas)
-    this.generoService.getComFiltros({ status: 0 }).subscribe(generos => this.generos = generos)
+    this.pessoaService.loadByID(this.cookieService.get('idpessoa')).subscribe(pessoa => {
+      this.pessoa = pessoa
+      this.pessoaOri = pessoa
+      this.pessoa.datanascimento = new Date(pessoa.datanascimento);
+      console.log(pessoa)
+      this.suc= true
+    },
+      error => {
+        this.messageService.add({ severity: 'error', summary: 'Erro', detail: error.error.text });
+      }
+    )
+
+
   }
 
-  getPessoaJogo() {
-    this.pessoaJogoService.getRecomendacao(this.user.idpessoa).subscribe(pessoaJogo => {
-      console.log(pessoaJogo)
-      this.pessoaJogo = pessoaJogo
-      this.origi = pessoaJogo
-      this.sucRequi = true
-      this.aplicaFiltros()
+  searchMuni(event) {
+    let query = event.query;
+    this.enderecoService.getAllMunicipio().subscribe(municipios => {
+      this.listmunicipio = []
+      for (let muni of municipios) {
+        this.listmunicipio.push(muni.nome)
+      }
+      this.listmunicipio = this.filterAutocomplete(query, this.listmunicipio)
+    })
+  }
+
+  searchBairro(event) {
+    let query = event.query;
+    this.enderecoService.getAllBairro().subscribe(bairros => {
+      this.listbairro = []
+      for (let bairro of bairros) {
+        this.listbairro.push(bairro.nome)
+      }
+      this.listbairro = this.filterAutocomplete(query, this.listbairro)
+    })
+  }
+
+  searchEstado(event) {
+    let query = event.query;
+    this.enderecoService.getAllEstado().subscribe(estados => {
+      this.listestado = []
+      for (let estado of estados) {
+        this.listestado.push(estado.nome)
+      }
+      this.listestado = this.filterAutocomplete(query, this.listestado)
     })
   }
 
 
-  ordenaJogos(i) {
-    switch (i) {
-      case '0': {
-        this.jogosOrdemId()
-        break;
+
+  filterAutocomplete(query, itens: any[]): any[] {
+    let filtered: any[] = [];
+    for (let i = 0; i < itens.length; i++) {
+      let item = itens[i];
+      if (item.toLowerCase().indexOf(query.toLowerCase()) == 0) {
+        filtered.push(item);
       }
-      case '1': {
-        this.jogosOrdemAlfabetica()
-        break;
-      }
+    }
+    return filtered;
+  }
+
+  pegaCep() {
+    let cep = this.pessoa.cep.numero
+    if (cep.toString().length >= 8) {
+      this.enderecoService.getCep(cep).subscribe(endereco => {
+        this.preencheEndereco(endereco)
+      })
     }
   }
 
-  jogosOrdemAlfabetica() {
-    this.pessoaJogo = this.pessoaJogo.sort(function (a, b) {
-      if (a.nome > b.nome) {
-        return 1;
+
+
+  preencheEndereco(endereco) {
+    this.pessoa.cep.bairro.municipio.estado.nome = endereco.uf
+    this.pessoa.cep.bairro.nome = endereco.bairro
+    this.pessoa.cep.bairro.municipio.nome = endereco.localidade
+    this.pessoa.cep.numero = this.enderecoService.apenasNumeros(endereco.cep)
+  }
+
+
+  envia() {
+    console.log("qq")
+    console.log(JSON.stringify(this.pessoa))
+    this.pessoaService.update(this.pessoa).subscribe(
+      success => {
+        this.router.navigate(['perfil/0']);
+        this.messageService.add({ severity: 'success', summary: 'Sucesso', detail: success.message });
+      },
+      error => {
+        this.messageService.add({ severity: 'error', summary: 'Erro', detail: error.error.text });
       }
-      if (a.nome < b.nome) {
-        return -1;
-      }
-      return 0;
-    });
+    )
   }
-
-  jogosOrdemId() {
-    this.pessoaJogo = this.pessoaJogo.sort(function (a, b) {
-      if (a.idjogo > b.idjogo) {
-        return 1;
-      }
-      if (a.idjogo < b.idjogo) {
-        return -1;
-      }
-      return 0;
-    });
-  }
-
-  getPlataforma(nome) {
-    this.sucRequi = false
-    if (this.filtros.plataforma.find(x => x == nome)) {
-      this.filtros.plataforma = this.filtros.plataforma.filter(x => x != nome)
-    }
-    else {
-      this.filtros.plataforma.push(nome)
-    }
-    this.aplicaFiltros()
-    this.sucRequi = true
-  }
-
-  getGenero(nome) {
-    this.sucRequi = false
-    if (this.filtros.genero.find(x => x == nome)) {
-      this.filtros.genero = this.filtros.genero.filter(x => x != nome)
-    }
-    else {
-      this.filtros.genero.push(nome)
-    }
-    this.aplicaFiltros()
-    this.sucRequi = true
-  }
-
-  aplicaFiltros() {
-    if (this.filtros.plataforma.length != 0) {
-      for (let filtro of this.filtros.plataforma) {
-        this.pessoaJogo = this.origi.filter(x => x.plataforma.find(y => y.nome == filtro))
-      }
-    }
-    else {
-      this.pessoaJogo = this.origi
-    }
-    if (this.filtros.genero.length != 0) {
-      for (let filtro of this.filtros.genero) {
-        this.pessoaJogo = this.pessoaJogo.filter(x => x.genero.find(y => y.nome == filtro))
-      }
-    }
-    if (!this.filtros.status) {
-      this.pessoaJogo = this.pessoaJogo.filter(x => x.status == this.filtros.status)
-    }
-    if (this.filtros.jogo) this.pessoaJogo = this.pessoaJogo.filter(x => !x.nome.toUpperCase().search(this.filtros.jogo.toUpperCase()))
-  }
-
-  selecionaJogo(jogo) {
-    this.modalJogo = jogo
-  }
-
-
-  limpar() {
-    this.sucRequi = false
-    this.filtros = {
-      status: 0,
-      jogo: '',
-      genero: [],
-      plataforma: [],
-    }
-    this.aplicaFiltros()
-  }
-
 }
