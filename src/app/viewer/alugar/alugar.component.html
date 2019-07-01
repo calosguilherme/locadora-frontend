@@ -145,11 +145,6 @@
   </div>
 </section>
 
-
-
-
-
-
 <!-- Modal -->
 <div id="myModal" class="modal fade" role="dialog">
   <div class="modal-dialog">
@@ -214,7 +209,7 @@
         </div>
       </div>
       <div class="modal-footer">
-        <button type="button" class="btn btn-danger" data-dismiss="modal">Fechar</button>
+        <button  type="button" class="btn btn-danger" data-dismiss="modal">Fechar</button>
       </div>
     </div>
 
@@ -257,7 +252,7 @@
         </table>
       </div>
       <div class="modal-footer">
-        <button type="button" class="btn btn-danger" data-dismiss="modal">Fechar</button>
+        <button  id ="fecharlistapessoajogo" type="button" class="btn btn-danger" data-dismiss="modal">Fechar</button>
       </div>
     </div>
 
@@ -303,14 +298,13 @@
   </p-header>
   <div class = "row">
     <div class= "col-md-6">
-      <button (click)="confirmarAluguel= false; confirmarLocacao()" type="button" class="btn btn-primary" >Sim</button>
+      <button onclick= "document.getElementById('fecharlistapessoajogo').click();   document.getElementById('cancelarlocacao').click();"  (click)="confirmarAluguel= false; confirmarLocacao()" type="button" class="btn btn-primary" data-dismiss="modal">Sim</button>
     </div>
     <div class= "col-lg-6">
       <button (click)="confirmarAluguel= false;" type="button" class="btn primary-btn" >Não</button>
     </div>
   </div>
 </p-dialog>
-
 
 <div id="myModal3" class="modal fade" role="dialog">
   <div class="modal-dialog">
@@ -349,7 +343,7 @@
                       <div class="card-body">
                         <div class="form-check form-check-inline">
                           <input (change) = "metodopagamento = 1" class="form-check-input" type="radio" name="inlineRadioOptions" id="inlineRadio1"
-                            value="option1">
+                            value="option1" checked="checked" >
                           <label class="form-check-label" for="inlineRadio1">
                             <span class="glyphicon glyphicon-credit-card" aria-hidden="true"></span>
                             Cartão de Crédito
@@ -408,9 +402,8 @@
       </div>
       <div class="modal-footer">
         <button (click)="confirmarAluguel= true;" type="button" class="btn btn-primary" >Confirmar</button>
-        <button (click)="preco = 0; dataDevolucao = null ; dataLocacao = null"  type="button" class="btn primary-btn" data-dismiss="modal">Cancelar</button>
+        <button id = "cancelarlocacao" (click)="preco = 0"  type="button" class="btn primary-btn" data-dismiss="modal">Cancelar</button>
       </div>
     </div>
-
   </div>
 </div>

@@ -16,6 +16,7 @@ import { EnderecoService } from "src/app/services/enderecoService";
 import { logging } from 'protractor';
 import { LocacaoService } from "src/app/services/locacaoService";
 import { Router } from '@angular/router';
+import * as moment from 'moment';
 
 @Component({
   selector: "alugar",
@@ -67,7 +68,6 @@ export class AlugarComponent implements OnInit {
     private cookieService: CookieService,
     private pessoaJogoService: PessoaJogoService,
     private messageService: MessageService
-
   ) {}
 
   ngOnInit() {
@@ -80,6 +80,7 @@ export class AlugarComponent implements OnInit {
       .subscribe(generos => (this.generos = generos));
     this.pegaEndereco();
     this.preco = 0
+    this.metodopagamento = 1
   }
   pegaJogos(filtro?) {
     this.jogosService.getComFiltros(filtro).subscribe(jogos => {
@@ -105,21 +106,20 @@ export class AlugarComponent implements OnInit {
 
   confirmarLocacao() {
     const { idpessoa, idjogo } = this.pessoaJogo;
-
+    
     const body = {
       idcartao: 1,
       metodopagamento: this.metodopagamento,
-      datadevolucao: this.dataDevolucao.toString(),
-      datalocacao: this.dataLocacao.toString(),
+      datadevolucao: moment(this.dataDevolucao).format('YYYY-MM-D'),
+      datalocacao: moment(this.dataLocacao).format('YYYY-MM-D'),
       tipopagamento:1,
-      pessoa: 4,
+      pessoa: Number(this.cookieService.get("idpessoa")),
       idpessoa,
       idjogo
     }
-    
+        
     this.locacaoService.create(body).subscribe(
       success => {
-        this.router.navigate(['home']);
         this.messageService.add({ severity: 'success', summary: 'Sucesso', detail: success.message });
       },
       error => {
