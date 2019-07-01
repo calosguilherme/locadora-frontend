@@ -25,5 +25,9 @@ export class PessoaJogoService extends CrudService<PessoaJogo>{
     return this.http.get<Jogo[]>(`${environment.API}recomendacao/${id}`).pipe(take(1));
   }
 
+  removeJogo(idpessoa, idjogo) {
+    return this.http.delete<any>(`${environment.API}pessoajogo/${idpessoa}/${idjogo}`).pipe(take(1));
+  }
+
 
 }

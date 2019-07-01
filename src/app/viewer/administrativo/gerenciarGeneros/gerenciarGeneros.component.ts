@@ -79,7 +79,6 @@ export class GerenciarGeneros implements OnInit {
       )
     }
     this.generos = generos;
-    this.genero = null;
     this.displayDialog = false;
   }
 

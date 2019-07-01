@@ -10,31 +10,31 @@ import { PlataformaService } from 'src/app/services/plataformaService';
 import { Plataforma } from 'src/app/model/plataforma.model';
 import { Genero } from 'src/app/model/genero.model';
 import { MessageService } from 'primeng/components/common/messageservice';
+import { LocacaoService } from 'src/app/services/locacaoService';
 
 
 @Component({
-  selector: 'vitrine',
-  templateUrl: './vitrine.component.html',
-  styleUrls: ['./vitrine.component.css'],
+  selector: 'alugados',
+  templateUrl: './alugados.component.html',
+  styleUrls: ['./alugados.component.css'],
 })
-export class VitrineComponent implements OnInit {
+export class AlugadosComponent implements OnInit {
   menuSelect: string = '0'
   active: boolean = false
-  pessoaJogo: VitrineJogo[]
+  pessoaJogo: any[]
   user: any = this.cookieService.getAll()
   sucRequi: boolean = false
   plataformas: Plataforma[]
   generos: Genero[]
-  editPessoaJogo: boolean = false
-  origi: VitrineJogo[]
-  modalJogo: VitrineJogo
+  infoPessoaJogo: boolean = false
+  origi: any[]
+  modalJogo: any
   preco: number
   public filtros = {
     vitrine: true,
     jogo: '',
     genero: [],
     plataforma: [],
-    status: 1,
   }
 
   constructor(
@@ -43,22 +43,21 @@ export class VitrineComponent implements OnInit {
     private generoService: GeneroService,
     private plataformaService: PlataformaService,
     private messageService: MessageService,
+    private locacaoService: LocacaoService,
   ) {  }
 
   ngOnInit() {
     this.getPessoaJogo()
-
     this.plataformaService.getComFiltros({ status: 0 }).subscribe(plataformas => this.plataformas = plataformas)
     this.generoService.getComFiltros({ status: 0 }).subscribe(generos => this.generos = generos)
   }
 
   getPessoaJogo() {
-    this.pessoaJogoService.getById(this.user.idpessoa).subscribe(pessoaJogo => {
+    this.locacaoService.loadByID(this.user.idpessoa).subscribe(pessoaJogo => {
       console.log(pessoaJogo)
       this.pessoaJogo = pessoaJogo
       this.origi = pessoaJogo
       this.sucRequi = true
-      this.aplicaFiltros()
     })
   }
 
@@ -77,15 +76,19 @@ export class VitrineComponent implements OnInit {
         this.jogosOrdemPreco()
         break;
       }
+      case '3': {
+        this.jogosOrdemDevo()
+        break;
+      }
     }
   }
 
   jogosOrdemAlfabetica() {
     this.pessoaJogo = this.pessoaJogo.sort(function (a, b) {
-      if (a.jogo.nome > b.jogo.nome) {
+      if (a.pessoajogo.jogo.nome > b.pessoajogo.jogo.nome) {
         return 1;
       }
-      if (a.jogo.nome < b.jogo.nome) {
+      if (a.pessoajogo.jogo.nome < b.pessoajogo.jogo.nome) {
         return -1;
       }
       return 0;
@@ -104,6 +107,17 @@ export class VitrineComponent implements OnInit {
     });
   }
 
+  jogosOrdemDevo() {
+    this.pessoaJogo = this.pessoaJogo.sort(function (a, b) {
+      if (a.datadevolucao > b.datadevolucao) {
+        return 1;
+      }
+      if (a.datadevolucao < b.datadevolucao) {
+        return -1;
+      }
+      return 0;
+    });
+  }
 
   jogosOrdemPreco() {
     this.pessoaJogo = this.pessoaJogo.sort(function (a, b) {
@@ -148,8 +162,9 @@ export class VitrineComponent implements OnInit {
 
   aplicaFiltros() {
     if (this.filtros.plataforma.length != 0) {
+      console.log(this.pessoaJogo)
       for (let filtro of this.filtros.plataforma) {
-        this.pessoaJogo = this.origi.filter(x => x.jogo.plataforma.find(y => y.nome == filtro))
+        this.pessoaJogo = this.origi.filter(x => x.pessoajogo.jogo.plataforma.find(y => y.nome == filtro))
       }
     }
     else {
@@ -157,16 +172,13 @@ export class VitrineComponent implements OnInit {
     }
     if (this.filtros.genero.length != 0) {
       for (let filtro of this.filtros.genero) {
-        this.pessoaJogo = this.pessoaJogo.filter(x => x.jogo.genero.find(y => y.nome == filtro))
+        this.pessoaJogo = this.pessoaJogo.filter(x => x.pessoajogo.jogo.genero.find(y => y.nome == filtro))
       }
     }
     if (!this.filtros.vitrine) {
       this.pessoaJogo = this.pessoaJogo.filter(x => x.vitrine == this.filtros.vitrine)
     }
-    if (this.filtros.status) {
-      this.pessoaJogo = this.pessoaJogo.filter(x => x.status != this.filtros.status)
-    }
-    if (this.filtros.jogo) this.pessoaJogo = this.pessoaJogo.filter(x => !x.jogo.nome.toUpperCase().search(this.filtros.jogo.toUpperCase()))
+    if (this.filtros.jogo) this.pessoaJogo = this.pessoaJogo.filter(x => !x.pessoajogo.jogo.nome.toUpperCase().search(this.filtros.jogo.toUpperCase()))
   }
 
   selecionaJogo(jogo) {
@@ -182,9 +194,10 @@ export class VitrineComponent implements OnInit {
     pessoaJogo.status = 0
     this.pessoaJogoService.update(pessoaJogo).subscribe(
       success => {
-        this.editPessoaJogo = false;
+        this.infoPessoaJogo = false;
         this.messageService.add({ severity: 'success', summary: 'Sucesso', detail: success.message });
         this.getPessoaJogo()
+        this.aplicaFiltros()
       },
       error => {
         this.messageService.add({ severity: 'error', summary: 'Erro', detail: error.error.text });
@@ -197,20 +210,16 @@ export class VitrineComponent implements OnInit {
       jogo: '',
       genero: [],
       plataforma: [],
-      status: 1,
     }
     this.aplicaFiltros()
   }
 
-  remove(idjogo) {
-    this.pessoaJogoService.removeJogo(this.user.idpessoa, idjogo).subscribe(
-      success => {
-        this.messageService.add({ severity: 'success', summary: 'Sucesso', detail: success.message });
-        this.getPessoaJogo()
-      },
-      error => {
-        this.messageService.add({ severity: 'error', summary: 'Erro', detail: error.error.text });
-      })
+  entregue(dataDevo) {
+    let data = new Date()
+    if (dataDevo < data.getDate) return ("Entregue")
+    else {
+      return("Não Entregue")
+    }
   }
 
 }
