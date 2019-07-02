@@ -20,6 +20,7 @@ export class LoginComponent implements OnInit {
   @BlockUI() blockUI: NgBlockUI;
   login: Auth = new Auth()
   erro: boolean = false
+  user: any
 
   constructor(
     private authServiceLocadora: AuthServiceLocadora,
@@ -31,6 +32,7 @@ export class LoginComponent implements OnInit {
   ) {  }
 
   ngOnInit() {
+    console.log(JSON.stringify({}))
   }
 
   logar() {
@@ -51,8 +53,10 @@ export class LoginComponent implements OnInit {
     this.blockUI.start('Carregando');
     this.authService.signIn(FacebookLoginProvider.PROVIDER_ID).finally(() => {
       this.authService.authState.subscribe((user) => {
-        this.verificaEmailBack(user)
-      })
+        this.user = user
+      }).unsubscribe(() => {
+          this.verificaEmailBack(user)
+        })
     });
   }
 
