@@ -20,12 +20,29 @@ export class PerfilComponent implements OnInit {
   constructor(
     private route: ActivatedRoute,
     private cookieService: CookieService,
-  ) {  }
+  ) { }
 
   ngOnInit() {
     this.route.params.subscribe(params => {
       this.menuSelect = params['menu']
     })
+  }
+
+  pegaTitulo(menu: string) {
+    switch (menu) {
+      case '0': {
+        return ('Configurações')
+      }
+      case '1': {
+        return ('Jogos Alugados')
+      }
+      case '2': {
+        return ('Sua Vitrine')
+      }
+      case '3': {
+        return ('Jogos Recomendados')
+      }
+    }
   }
 
 }

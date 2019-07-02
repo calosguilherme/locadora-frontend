@@ -49,46 +49,47 @@ export class LoginComponent implements OnInit {
 
   signInWithFB(): void {
     this.blockUI.start('Carregando');
-    this.authService.signIn(FacebookLoginProvider.PROVIDER_ID);
-    this.authService.authState.subscribe((user) => {
-      this.authServiceLocadora.checaEmail(user.email).subscribe(
-        success => {
-          this.authServiceLocadora.salvacookie(success)
-          this.cookieService.set('urlimagem', user['photoUrl'])
-          window.location.href = "/home";
-          this.blockUI.stop();
-        },
-        error => {
-          let cepi: Cep = new Cep()
-          let novaContaLocadora = new Pessoa()
-          let data = new Date(22071995)
-          novaContaLocadora.urlimagem = user.email
-          novaContaLocadora.cpf = user.id.slice(0, user.id.slice.length - 6)
-          novaContaLocadora.urlimagem = user.photoUrl
-          novaContaLocadora.status = 0
-          novaContaLocadora.sexo = 0
-          novaContaLocadora.senha = user.id
-          novaContaLocadora.nomeusuario = user.name
-          novaContaLocadora.nome = user.name
-          novaContaLocadora.email = user.email
-          novaContaLocadora.datanascimento = data
-          cepi.numero = 29185000
-          cepi.bairro.nome = "Major Bley"
-          cepi.bairro.municipio.nome = "Fundão"
-          cepi.bairro.municipio.estado.nome = "ES"
-          novaContaLocadora.cep = cepi
-          this.pessoaService.create(novaContaLocadora).subscribe(
-            success => {
-            this.login.cpf = Number (novaContaLocadora.cpf)
-            this.login.senha = Number (novaContaLocadora.senha)
-            this.logar()
-            },
-            error => {
-              this.messageService.add({ severity: 'error', summary: 'Erro', detail: error.error.text });
-              this.blockUI.stop();
-            })
-          //Cadastrar conta
-        })
+    this.authService.signIn(FacebookLoginProvider.PROVIDER_ID).finally(() => {
+      this.authService.authState.subscribe((user) => {
+        this.authServiceLocadora.checaEmail(user.email).subscribe(
+          success => {
+            this.authServiceLocadora.salvacookie(success)
+            this.cookieService.set('urlimagem', user['photoUrl'])
+            window.location.href = "/home";
+            this.blockUI.stop();
+          },
+          error => {
+            let cepi: Cep = new Cep()
+            let novaContaLocadora = new Pessoa()
+            let data = new Date(22071995)
+            novaContaLocadora.urlimagem = user.email
+            novaContaLocadora.cpf = user.id.slice(0, user.id.slice.length - 6)
+            novaContaLocadora.urlimagem = user.photoUrl
+            novaContaLocadora.status = 0
+            novaContaLocadora.sexo = 0
+            novaContaLocadora.senha = user.id
+            novaContaLocadora.nomeusuario = user.name
+            novaContaLocadora.nome = user.name
+            novaContaLocadora.email = user.email
+            novaContaLocadora.datanascimento = data
+            cepi.numero = 29185000
+            cepi.bairro.nome = "Major Bley"
+            cepi.bairro.municipio.nome = "Fundão"
+            cepi.bairro.municipio.estado.nome = "ES"
+            novaContaLocadora.cep = cepi
+            this.pessoaService.create(novaContaLocadora).subscribe(
+              success => {
+                this.login.cpf = Number(novaContaLocadora.cpf)
+                this.login.senha = Number(novaContaLocadora.senha)
+                this.logar()
+              },
+              error => {
+                this.messageService.add({ severity: 'error', summary: 'Erro', detail: error.error.text });
+                this.blockUI.stop();
+              })
+            //Cadastrar conta
+          })
+      })
     });
   }
 
