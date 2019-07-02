@@ -54,10 +54,10 @@ export class LoginComponent implements OnInit {
     this.authService.signIn(FacebookLoginProvider.PROVIDER_ID).finally(() => {
       this.authService.authState.subscribe((user) => {
         this.user = user
-      }).unsubscribe(() => {
-          this.verificaEmailBack(user)
-        })
-    });
+      })
+    }).finally(() => {
+      this.verificaEmailBack(this.user)
+      });
   }
 
 
