@@ -55,11 +55,12 @@ export class LoginComponent implements OnInit {
       this.authService.authState.subscribe((user) => {
         this.user = user
       })
-    }).finally(() => {
-      this.verificaEmailBack(this.user)
+    }).then(() => {
+      setTimeout(() => {    //<<<---    using ()=> syntax
+        this.verificaEmailBack(this.user)
+      }, 3000);
       });
   }
-
 
 
 
