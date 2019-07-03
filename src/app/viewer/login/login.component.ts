@@ -66,7 +66,7 @@ export class LoginComponent implements OnInit {
 
 
   verificaEmailBack(user) {
-    console.log('verifica')
+    console.log('verifica2')
     this.authServiceLocadora.checaEmail(user.email).subscribe(
       success => {
         this.authServiceLocadora.salvacookie(success)
