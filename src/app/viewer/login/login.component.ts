@@ -3,7 +3,7 @@ import { Auth } from 'src/app/model/auth.model';
 import { AuthServiceLocadora } from 'src/app/services/authService';
 import { MessageService } from 'primeng/components/common/messageservice';
 import { Router } from '@angular/router';
-import { AuthService, FacebookLoginProvider } from 'angularx-social-login';
+import { AuthService, FacebookLoginProvider, LoginOpt } from 'angularx-social-login';
 import { Pessoa } from 'src/app/model/pessoa.model';
 import { PessoaService } from 'src/app/services/pessoaService';
 import { Cep } from 'src/app/model/cep.model';
@@ -39,7 +39,6 @@ export class LoginComponent implements OnInit {
   ) {  }
 
   ngOnInit() {
-    console.log(JSON.stringify({}))
   }
 
 
