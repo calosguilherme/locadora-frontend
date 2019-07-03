@@ -1,0 +1,15 @@
+{
+  "ExpandedNodes": [
+    "",
+    "\\src",
+    "\\src\\app",
+    "\\src\\app\\model",
+    "\\src\\app\\viewer",
+    "\\src\\app\\viewer\\alugar",
+    "\\src\\app\\viewer\\login",
+    "\\src\\app\\viewer\\perfil",
+    "\\src\\assets"
+  ],
+  "SelectedNode": "\\src\\app\\model\\crudService.model.ts",
+  "PreviewInSolutionExplorer": false
+}

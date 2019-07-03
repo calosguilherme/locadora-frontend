@@ -54,6 +54,7 @@ export class LoginComponent implements OnInit {
     this.authService.signIn(FacebookLoginProvider.PROVIDER_ID).finally(() => {
       this.authService.authState.subscribe((user) => {
         this.user = user
+        console.log(user)
       })
     }).then(() => {
       setTimeout(() => {    //<<<---    using ()=> syntax
