@@ -10,18 +10,18 @@ import { Cep } from 'src/app/model/cep.model';
 import { CookieService } from 'ngx-cookie-service';
 import { BlockUI, NgBlockUI } from 'ng-block-ui';
 
+const fbLoginOptions: LoginOpt = {
+  scope: 'public_profile,email,user_location,user_gender,user_birthday',
+  return_scopes: true,
+  enable_profile_selector: true
+};
+
 @Component({
   selector: 'login',
   templateUrl: './login.component.html',
   styleUrls: ['./login.component.css'],
 
 })
-
-const fbLoginOptions: LoginOpt = {
-  scope: 'public_profile,email,user_location,user_gender,user_birthday',
-  return_scopes: true,
-  enable_profile_selector: true
-};
 
 export class LoginComponent implements OnInit {
   @BlockUI() blockUI: NgBlockUI;
