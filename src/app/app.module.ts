@@ -71,21 +71,19 @@ import { BlockUIModule } from 'ng-block-ui';
 
 
 
-
-
-
-let config = new AuthServiceConfig([
-  {
-    id: FacebookLoginProvider.PROVIDER_ID,
-    provider: new FacebookLoginProvider("718009998656993")
-  }
-]);
-
 const fbLoginOptions: LoginOpt = {
   scope: 'public_profile,email,user_location,user_gender,user_birthday',
   return_scopes: true,
   enable_profile_selector: true
 }; 
+
+
+let config = new AuthServiceConfig([
+  {
+    id: FacebookLoginProvider.PROVIDER_ID,
+    provider: new FacebookLoginProvider("718009998656993", fbLoginOptions)
+  }
+]);
 
 export function provideConfig() {
   return config;
