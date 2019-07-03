@@ -16,6 +16,13 @@ import { BlockUI, NgBlockUI } from 'ng-block-ui';
   styleUrls: ['./login.component.css'],
 
 })
+
+const fbLoginOptions: LoginOpt = {
+  scope: 'public_profile,email,user_location,user_gender,user_birthday',
+  return_scopes: true,
+  enable_profile_selector: true
+};
+
 export class LoginComponent implements OnInit {
   @BlockUI() blockUI: NgBlockUI;
   login: Auth = new Auth()
@@ -35,6 +42,8 @@ export class LoginComponent implements OnInit {
     console.log(JSON.stringify({}))
   }
 
+
+
   logar() {
     this.blockUI.start('Carregando');
     this.authServiceLocadora.login(this.login).subscribe(
@@ -51,7 +60,7 @@ export class LoginComponent implements OnInit {
 
   signInWithFB(): void {
     this.blockUI.start('Carregando');
-    this.authService.signIn(FacebookLoginProvider.PROVIDER_ID).finally(() => {
+    this.authService.signIn(FacebookLoginProvider.PROVIDER_ID, fbLoginOptions).finally(() => {
       this.authService.authState.subscribe((user) => {
         this.user = user
         console.log(user)
@@ -100,7 +109,7 @@ export class LoginComponent implements OnInit {
             this.logar()
           },
           error => {
-            this.messageService.add({ severity: 'error', summary: 'Erro', detail: error.error.text });
+            this.messageService.add({ severity: 'error', summary: 'Erro', detail: 'Favor deixar seu email publico no facebook' });
             this.blockUI.stop();
           })
       })

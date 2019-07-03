@@ -72,7 +72,7 @@ import { BlockUIModule } from 'ng-block-ui';
 
 
 const fbLoginOptions: LoginOpt = {
-  scope: 'email,user_location,user_gender,user_birthday',
+  scope: 'public_profile,email,user_location,user_gender,user_birthday',
   return_scopes: true,
   enable_profile_selector: true
 }; 
