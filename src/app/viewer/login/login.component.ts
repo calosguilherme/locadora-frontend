@@ -3,18 +3,12 @@ import { Auth } from 'src/app/model/auth.model';
 import { AuthServiceLocadora } from 'src/app/services/authService';
 import { MessageService } from 'primeng/components/common/messageservice';
 import { Router } from '@angular/router';
-import { AuthService, FacebookLoginProvider, LoginOpt } from 'angularx-social-login';
+import { AuthService, FacebookLoginProvider } from 'angularx-social-login';
 import { Pessoa } from 'src/app/model/pessoa.model';
 import { PessoaService } from 'src/app/services/pessoaService';
 import { Cep } from 'src/app/model/cep.model';
 import { CookieService } from 'ngx-cookie-service';
 import { BlockUI, NgBlockUI } from 'ng-block-ui';
-
-const fbLoginOptions: LoginOpt = {
-  scope: 'public_profile,email,user_location,user_gender,user_birthday',
-  return_scopes: true,
-  enable_profile_selector: true
-};
 
 @Component({
   selector: 'login',
@@ -22,7 +16,6 @@ const fbLoginOptions: LoginOpt = {
   styleUrls: ['./login.component.css'],
 
 })
-
 export class LoginComponent implements OnInit {
   @BlockUI() blockUI: NgBlockUI;
   login: Auth = new Auth()
@@ -41,8 +34,6 @@ export class LoginComponent implements OnInit {
   ngOnInit() {
   }
 
-
-
   logar() {
     this.blockUI.start('Carregando');
     this.authServiceLocadora.login(this.login).subscribe(
@@ -59,10 +50,9 @@ export class LoginComponent implements OnInit {
 
   signInWithFB(): void {
     this.blockUI.start('Carregando');
-    this.authService.signIn(FacebookLoginProvider.PROVIDER_ID, fbLoginOptions).finally(() => {
+    this.authService.signIn(FacebookLoginProvider.PROVIDER_ID).finally(() => {
       this.authService.authState.subscribe((user) => {
         this.user = user
-        console.log(user)
       })
     }).then(() => {
       setTimeout(() => {    //<<<---    using ()=> syntax
@@ -74,7 +64,6 @@ export class LoginComponent implements OnInit {
 
 
   verificaEmailBack(user) {
-    console.log('verifica2')
     this.authServiceLocadora.checaEmail(user.email).subscribe(
       success => {
         this.authServiceLocadora.salvacookie(success)
@@ -108,7 +97,7 @@ export class LoginComponent implements OnInit {
             this.logar()
           },
           error => {
-            this.messageService.add({ severity: 'error', summary: 'Erro', detail: 'Favor deixar seu email publico no facebook' });
+            this.messageService.add({ severity: 'error', summary: 'Erro', detail: 'Favor deixar seu email publico no facebook e confirmado' });
             this.blockUI.stop();
           })
       })

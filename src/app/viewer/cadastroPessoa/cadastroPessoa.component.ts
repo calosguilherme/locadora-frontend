@@ -46,7 +46,7 @@ export class CadastroPessoaComponent implements OnInit {
       'municipio': [null, Validators.required],
       'bairro': [null, Validators.required],
       'sexo': [null, Validators.required],
-      'cpf': [null, [Validators.required, Validators.maxLength(12), Validators.minLength(12)]],
+      'cpf': [null, [Validators.required, Validators.maxLength(12)]],
       'email': [null, [Validators.required, Validators.email]],
       'senha': [null, [Validators.required, Validators.minLength(6)]],
     });

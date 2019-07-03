@@ -81,7 +81,7 @@ const fbLoginOptions: LoginOpt = {
 let config = new AuthServiceConfig([
   {
     id: FacebookLoginProvider.PROVIDER_ID,
-    provider: new FacebookLoginProvider("718009998656993", fbLoginOptions)
+    provider: new FacebookLoginProvider("718009998656993")
   }
 ]);
 
